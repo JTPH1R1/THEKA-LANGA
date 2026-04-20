@@ -1,19 +1,21 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-import { ProtectedRoute, GuestRoute } from '@/components/auth/ProtectedRoute'
+import { ProtectedRoute, ProfileRequiredRoute, GuestRoute } from '@/components/auth/ProtectedRoute'
 import { LoginPage } from '@/app/auth/LoginPage'
 import { RegisterPage } from '@/app/auth/RegisterPage'
 import { ResetPasswordPage } from '@/app/auth/ResetPasswordPage'
 import { NewPasswordPage } from '@/app/auth/NewPasswordPage'
+import { ProfileSetupPage } from '@/app/profile/ProfileSetupPage'
+import { EditProfilePage } from '@/app/profile/EditProfilePage'
 import { DashboardPage } from '@/app/dashboard/DashboardPage'
 
 export const router = createBrowserRouter([
-  // Redirect root to dashboard (ProtectedRoute handles the /auth/login redirect if unauthenticated)
+  // Root redirect
   {
     path: '/',
     element: <Navigate to="/dashboard" replace />,
   },
 
-  // Guest-only routes — logged-in users are redirected to /dashboard
+  // Guest-only — logged-in users redirect to /dashboard
   {
     element: <GuestRoute />,
     children: [
@@ -23,15 +25,19 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // New password — accessible to authenticated users (via password reset email)
-  {
-    path: '/auth/new-password',
-    element: <NewPasswordPage />,
-  },
-
-  // Protected routes — unauthenticated users are redirected to /auth/login
+  // Auth only (no profile requirement) — password reset redirect lands here
   {
     element: <ProtectedRoute />,
+    children: [
+      { path: '/auth/new-password',  element: <NewPasswordPage /> },
+      { path: '/profile/setup',      element: <ProfileSetupPage /> },
+      { path: '/profile/edit',       element: <EditProfilePage /> },
+    ],
+  },
+
+  // Auth + profile required — main app routes go here
+  {
+    element: <ProfileRequiredRoute />,
     children: [
       { path: '/dashboard', element: <DashboardPage /> },
     ],
