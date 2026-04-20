@@ -7,6 +7,7 @@ import { NewPasswordPage } from '@/app/auth/NewPasswordPage'
 import { ProfileSetupPage } from '@/app/profile/ProfileSetupPage'
 import { EditProfilePage } from '@/app/profile/EditProfilePage'
 import { DashboardPage } from '@/app/dashboard/DashboardPage'
+import { KycWizardPage } from '@/app/kyc/KycWizardPage'
 
 export const router = createBrowserRouter([
   // Root redirect
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
     element: <ProfileRequiredRoute />,
     children: [
       { path: '/dashboard', element: <DashboardPage /> },
+      { path: '/kyc',       element: <KycWizardPage /> },
     ],
   },
 
