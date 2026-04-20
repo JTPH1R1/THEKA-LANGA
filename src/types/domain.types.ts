@@ -488,6 +488,25 @@ export interface Contribution {
   profile?: ProfileSummary
 }
 
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+export type NotificationPriority = 'low' | 'normal' | 'high' | 'urgent'
+
+export interface AppNotification {
+  id:          string
+  recipientId: string
+  groupId:     string | null
+  type:        string
+  priority:    NotificationPriority
+  title:       string
+  body:        string
+  actionUrl:   string | null
+  data:        Record<string, unknown> | null
+  read:        boolean
+  readAt:      string | null
+  createdAt:   string
+}
+
 // ─── Admin ────────────────────────────────────────────────────────────────────
 
 export interface AdminStats {

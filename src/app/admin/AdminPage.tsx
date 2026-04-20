@@ -22,10 +22,21 @@ function StatCard({ label, value, sub, icon: Icon, to, color = 'text-slate-100' 
 }
 
 export function AdminPage() {
-  const { data: stats, isLoading } = useAdminStats()
+  const { data: stats, isLoading, isError } = useAdminStats()
   const { data: errors = [] } = useSystemErrors()
 
   const skeleton = <div className="h-7 w-20 bg-slate-700 animate-pulse rounded" />
+
+  if (isError) return (
+    <div>
+      <AdminNav />
+      <div className="max-w-5xl mx-auto px-4 py-16 text-center">
+        <AlertTriangle size={32} className="text-amber-400 mx-auto mb-3" />
+        <p className="text-slate-300 font-medium">Could not load admin stats</p>
+        <p className="text-slate-500 text-sm mt-1">Check that your account has system_admin role and the API schemas are exposed in Supabase.</p>
+      </div>
+    </div>
+  )
 
   return (
     <div>
@@ -39,40 +50,40 @@ export function AdminPage() {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <StatCard
             label="Total Users"
-            value={isLoading ? '—' : stats!.totalUsers}
-            sub={isLoading ? undefined : `${stats!.activeUsers} active · ${stats!.blacklistedUsers} blacklisted`}
+            value={isLoading ? '—' : (stats?.totalUsers ?? 0)}
+            sub={isLoading ? undefined : `${stats?.activeUsers ?? 0} active · ${stats?.blacklistedUsers ?? 0} blacklisted`}
             icon={Users}
             to="/admin/users"
           />
           <StatCard
             label="Groups"
-            value={isLoading ? '—' : stats!.totalGroups}
-            sub={isLoading ? undefined : `${stats!.activeGroups} active`}
+            value={isLoading ? '—' : (stats?.totalGroups ?? 0)}
+            sub={isLoading ? undefined : `${stats?.activeGroups ?? 0} active`}
             icon={Building2}
             to="/admin/groups"
           />
           <StatCard
             label="Loan Book"
-            value={isLoading ? '—' : formatCurrency(stats!.loanOutstanding, 'KES')}
-            sub={isLoading ? undefined : `${stats!.totalDefaults} defaults`}
+            value={isLoading ? '—' : formatCurrency(stats?.loanOutstanding ?? 0, 'KES')}
+            sub={isLoading ? undefined : `${stats?.totalDefaults ?? 0} defaults`}
             icon={TrendingUp}
             to="/admin/groups"
           />
           <StatCard
             label="KYC Queue"
-            value={isLoading ? '—' : stats!.kycQueueCount}
+            value={isLoading ? '—' : (stats?.kycQueueCount ?? 0)}
             sub="pending review"
             icon={ShieldCheck}
             to="/admin/kyc"
-            color={stats && stats.kycQueueCount > 0 ? 'text-amber-400' : 'text-slate-100'}
+            color={(stats?.kycQueueCount ?? 0) > 0 ? 'text-amber-400' : 'text-slate-100'}
           />
           <StatCard
             label="System Errors"
-            value={isLoading ? '—' : stats!.unresolvedErrors}
+            value={isLoading ? '—' : (stats?.unresolvedErrors ?? 0)}
             sub="unresolved"
             icon={AlertTriangle}
             to="/admin/jobs"
-            color={stats && stats.unresolvedErrors > 0 ? 'text-rose-400' : 'text-slate-100'}
+            color={(stats?.unresolvedErrors ?? 0) > 0 ? 'text-rose-400' : 'text-slate-100'}
           />
           <StatCard
             label="Job Monitor"
