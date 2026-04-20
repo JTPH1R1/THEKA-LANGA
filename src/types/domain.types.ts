@@ -272,6 +272,70 @@ export interface LoanRepayment {
   createdAt: string
 }
 
+// ─── Personal Finance ────────────────────────────────────────────────────────
+
+export type TransactionType = 'income' | 'expense' | 'transfer'
+export type PaymentMethod   = 'cash' | 'mobile_money' | 'bank' | 'card' | 'other'
+
+export interface Transaction {
+  id:            string
+  profileId:     string
+  type:          TransactionType
+  category:      string
+  subcategory:   string | null
+  amount:        number           // cents
+  description:   string | null
+  date:          string           // YYYY-MM-DD
+  tags:          string[]
+  paymentMethod: PaymentMethod | null
+  isRecurring:   boolean
+  createdAt:     string
+  updatedAt:     string
+}
+
+export interface Budget {
+  id:              string
+  profileId:       string
+  month:           string          // YYYY-MM
+  category:        string
+  budgetedAmount:  number          // cents
+  notes:           string | null
+  createdAt:       string
+  updatedAt:       string
+  // Computed on the client
+  actualSpent?:    number          // cents
+}
+
+export interface ShoppingList {
+  id:             string
+  profileId:      string
+  name:           string
+  plannedDate:    string | null
+  isComplete:     boolean
+  completedAt:    string | null
+  totalEstimated: number          // cents
+  totalActual:    number          // cents
+  createdAt:      string
+  updatedAt:      string
+  // Populated when fetched with items
+  items?:         ShoppingItem[]
+}
+
+export interface ShoppingItem {
+  id:             string
+  listId:         string
+  name:           string
+  quantity:       number
+  unit:           string | null
+  estimatedPrice: number | null   // cents
+  actualPrice:    number | null   // cents
+  category:       string | null
+  isChecked:      boolean
+  checkedAt:      string | null
+  sortOrder:      number
+  createdAt:      string
+}
+
 // ─── Dashboard ───────────────────────────────────────────────────────────────
 
 export interface DashboardKpis {

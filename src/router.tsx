@@ -12,6 +12,7 @@ import { KycWizardPage } from '@/app/kyc/KycWizardPage'
 import { GroupListPage } from '@/app/groups/GroupListPage'
 import { GroupCreatePage } from '@/app/groups/GroupCreatePage'
 import { GroupDetailPage } from '@/app/groups/GroupDetailPage'
+import { PersonalPage } from '@/app/personal/PersonalPage'
 
 export const router = createBrowserRouter([
   // Root redirect
@@ -53,14 +54,7 @@ export const router = createBrowserRouter([
           { path: '/groups/new',      element: <GroupCreatePage /> },
           { path: '/groups/:id',      element: <GroupDetailPage /> },
           { path: '/groups/:id/:tab', element: <GroupDetailPage /> },
-          {
-            path: '/personal',
-            element: (
-              <div className="p-8 text-center text-slate-500 text-sm">
-                Personal Finance — coming in Phase 11
-              </div>
-            ),
-          },
+          { path: '/personal', element: <PersonalPage /> },
           {
             path: '/reports',
             element: (
