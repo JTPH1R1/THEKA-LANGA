@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { ProtectedRoute, ProfileRequiredRoute, GuestRoute } from '@/components/auth/ProtectedRoute'
+import { AdminRoute } from '@/components/auth/AdminRoute'
 import { AppShell } from '@/components/layout/AppShell'
 import { LoginPage } from '@/app/auth/LoginPage'
 import { RegisterPage } from '@/app/auth/RegisterPage'
@@ -14,6 +15,12 @@ import { GroupCreatePage } from '@/app/groups/GroupCreatePage'
 import { GroupDetailPage } from '@/app/groups/GroupDetailPage'
 import { PersonalPage } from '@/app/personal/PersonalPage'
 import { ReportsPage } from '@/app/reports/ReportsPage'
+import { AdminPage } from '@/app/admin/AdminPage'
+import { AdminUsersPage } from '@/app/admin/AdminUsersPage'
+import { AdminGroupsPage } from '@/app/admin/AdminGroupsPage'
+import { AdminKycPage } from '@/app/admin/AdminKycPage'
+import { AdminAuditPage } from '@/app/admin/AdminAuditPage'
+import { AdminJobsPage } from '@/app/admin/AdminJobsPage'
 
 export const router = createBrowserRouter([
   // Root redirect
@@ -48,22 +55,27 @@ export const router = createBrowserRouter([
       {
         element: <AppShell />,
         children: [
-          { path: '/dashboard',   element: <DashboardPage /> },
-          { path: '/kyc',         element: <KycWizardPage /> },
-          { path: '/profile/edit', element: <EditProfilePage /> },
+          { path: '/dashboard',       element: <DashboardPage /> },
+          { path: '/kyc',             element: <KycWizardPage /> },
+          { path: '/profile/edit',    element: <EditProfilePage /> },
           { path: '/groups',          element: <GroupListPage /> },
           { path: '/groups/new',      element: <GroupCreatePage /> },
           { path: '/groups/:id',      element: <GroupDetailPage /> },
           { path: '/groups/:id/:tab', element: <GroupDetailPage /> },
-          { path: '/personal', element: <PersonalPage /> },
-          { path: '/reports', element: <ReportsPage /> },
+          { path: '/personal',        element: <PersonalPage /> },
+          { path: '/reports',         element: <ReportsPage /> },
+
+          // Admin — guarded by AdminRoute (system_admin or support only)
           {
-            path: '/admin',
-            element: (
-              <div className="p-8 text-center text-slate-500 text-sm">
-                Admin Panel — coming in Phase 13
-              </div>
-            ),
+            element: <AdminRoute />,
+            children: [
+              { path: '/admin',        element: <AdminPage /> },
+              { path: '/admin/users',  element: <AdminUsersPage /> },
+              { path: '/admin/groups', element: <AdminGroupsPage /> },
+              { path: '/admin/kyc',    element: <AdminKycPage /> },
+              { path: '/admin/audit',  element: <AdminAuditPage /> },
+              { path: '/admin/jobs',   element: <AdminJobsPage /> },
+            ],
           },
         ],
       },

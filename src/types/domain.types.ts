@@ -487,3 +487,91 @@ export interface Contribution {
   // Populated by two-query join
   profile?: ProfileSummary
 }
+
+// ─── Admin ────────────────────────────────────────────────────────────────────
+
+export interface AdminStats {
+  totalUsers:       number
+  activeUsers:      number
+  blacklistedUsers: number
+  activeGroups:     number
+  totalGroups:      number
+  loanOutstanding:  number   // cents
+  totalDefaults:    number
+  kycQueueCount:    number
+  unresolvedErrors: number
+}
+
+export interface AdminUser {
+  id:              string
+  email:           string
+  fullLegalName:   string
+  preferredName:   string | null
+  phone:           string | null
+  systemRole:      SystemRole
+  kycLevel:        KycLevel
+  creditScore:     number
+  creditScoreBand: ScoreBand
+  isBlacklisted:   boolean
+  isActive:        boolean
+  createdAt:       string
+  groupCount:      number
+}
+
+export interface AdminGroup {
+  id:                 string
+  name:               string
+  slug:               string
+  type:               'public' | 'private'
+  status:             GroupStatus
+  currency:           string
+  createdAt:          string
+  memberCount:        number
+  totalContributions: number   // cents
+  activeLoanBook:     number   // cents
+  totalDefaults:      number
+}
+
+export interface AdminKycEntry {
+  profileId:          string
+  fullLegalName:      string
+  email:              string
+  phone:              string | null
+  verificationStatus: KycVerificationStatus
+  kycLevel:           KycLevel
+  submittedAt:        string | null
+  riskRating:         string
+}
+
+export interface AdminAuditEvent {
+  id:         string
+  schemaName: string
+  tableName:  string
+  recordId:   string
+  action:     'INSERT' | 'UPDATE' | 'DELETE'
+  changedAt:  string
+  changedBy:  string | null
+  actorName:  string | null
+  diff:       Record<string, unknown> | null
+}
+
+export interface AdminJobEntry {
+  id:               string
+  jobName:          string
+  status:           'started' | 'completed' | 'failed' | 'partial'
+  startedAt:        string
+  completedAt:      string | null
+  durationMs:       number | null
+  recordsProcessed: number
+  errorMessage:     string | null
+}
+
+export interface AdminSystemError {
+  id:        string
+  source:    string
+  errorCode: string | null
+  message:   string
+  profileId: string | null
+  resolved:  boolean
+  createdAt: string
+}
