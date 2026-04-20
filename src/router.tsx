@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { ProtectedRoute, ProfileRequiredRoute, GuestRoute } from '@/components/auth/ProtectedRoute'
+import { AppShell } from '@/components/layout/AppShell'
 import { LoginPage } from '@/app/auth/LoginPage'
 import { RegisterPage } from '@/app/auth/RegisterPage'
 import { ResetPasswordPage } from '@/app/auth/ResetPasswordPage'
@@ -32,16 +33,54 @@ export const router = createBrowserRouter([
     children: [
       { path: '/auth/new-password',  element: <NewPasswordPage /> },
       { path: '/profile/setup',      element: <ProfileSetupPage /> },
-      { path: '/profile/edit',       element: <EditProfilePage /> },
     ],
   },
 
-  // Auth + profile required — main app routes go here
+  // Auth + profile required — all main app routes wrapped in AppShell
   {
     element: <ProfileRequiredRoute />,
     children: [
-      { path: '/dashboard', element: <DashboardPage /> },
-      { path: '/kyc',       element: <KycWizardPage /> },
+      {
+        element: <AppShell />,
+        children: [
+          { path: '/dashboard',   element: <DashboardPage /> },
+          { path: '/kyc',         element: <KycWizardPage /> },
+          { path: '/profile/edit', element: <EditProfilePage /> },
+          // Phases 6+ will fill these routes
+          {
+            path: '/groups',
+            element: (
+              <div className="p-8 text-center text-slate-500 text-sm">
+                Groups — coming in Phase 6
+              </div>
+            ),
+          },
+          {
+            path: '/personal',
+            element: (
+              <div className="p-8 text-center text-slate-500 text-sm">
+                Personal Finance — coming in Phase 11
+              </div>
+            ),
+          },
+          {
+            path: '/reports',
+            element: (
+              <div className="p-8 text-center text-slate-500 text-sm">
+                Reports — coming in Phase 12
+              </div>
+            ),
+          },
+          {
+            path: '/admin',
+            element: (
+              <div className="p-8 text-center text-slate-500 text-sm">
+                Admin Panel — coming in Phase 13
+              </div>
+            ),
+          },
+        ],
+      },
     ],
   },
 
