@@ -90,3 +90,78 @@ export type ProfileSummary = Pick<
   Profile,
   'id' | 'fullLegalName' | 'preferredName' | 'avatarUrl' | 'creditScore' | 'creditScoreBand' | 'kycLevel'
 >
+
+// ─── Groups ───────────────────────────────────────────────────────────────────
+
+export interface Group {
+  id: string
+  name: string
+  slug: string
+  description: string | null
+  type: 'public' | 'private'
+  status: GroupStatus
+  currency: string
+  timezone: string
+  cycleStart: string | null
+  cycleEnd: string | null
+  logoUrl: string | null
+  createdBy: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface GroupRules {
+  groupId: string
+  contributionAmount: number        // cents
+  contributionFrequency: ContributionFrequency
+  contributionDay: number | null
+  gracePeriodDays: number
+  lateFineFlat: number              // cents
+  lateFineInterestRateDaily: number
+  initiationFee: number             // cents
+  lateJoiningFee: number            // cents
+  midJoinAllowed: boolean
+  midJoinDeadlineWeeks: number
+  maxMembers: number | null
+  minKycLevel: KycLevel
+  loanEnabled: boolean
+  maxLoanMultiplier: number
+  loanInterestRate: number
+  loanInterestType: LoanInterestType
+  loanRepaymentPeriods: number
+  loanProcessingFeeRate: number
+  maxActiveLoansPerMember: number
+  guarantorRequired: boolean
+  guarantorsRequiredCount: number
+  minGuarantorCreditScore: number | null
+  defaultThresholdDays: number
+  defaultPenaltyRate: number
+  blacklistRecommendationAfter: number
+  dividendDistribution: DividendDistribution
+  rulesVersion: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface GroupMember {
+  id: string
+  groupId: string
+  profileId: string
+  role: GroupMemberRole
+  status: GroupMemberStatus
+  joinedAt: string | null
+  exitedAt: string | null
+  midJoin: boolean
+  midJoinCatchupAmount: number | null
+  creditScoreAtJoin: number | null
+  createdAt: string
+  // Joined fields (when fetched with profile)
+  profile?: ProfileSummary
+}
+
+export interface GroupWithMeta extends Group {
+  rules?: GroupRules
+  myRole?: GroupMemberRole | null
+  myStatus?: GroupMemberStatus | null
+  memberCount?: number
+}

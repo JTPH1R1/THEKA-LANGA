@@ -9,6 +9,9 @@ import { ProfileSetupPage } from '@/app/profile/ProfileSetupPage'
 import { EditProfilePage } from '@/app/profile/EditProfilePage'
 import { DashboardPage } from '@/app/dashboard/DashboardPage'
 import { KycWizardPage } from '@/app/kyc/KycWizardPage'
+import { GroupListPage } from '@/app/groups/GroupListPage'
+import { GroupCreatePage } from '@/app/groups/GroupCreatePage'
+import { GroupDetailPage } from '@/app/groups/GroupDetailPage'
 
 export const router = createBrowserRouter([
   // Root redirect
@@ -46,15 +49,10 @@ export const router = createBrowserRouter([
           { path: '/dashboard',   element: <DashboardPage /> },
           { path: '/kyc',         element: <KycWizardPage /> },
           { path: '/profile/edit', element: <EditProfilePage /> },
-          // Phases 6+ will fill these routes
-          {
-            path: '/groups',
-            element: (
-              <div className="p-8 text-center text-slate-500 text-sm">
-                Groups — coming in Phase 6
-              </div>
-            ),
-          },
+          { path: '/groups',          element: <GroupListPage /> },
+          { path: '/groups/new',      element: <GroupCreatePage /> },
+          { path: '/groups/:id',      element: <GroupDetailPage /> },
+          { path: '/groups/:id/:tab', element: <GroupDetailPage /> },
           {
             path: '/personal',
             element: (
