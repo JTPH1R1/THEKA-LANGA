@@ -213,6 +213,65 @@ export interface ElectionCandidate {
   voteCount?: number
 }
 
+// ─── Loans ───────────────────────────────────────────────────────────────────
+
+export interface Loan {
+  id: string
+  groupId: string
+  borrowerId: string
+  principal: number          // cents
+  processingFee: number      // cents
+  totalInterest: number      // cents
+  totalRepayable: number     // cents
+  amountRepaid: number       // cents
+  outstanding: number        // cents (generated)
+  interestRate: number
+  interestType: LoanInterestType
+  repaymentPeriods: number
+  repaymentSchedule: RepaymentPeriod[]
+  status: LoanStatus
+  appliedAt: string
+  reviewedAt: string | null
+  approvedAt: string | null
+  disbursedAt: string | null
+  completedAt: string | null
+  dueDate: string | null
+  reviewedBy: string | null
+  approvedBy: string | null
+  rejectionReason: string | null
+  creditScoreAtApply: number
+  notes: string | null
+  createdAt: string
+  updatedAt: string
+  // Populated by join
+  borrowerProfile?: ProfileSummary
+}
+
+export interface LoanGuarantor {
+  id: string
+  loanId: string
+  guarantorId: string
+  status: 'pending' | 'accepted' | 'declined'
+  respondedAt: string | null
+  creditScoreAtGuarantee: number | null
+  createdAt: string
+  profile?: ProfileSummary
+}
+
+export interface LoanRepayment {
+  id: string
+  loanId: string
+  groupId: string
+  borrowerId: string
+  amountPaid: number
+  paidAt: string
+  paymentRef: string | null
+  paymentChannel: PaymentChannel | null
+  isReversal: boolean
+  notes: string | null
+  createdAt: string
+}
+
 // ─── Contributions ────────────────────────────────────────────────────────────
 
 export interface Contribution {
