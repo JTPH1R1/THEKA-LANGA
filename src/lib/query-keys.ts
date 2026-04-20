@@ -54,6 +54,11 @@ export const queryKeys = {
   shoppingLists:        (profileId: string)                   => ['personal', 'shopping', profileId] as const,
   shoppingList:         (listId: string)                      => ['personal', 'shopping', 'list', listId] as const,
 
+  // ─── Reports ─────────────────────────────────────────────────────────────────
+  reportCycleSummary:    (groupId: string, period: string)   => ['report', 'cycle',  groupId, period]   as const,
+  reportMemberStatement: (groupId: string, memberId: string) => ['report', 'member', groupId, memberId] as const,
+  reportLoanBook:        (groupId: string)                   => ['report', 'loans',  groupId]            as const,
+
   // ─── Notifications ────────────────────────────────────────────────────────
   notifications: (profileId: string) => ['notifications', profileId] as const,
 

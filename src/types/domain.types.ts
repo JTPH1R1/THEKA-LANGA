@@ -380,6 +380,90 @@ export interface NextContributionDue {
   dueDate:        string
 }
 
+// ─── Reports ─────────────────────────────────────────────────────────────────
+
+export interface CycleSummaryRow {
+  memberId:       string
+  memberName:     string
+  expectedAmount: number   // cents
+  paidAmount:     number   // cents
+  fineAmount:     number   // cents
+  status:         ContributionStatus
+  paidAt:         string | null
+}
+
+export interface CycleSummaryData {
+  group:        { id: string; name: string; currency: string }
+  cyclePeriod:  string
+  generatedAt:  string
+  rows:         CycleSummaryRow[]
+  totals: {
+    expected:       number
+    collected:      number
+    outstanding:    number
+    membersPaid:    number
+    membersPartial: number
+    membersOverdue: number
+  }
+}
+
+export interface MemberStatementContribution {
+  cyclePeriod:    string
+  dueDate:        string
+  expectedAmount: number   // cents
+  paidAmount:     number   // cents
+  fineAmount:     number   // cents
+  status:         ContributionStatus
+}
+
+export interface MemberStatementLoan {
+  appliedAt:      string
+  principal:      number   // cents
+  totalRepayable: number   // cents
+  amountRepaid:   number   // cents
+  outstanding:    number   // cents
+  interestRate:   number
+  status:         LoanStatus
+  disbursedAt:    string | null
+}
+
+export interface MemberStatementData {
+  group:        { name: string; currency: string }
+  member:       { name: string; creditScore: number; creditScoreBand: string }
+  generatedAt:  string
+  contributions: MemberStatementContribution[]
+  loans:        MemberStatementLoan[]
+  totals: {
+    totalContributed: number
+    activeLoansCount: number
+    loanOutstanding:  number
+  }
+}
+
+export interface LoanBookRow {
+  borrowerName: string
+  appliedAt:    string
+  principal:    number   // cents
+  outstanding:  number   // cents
+  amountRepaid: number   // cents
+  interestRate: number
+  status:       LoanStatus
+  disbursedAt:  string | null
+  dueDate:      string | null
+}
+
+export interface LoanBookData {
+  group:       { name: string; currency: string }
+  generatedAt: string
+  loans:       LoanBookRow[]
+  totals: {
+    activePrincipal:   number
+    activeOutstanding: number
+    completedCount:    number
+    defaultCount:      number
+  }
+}
+
 // ─── Contributions ────────────────────────────────────────────────────────────
 
 export interface Contribution {

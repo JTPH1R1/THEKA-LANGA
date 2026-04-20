@@ -13,6 +13,7 @@ import { GroupListPage } from '@/app/groups/GroupListPage'
 import { GroupCreatePage } from '@/app/groups/GroupCreatePage'
 import { GroupDetailPage } from '@/app/groups/GroupDetailPage'
 import { PersonalPage } from '@/app/personal/PersonalPage'
+import { ReportsPage } from '@/app/reports/ReportsPage'
 
 export const router = createBrowserRouter([
   // Root redirect
@@ -55,14 +56,7 @@ export const router = createBrowserRouter([
           { path: '/groups/:id',      element: <GroupDetailPage /> },
           { path: '/groups/:id/:tab', element: <GroupDetailPage /> },
           { path: '/personal', element: <PersonalPage /> },
-          {
-            path: '/reports',
-            element: (
-              <div className="p-8 text-center text-slate-500 text-sm">
-                Reports — coming in Phase 12
-              </div>
-            ),
-          },
+          { path: '/reports', element: <ReportsPage /> },
           {
             path: '/admin',
             element: (

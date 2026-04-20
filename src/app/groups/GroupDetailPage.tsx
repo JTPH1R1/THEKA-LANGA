@@ -16,6 +16,7 @@ import { MembersTab } from '@/app/groups/tabs/MembersTab'
 import { ElectionsTab } from '@/app/groups/tabs/ElectionsTab'
 import { ContributionsTab } from '@/app/groups/tabs/ContributionsTab'
 import { LoansTab } from '@/app/groups/tabs/LoansTab'
+import { ReportsTab } from '@/app/groups/tabs/ReportsTab'
 import { formatCurrency, formatDate } from '@/lib/formatters'
 
 const TABS = [
@@ -277,9 +278,13 @@ export function GroupDetailPage() {
         />
       )}
 
-      {(tab === 'rules' || tab === 'reports') && (
+      {tab === 'reports' && (
+        <ReportsTab groupId={groupId ?? ''} currency={group.currency} />
+      )}
+
+      {tab === 'rules' && (
         <div className="text-center text-slate-500 text-sm py-12">
-          {TABS.find((t) => t.id === tab)?.label} — coming in a future phase
+          Rules — coming in a future phase
         </div>
       )}
 
