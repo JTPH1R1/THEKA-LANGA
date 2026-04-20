@@ -165,3 +165,50 @@ export interface GroupWithMeta extends Group {
   myStatus?: GroupMemberStatus | null
   memberCount?: number
 }
+
+// ─── Join requests ────────────────────────────────────────────────────────────
+
+export interface GroupJoinRequest {
+  id: string
+  groupId: string
+  requesterId: string
+  status: 'pending' | 'approved' | 'denied' | 'withdrawn'
+  message: string | null
+  reviewedBy: string | null
+  reviewedAt: string | null
+  denialReason: string | null
+  createdAt: string
+  // Populated when fetched for officer review
+  requesterProfile?: ProfileSummary
+}
+
+// ─── Elections ────────────────────────────────────────────────────────────────
+
+export interface Election {
+  id: string
+  groupId: string
+  position: 'chair' | 'treasurer' | 'secretary'
+  status: ElectionStatus
+  nominationsOpenAt: string
+  nominationsCloseAt: string
+  votingOpenAt: string | null
+  votingCloseAt: string | null
+  winnerId: string | null
+  openedBy: string
+  closedBy: string | null
+  createdAt: string
+}
+
+export interface ElectionCandidate {
+  id: string
+  electionId: string
+  candidateId: string
+  nominatedBy: string
+  accepted: boolean | null
+  acceptedAt: string | null
+  manifesto: string | null
+  withdrew: boolean
+  createdAt: string
+  profile?: ProfileSummary
+  voteCount?: number
+}
