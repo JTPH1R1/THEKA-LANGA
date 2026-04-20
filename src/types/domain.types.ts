@@ -212,3 +212,27 @@ export interface ElectionCandidate {
   profile?: ProfileSummary
   voteCount?: number
 }
+
+// ─── Contributions ────────────────────────────────────────────────────────────
+
+export interface Contribution {
+  id: string
+  groupId: string
+  memberId: string
+  cyclePeriod: string
+  dueDate: string
+  expectedAmount: number    // cents
+  paidAmount: number        // cents
+  fineAmount: number        // cents
+  totalPaid: number         // cents (generated: paidAmount + fineAmount)
+  status: ContributionStatus
+  paidAt: string | null
+  paymentRef: string | null
+  paymentChannel: PaymentChannel | null
+  recordedBy: string | null
+  notes: string | null
+  createdAt: string
+  updatedAt: string
+  // Populated by two-query join
+  profile?: ProfileSummary
+}

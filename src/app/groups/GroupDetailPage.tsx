@@ -14,6 +14,7 @@ import { ConfirmDialog } from '@/components/shared/ConfirmDialog'
 import { Button } from '@/components/ui/button'
 import { MembersTab } from '@/app/groups/tabs/MembersTab'
 import { ElectionsTab } from '@/app/groups/tabs/ElectionsTab'
+import { ContributionsTab } from '@/app/groups/tabs/ContributionsTab'
 import { formatCurrency, formatDate } from '@/lib/formatters'
 
 const TABS = [
@@ -258,7 +259,15 @@ export function GroupDetailPage() {
         <ElectionsTab groupId={groupId ?? ''} myMembership={myMembership ?? null} />
       )}
 
-      {(tab === 'contributions' || tab === 'loans' || tab === 'rules' || tab === 'reports') && (
+      {tab === 'contributions' && (
+        <ContributionsTab
+          groupId={groupId ?? ''}
+          currency={group.currency}
+          myMembership={myMembership ?? null}
+        />
+      )}
+
+      {(tab === 'loans' || tab === 'rules' || tab === 'reports') && (
         <div className="text-center text-slate-500 text-sm py-12">
           {TABS.find((t) => t.id === tab)?.label} — coming in a future phase
         </div>
