@@ -272,6 +272,50 @@ export interface LoanRepayment {
   createdAt: string
 }
 
+// ─── Dashboard ───────────────────────────────────────────────────────────────
+
+export interface DashboardKpis {
+  groupCount:       number
+  totalContributed: number   // cents
+  loanOutstanding:  number   // cents
+  activeLoans:      number
+  onTimePayments:   number
+  latePayments:     number
+}
+
+export interface GroupSummaryRow {
+  groupId:            string
+  name:               string
+  status:             GroupStatus
+  currency:           string
+  activeMembers:      number
+  totalContributions: number   // cents
+  activeLoanBook:     number   // cents
+  outstandingLoans:   number   // cents
+  totalDefaults:      number
+  myRole?:            GroupMemberRole
+  myContributed?:     number   // cents
+  myLoanOutstanding?: number   // cents
+}
+
+export interface ActivityEvent {
+  eventType:  string
+  groupId:    string
+  groupName:  string
+  actorName:  string
+  amount:     number | null   // cents
+  currency:   string
+  occurredAt: string
+}
+
+export interface NextContributionDue {
+  groupId:        string
+  groupName:      string
+  expectedAmount: number   // cents
+  currency:       string
+  dueDate:        string
+}
+
 // ─── Contributions ────────────────────────────────────────────────────────────
 
 export interface Contribution {
