@@ -29,14 +29,45 @@ export const db = {
 } as const
 
 // Schema-qualified RPC caller.
-// supabase.rpc(fn, params, { schema }) silently ignores the schema option in Supabase JS v2.
-// supabase.schema(s).rpc(fn, params) sends the correct Accept-Profile / Content-Profile headers.
-export function schemaRpc<T = unknown>(
+// Neither supabase.rpc(fn, params, { schema }) nor supabase.schema(s).rpc() correctly sets
+// Content-Profile in Supabase JS v2 — both send 'public' regardless of the schema argument.
+// We bypass the client and use a raw fetch with the correct Content-Profile header.
+export async function schemaRpc<T = unknown>(
   schema: keyof typeof db,
   fn: string,
   params: Record<string, unknown> = {},
 ): Promise<{ data: T; error: { message: string } | null }> {
-  return (db[schema]() as unknown as {
-    rpc: (fn: string, params: Record<string, unknown>) => Promise<{ data: T; error: { message: string } | null }>
-  }).rpc(fn, params)
+  const { data: { session } } = await supabase.auth.getSession()
+
+  const headers: Record<string, string> = {
+    'Content-Type':  'application/json',
+    'apikey':        env.VITE_SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${session?.access_token ?? env.VITE_SUPABASE_ANON_KEY}`,
+    'Content-Profile': schema,
+    'Accept-Profile':  schema,
+  }
+
+  try {
+    const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(params),
+    })
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      return {
+        data:  null as unknown as T,
+        error: { message: body.message ?? body.hint ?? `HTTP ${res.status}` },
+      }
+    }
+
+    const data = await res.json()
+    return { data: data as T, error: null }
+  } catch (err) {
+    return {
+      data:  null as unknown as T,
+      error: { message: err instanceof Error ? err.message : 'Network error' },
+    }
+  }
 }

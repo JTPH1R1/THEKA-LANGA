@@ -1,4 +1,4 @@
-import { db, schemaRpc } from '@/lib/supabase'
+import { supabase, db, schemaRpc } from '@/lib/supabase'
 import type { Group, GroupRules, GroupWithMeta } from '@/types/domain.types'
 import type { GroupInfoValues } from '@/lib/validators/group.schema'
 import type { FullRulesValues } from '@/lib/validators/group-rules.schema'

@@ -1,4 +1,4 @@
-import { db, schemaRpc } from '@/lib/supabase'
+import { supabase, db, schemaRpc } from '@/lib/supabase'
 import type {
   Loan, LoanGuarantor, LoanRepayment, LoanStatus,
   RepaymentPeriod, ProfileSummary,

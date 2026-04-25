@@ -1,4 +1,4 @@
-import { db, schemaRpc } from '@/lib/supabase'
+import { supabase, db, schemaRpc } from '@/lib/supabase'
 import type {
   DashboardKpis, GroupSummaryRow, ActivityEvent, NextContributionDue,
 } from '@/types/domain.types'
