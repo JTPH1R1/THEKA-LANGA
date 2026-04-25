@@ -36,17 +36,17 @@ export function FileUploadField({
 
   return (
     <div className="space-y-1.5">
-      <p className="text-sm text-slate-300">
+      <p className="text-sm text-slate-700">
         {label}
         {required && <span className="text-red-400 ml-1">*</span>}
       </p>
 
       {file ? (
-        <div className="flex items-center justify-between bg-teal-900/20 border border-teal-800 rounded-lg px-3 py-2.5">
+        <div className="flex items-center justify-between bg-teal-100/20 border border-teal-200 rounded-lg px-3 py-2.5">
           <div className="flex items-center gap-2 min-w-0">
-            <FileCheck className="text-teal-400 shrink-0" size={16} />
-            <span className="text-xs text-teal-300 truncate">{file.name}</span>
-            <span className="text-xs text-slate-500 shrink-0">
+            <FileCheck className="text-teal-600 shrink-0" size={16} />
+            <span className="text-xs text-teal-700 truncate">{file.name}</span>
+            <span className="text-xs text-slate-400 shrink-0">
               ({(file.size / 1024).toFixed(0)} KB)
             </span>
           </div>
@@ -66,16 +66,16 @@ export function FileUploadField({
           className={cn(
             'w-full flex flex-col items-center gap-2 border-2 border-dashed rounded-lg p-4 transition-colors',
             error
-              ? 'border-red-700 bg-red-900/10 hover:border-red-600'
-              : 'border-slate-700 bg-slate-800/50 hover:border-teal-600 hover:bg-teal-900/10'
+              ? 'border-red-300 bg-red-50 hover:border-red-400'
+              : 'border-gray-300 bg-gray-100/50 hover:border-teal-600 hover:bg-teal-100/10'
           )}
         >
-          <Upload className="text-slate-500" size={20} />
+          <Upload className="text-slate-400" size={20} />
           <span className="text-xs text-slate-400">Click to upload</span>
         </button>
       )}
 
-      {hint && !error && <p className="text-xs text-slate-500">{hint}</p>}
+      {hint && !error && <p className="text-xs text-slate-400">{hint}</p>}
       {error && <p className="text-xs text-red-400">{error}</p>}
 
       <input

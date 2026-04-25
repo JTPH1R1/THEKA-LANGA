@@ -71,27 +71,27 @@ function LoanApplicationPanel({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-slate-900 border border-teal-800/40 rounded-xl p-5 space-y-5"
+        className="bg-white border border-teal-200 rounded-xl p-5 space-y-5"
       >
-        <h3 className="text-sm font-medium text-teal-300">Apply for a loan</h3>
+        <h3 className="text-sm font-medium text-teal-700">Apply for a loan</h3>
 
         {rules && (
-          <div className="flex flex-wrap gap-4 text-xs text-slate-400 bg-slate-800/60 rounded-lg px-3 py-2">
-            <span>Rate: <span className="text-slate-200">{rules.loanInterestRate}% / yr ({rules.loanInterestType.replace('_', ' ')})</span></span>
-            <span>Max: <span className="text-slate-200">{rules.maxLoanMultiplier}× contributions</span></span>
-            <span>Periods: <span className="text-slate-200">{rules.loanRepaymentPeriods} months</span></span>
+          <div className="flex flex-wrap gap-4 text-xs text-slate-400 bg-gray-100 rounded-lg px-3 py-2">
+            <span>Rate: <span className="text-slate-800">{rules.loanInterestRate}% / yr ({rules.loanInterestType.replace('_', ' ')})</span></span>
+            <span>Max: <span className="text-slate-800">{rules.maxLoanMultiplier}× contributions</span></span>
+            <span>Periods: <span className="text-slate-800">{rules.loanRepaymentPeriods} months</span></span>
           </div>
         )}
 
         <FormField control={form.control} name="principal" render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-slate-300 text-xs">Loan amount ({currency})</FormLabel>
+            <FormLabel className="text-slate-700 text-xs">Loan amount ({currency})</FormLabel>
             <FormControl>
               <Input
                 type="number" step="0.01" min="0" placeholder="0.00"
                 {...field}
                 onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
-                className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
               />
             </FormControl>
             <FormMessage className="text-xs" />
@@ -100,12 +100,12 @@ function LoanApplicationPanel({
 
         <FormField control={form.control} name="notes" render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-slate-300 text-xs">Purpose / notes (optional)</FormLabel>
+            <FormLabel className="text-slate-700 text-xs">Purpose / notes (optional)</FormLabel>
             <FormControl>
               <Input
                 placeholder="e.g. School fees, business expansion…"
                 {...field}
-                className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
               />
             </FormControl>
             <FormMessage className="text-xs" />
@@ -115,7 +115,7 @@ function LoanApplicationPanel({
         {/* Guarantor selection */}
         {rules?.guarantorRequired && otherMembers.length > 0 && (
           <div>
-            <p className="text-xs text-slate-300 mb-2">
+            <p className="text-xs text-slate-700 mb-2">
               Guarantors — select at least {rules.guarantorsRequiredCount}
             </p>
             <div className="space-y-1 max-h-40 overflow-y-auto">
@@ -131,16 +131,16 @@ function LoanApplicationPanel({
                     className={[
                       'w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-left transition-colors',
                       selected
-                        ? 'bg-teal-900/40 border border-teal-700'
-                        : 'bg-slate-800/60 border border-transparent hover:border-slate-700',
+                        ? 'bg-teal-50 border border-teal-300'
+                        : 'bg-gray-100 border border-transparent hover:border-gray-300',
                     ].join(' ')}
                   >
                     <Avatar className="h-6 w-6 shrink-0">
-                      <AvatarFallback className="bg-slate-700 text-slate-300 text-xs">{initials}</AvatarFallback>
+                      <AvatarFallback className="bg-gray-200 text-slate-700 text-xs">{initials}</AvatarFallback>
                     </Avatar>
-                    <span className="text-sm text-slate-200 flex-1">{name}</span>
-                    <span className="text-xs text-slate-500">Score {m.profile?.creditScore ?? '—'}</span>
-                    {selected && <span className="text-xs text-teal-400">✓</span>}
+                    <span className="text-sm text-slate-800 flex-1">{name}</span>
+                    <span className="text-xs text-slate-400">Score {m.profile?.creditScore ?? '—'}</span>
+                    {selected && <span className="text-xs text-teal-600">✓</span>}
                   </button>
                 )
               })}
@@ -154,7 +154,7 @@ function LoanApplicationPanel({
             {applyForLoan.isPending ? 'Submitting…' : 'Submit application'}
           </Button>
           <Button type="button" variant="ghost" onClick={onDone}
-            className="text-slate-400 hover:text-slate-200 text-sm">
+            className="text-slate-400 hover:text-slate-800 text-sm">
             Cancel
           </Button>
         </div>
@@ -173,12 +173,12 @@ function GuarantorRequestBanner({ groupId }: { groupId: string }) {
   if (!groupRequests.length) return null
 
   return (
-    <div className="bg-amber-900/20 border border-amber-800/40 rounded-xl p-4 space-y-3">
-      <h3 className="text-sm font-medium text-amber-300">Guarantor requests ({groupRequests.length})</h3>
+    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3">
+      <h3 className="text-sm font-medium text-amber-600">Guarantor requests ({groupRequests.length})</h3>
       {groupRequests.map((req) => (
         <div key={req.id} className="flex items-center gap-3 justify-between">
-          <div className="text-xs text-slate-300">
-            <span className="text-slate-200 font-medium">{formatCurrency(req.loan?.principal ?? 0, 'KES')}</span> loan
+          <div className="text-xs text-slate-700">
+            <span className="text-slate-800 font-medium">{formatCurrency(req.loan?.principal ?? 0, 'KES')}</span> loan
             — {req.loan?.borrowerProfile?.preferredName ?? 'member'}
           </div>
           <div className="flex gap-2">
@@ -287,7 +287,7 @@ export function LoansTab({ groupId, currency, myMembership, currentUserId }: Loa
               'px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors',
               statusFilter === value
                 ? 'bg-teal-700 text-white'
-                : 'bg-slate-800 text-slate-400 hover:text-slate-200',
+                : 'bg-gray-100 text-slate-400 hover:text-slate-800',
             ].join(' ')}
           >
             {label}
@@ -298,7 +298,7 @@ export function LoansTab({ groupId, currency, myMembership, currentUserId }: Loa
       {/* Loan list */}
       {isLoading ? (
         <div className="space-y-3 animate-pulse">
-          {[1, 2, 3].map((i) => <div key={i} className="h-16 bg-slate-900 border border-slate-800 rounded-xl" />)}
+          {[1, 2, 3].map((i) => <div key={i} className="h-16 bg-white border border-gray-200 rounded-xl" />)}
         </div>
       ) : !loans.length ? (
         <EmptyState

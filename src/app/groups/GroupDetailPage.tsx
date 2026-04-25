@@ -86,39 +86,39 @@ export function GroupDetailPage() {
   if (isLoading) {
     return (
       <div className="p-6 max-w-5xl mx-auto animate-pulse">
-        <div className="h-8 bg-slate-800 rounded w-48 mb-4" />
-        <div className="h-32 bg-slate-900 border border-slate-800 rounded-xl" />
+        <div className="h-8 bg-gray-100 rounded w-48 mb-4" />
+        <div className="h-32 bg-white border border-gray-200 rounded-xl" />
       </div>
     )
   }
 
   if (!group) {
     return (
-      <div className="p-6 text-center text-slate-500">
+      <div className="p-6 text-center text-slate-400">
         Group not found.{' '}
-        <Link to="/groups" className="text-teal-400 hover:underline">Back to groups</Link>
+        <Link to="/groups" className="text-teal-600 hover:underline">Back to groups</Link>
       </div>
     )
   }
 
   return (
     <div className="p-4 sm:p-6 max-w-5xl mx-auto">
-      <Link to="/groups" className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-teal-400 transition-colors mb-4">
+      <Link to="/groups" className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-teal-600 transition-colors mb-4">
         <ArrowLeft size={13} /> All groups
       </Link>
 
       {/* Group header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 mb-4">
+      <div className="bg-white border border-gray-200 rounded-xl p-5 mb-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <h1 className="text-xl font-bold text-slate-100">{group.name}</h1>
+              <h1 className="text-xl font-bold text-slate-900">{group.name}</h1>
               <GroupStatusBadge status={group.status} />
             </div>
             {group.description && (
               <p className="text-sm text-slate-400 mb-2">{group.description}</p>
             )}
-            <div className="flex flex-wrap gap-4 text-xs text-slate-500">
+            <div className="flex flex-wrap gap-4 text-xs text-slate-400">
               <span>{group.currency} · {group.timezone.split('/')[1]?.replace('_', ' ') ?? group.timezone}</span>
               {group.cycleStart && (
                 <span>Cycle: {formatDate(group.cycleStart)} → {group.cycleEnd ? formatDate(group.cycleEnd) : 'ongoing'}</span>
@@ -136,7 +136,7 @@ export function GroupDetailPage() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setExitOpen(true)}
-                className="text-red-400 hover:text-red-300 gap-1.5 text-xs"
+                className="text-red-600 hover:text-red-700 gap-1.5 text-xs"
               >
                 <LogOut size={13} /> Leave group
               </Button>
@@ -147,7 +147,7 @@ export function GroupDetailPage() {
                 size="sm"
                 onClick={handleWithdraw}
                 disabled={withdraw.isPending}
-                className="text-amber-400 hover:text-amber-300 gap-1.5 text-xs"
+                className="text-amber-600 hover:text-amber-600 gap-1.5 text-xs"
               >
                 Withdraw request
               </Button>
@@ -166,13 +166,13 @@ export function GroupDetailPage() {
 
         {/* Join request form */}
         {showJoinForm && (
-          <div className="mt-4 border-t border-slate-800 pt-4 space-y-3">
+          <div className="mt-4 border-t border-gray-200 pt-4 space-y-3">
             <textarea
               rows={2}
               placeholder="Optional message to the group officers…"
               value={joinMessage}
               onChange={(e) => setJoinMessage(e.target.value)}
-              className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-teal-500 px-3 py-2 text-sm resize-none"
+              className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-teal-500 px-3 py-2 text-sm resize-none"
             />
             <div className="flex gap-2">
               <Button
@@ -187,7 +187,7 @@ export function GroupDetailPage() {
                 size="sm"
                 variant="ghost"
                 onClick={() => setShowJoinForm(false)}
-                className="text-slate-400 hover:text-slate-200"
+                className="text-slate-400 hover:text-slate-800"
               >
                 Cancel
               </Button>
@@ -196,14 +196,14 @@ export function GroupDetailPage() {
         )}
 
         {hasPendingRequest && (
-          <p className="mt-3 text-xs text-amber-400/80 border-t border-slate-800 pt-3">
+          <p className="mt-3 text-xs text-amber-600/80 border-t border-gray-200 pt-3">
             Your join request is pending review by the group officers.
           </p>
         )}
       </div>
 
       {/* Tab nav (only show full tabs to members) */}
-      <div className="flex gap-1 overflow-x-auto pb-1 mb-5 border-b border-slate-800">
+      <div className="flex gap-1 overflow-x-auto pb-1 mb-5 border-b border-gray-200">
         {TABS.map(({ id, label, icon: Icon }) => (
           <NavLink
             key={id}
@@ -213,8 +213,8 @@ export function GroupDetailPage() {
               [
                 'flex items-center gap-1.5 px-3 py-2 text-xs font-medium whitespace-nowrap border-b-2 -mb-px transition-colors',
                 isActive
-                  ? 'border-teal-500 text-teal-300'
-                  : 'border-transparent text-slate-400 hover:text-slate-200',
+                  ? 'border-teal-500 text-teal-700'
+                  : 'border-transparent text-slate-400 hover:text-slate-800',
               ].join(' ')
             }
           >
@@ -229,20 +229,20 @@ export function GroupDetailPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {rules && (
             <>
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                <p className="text-xs text-slate-500 mb-1">Contribution</p>
-                <p className="text-xl font-bold text-slate-100">{formatCurrency(rules.contributionAmount, group.currency)}</p>
-                <p className="text-xs text-slate-500 capitalize">{rules.contributionFrequency}</p>
+              <div className="bg-white border border-gray-200 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Contribution</p>
+                <p className="text-xl font-bold text-slate-900">{formatCurrency(rules.contributionAmount, group.currency)}</p>
+                <p className="text-xs text-slate-400 capitalize">{rules.contributionFrequency}</p>
               </div>
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                <p className="text-xs text-slate-500 mb-1">Loan interest</p>
-                <p className="text-xl font-bold text-slate-100">{rules.loanInterestRate}%</p>
-                <p className="text-xs text-slate-500 capitalize">{rules.loanInterestType.replace('_', ' ')} / year</p>
+              <div className="bg-white border border-gray-200 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Loan interest</p>
+                <p className="text-xl font-bold text-slate-900">{rules.loanInterestRate}%</p>
+                <p className="text-xs text-slate-400 capitalize">{rules.loanInterestType.replace('_', ' ')} / year</p>
               </div>
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                <p className="text-xs text-slate-500 mb-1">Max loan</p>
-                <p className="text-xl font-bold text-slate-100">{rules.maxLoanMultiplier}×</p>
-                <p className="text-xs text-slate-500">total contributions</p>
+              <div className="bg-white border border-gray-200 rounded-xl p-4">
+                <p className="text-xs text-slate-400 mb-1">Max loan</p>
+                <p className="text-xl font-bold text-slate-900">{rules.maxLoanMultiplier}×</p>
+                <p className="text-xs text-slate-400">total contributions</p>
               </div>
             </>
           )}
@@ -283,7 +283,7 @@ export function GroupDetailPage() {
       )}
 
       {tab === 'rules' && (
-        <div className="text-center text-slate-500 text-sm py-12">
+        <div className="text-center text-slate-400 text-sm py-12">
           Rules — coming in a future phase
         </div>
       )}

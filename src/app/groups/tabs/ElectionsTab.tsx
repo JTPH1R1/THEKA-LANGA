@@ -66,8 +66,8 @@ function ElectionCard({
   const pending  = candidates.filter((c) => c.accepted === null && !c.withdrew)
 
   const statusColors: Record<string, string> = {
-    nominations_open: 'text-blue-400',
-    voting_open:      'text-teal-400',
+    nominations_open: 'text-blue-600',
+    voting_open:      'text-teal-600',
     closed:           'text-slate-400',
     cancelled:        'text-red-400',
   }
@@ -127,37 +127,37 @@ function ElectionCard({
     : null
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
       {/* Header */}
       <button
         onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center justify-between p-4 text-left hover:bg-slate-800/40 transition-colors"
+        className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
       >
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-slate-100">
+            <span className="text-sm font-semibold text-slate-900">
               {POSITION_LABELS[election.position]} Election
             </span>
             <span className={`text-xs font-medium ${statusColors[election.status] ?? 'text-slate-400'}`}>
               {election.status.replace('_', ' ')}
             </span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             {election.status === 'nominations_open' && `Nominations close ${formatDate(election.nominationsCloseAt)}`}
             {election.status === 'voting_open'      && `Voting open — ${accepted.length} candidates`}
             {election.status === 'closed'           && `Winner: ${winnerProfile?.preferredName ?? winnerProfile?.fullLegalName ?? '—'}`}
           </p>
         </div>
-        <ChevronDown size={16} className={`text-slate-500 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+        <ChevronDown size={16} className={`text-slate-400 transition-transform ${expanded ? 'rotate-180' : ''}`} />
       </button>
 
       {expanded && (
-        <div className="px-4 pb-4 space-y-4 border-t border-slate-800">
+        <div className="px-4 pb-4 space-y-4 border-t border-gray-200">
 
           {/* Candidates */}
           <div className="space-y-2 pt-3">
             {accepted.length === 0 && pending.length === 0 && (
-              <p className="text-xs text-slate-500">No candidates yet.</p>
+              <p className="text-xs text-slate-400">No candidates yet.</p>
             )}
             {[...accepted, ...pending].map((c) => {
               const name = c.profile?.preferredName ?? c.profile?.fullLegalName ?? 'Unknown'
@@ -168,14 +168,14 @@ function ElectionCard({
               return (
                 <div key={c.id} className="flex items-center gap-3">
                   <Avatar className="h-7 w-7 shrink-0">
-                    <AvatarFallback className="bg-slate-700 text-slate-300 text-xs">{initials}</AvatarFallback>
+                    <AvatarFallback className="bg-gray-200 text-slate-700 text-xs">{initials}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-slate-200">{name}</span>
-                      {isWinner && <Crown size={13} className="text-amber-400" />}
-                      {c.accepted === null && <span className="text-xs text-amber-400">pending acceptance</span>}
-                      {myVoteHere && <span className="text-xs text-teal-400">✓ your vote</span>}
+                      <span className="text-sm text-slate-800">{name}</span>
+                      {isWinner && <Crown size={13} className="text-amber-600" />}
+                      {c.accepted === null && <span className="text-xs text-amber-600">pending acceptance</span>}
+                      {myVoteHere && <span className="text-xs text-teal-600">✓ your vote</span>}
                     </div>
                   </div>
                   {election.status === 'voting_open' && isMember && !hasVoted && c.accepted && !c.withdrew && (
@@ -199,7 +199,7 @@ function ElectionCard({
               <Button
                 size="sm"
                 onClick={() => setNominateOpen(true)}
-                className="h-7 px-3 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs"
+                className="h-7 px-3 bg-gray-200 hover:text-slate-500 text-slate-800 text-xs"
               >
                 Nominate myself
               </Button>
@@ -299,15 +299,15 @@ function OpenElectionForm({ groupId, onDone }: OpenElectionFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-      <h3 className="text-sm font-medium text-slate-200">Open new election</h3>
+    <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+      <h3 className="text-sm font-medium text-slate-800">Open new election</h3>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <Label className="text-slate-300">Position</Label>
+          <Label className="text-slate-700">Position</Label>
           <select
             value={position}
             onChange={(e) => setPosition(e.target.value as typeof position)}
-            className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
+            className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
           >
             <option value="chair">Chairperson</option>
             <option value="treasurer">Treasurer</option>
@@ -315,12 +315,12 @@ function OpenElectionForm({ groupId, onDone }: OpenElectionFormProps) {
           </select>
         </div>
         <div className="space-y-1.5">
-          <Label className="text-slate-300">Nominations close</Label>
+          <Label className="text-slate-700">Nominations close</Label>
           <Input
             type="date"
             value={closeDate}
             onChange={(e) => setCloseDate(e.target.value)}
-            className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+            className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
             required
           />
         </div>
@@ -331,7 +331,7 @@ function OpenElectionForm({ groupId, onDone }: OpenElectionFormProps) {
           {open.isPending ? 'Opening…' : 'Open election'}
         </Button>
         <Button type="button" variant="ghost" onClick={onDone}
-          className="text-slate-400 hover:text-slate-200 text-sm">
+          className="text-slate-400 hover:text-slate-800 text-sm">
           Cancel
         </Button>
       </div>
@@ -364,7 +364,7 @@ export function ElectionsTab({ groupId, myMembership }: ElectionsTabProps) {
 
       {isLoading ? (
         <div className="space-y-3 animate-pulse">
-          {[1, 2].map((i) => <div key={i} className="h-16 bg-slate-900 border border-slate-800 rounded-xl" />)}
+          {[1, 2].map((i) => <div key={i} className="h-16 bg-white border border-gray-200 rounded-xl" />)}
         </div>
       ) : !elections.length ? (
         <EmptyState icon={Vote} title="No elections yet" description="The group chair can open elections for officer positions." />

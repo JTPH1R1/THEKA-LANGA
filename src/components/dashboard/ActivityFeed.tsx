@@ -21,23 +21,23 @@ const EVENT_CONFIG: Record<string, {
   label: (e: ActivityEvent) => string
 }> = {
   contribution_paid: {
-    icon: CreditCard, iconClass: 'text-teal-400 bg-teal-900/40',
+    icon: CreditCard, iconClass: 'text-teal-600 bg-teal-50',
     label: (e) => `${e.actorName} paid ${e.amount != null ? formatCurrency(e.amount, e.currency) : ''} contribution`,
   },
   loan_disbursed: {
-    icon: TrendingUp, iconClass: 'text-indigo-400 bg-indigo-900/40',
+    icon: TrendingUp, iconClass: 'text-indigo-600 bg-indigo-50',
     label: (e) => `${e.actorName} received ${e.amount != null ? formatCurrency(e.amount, e.currency) : ''} loan`,
   },
   loan_completed: {
-    icon: CheckCircle2, iconClass: 'text-teal-400 bg-teal-900/40',
+    icon: CheckCircle2, iconClass: 'text-teal-600 bg-teal-50',
     label: (e) => `${e.actorName} fully repaid ${e.amount != null ? formatCurrency(e.amount, e.currency) : ''} loan`,
   },
   member_joined: {
-    icon: UserPlus, iconClass: 'text-blue-400 bg-blue-900/40',
+    icon: UserPlus, iconClass: 'text-blue-600 bg-blue-50',
     label: (e) => `${e.actorName} joined the group`,
   },
   election_closed: {
-    icon: Vote, iconClass: 'text-amber-400 bg-amber-900/40',
+    icon: Vote, iconClass: 'text-amber-600 bg-amber-50',
     label: (e) => `${e.actorName} elected as officer`,
   },
 }
@@ -55,10 +55,10 @@ export function ActivityFeed({ limit = 15 }: Props) {
       <div className="space-y-3 animate-pulse">
         {[1, 2, 3, 4].map((i) => (
           <div key={i} className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-slate-800 shrink-0" />
+            <div className="w-8 h-8 rounded-full bg-gray-100 shrink-0" />
             <div className="flex-1 space-y-1.5">
-              <div className="h-3 bg-slate-800 rounded w-3/4" />
-              <div className="h-2.5 bg-slate-800 rounded w-1/3" />
+              <div className="h-3 bg-gray-100 rounded w-3/4" />
+              <div className="h-2.5 bg-gray-100 rounded w-1/3" />
             </div>
           </div>
         ))}
@@ -68,7 +68,7 @@ export function ActivityFeed({ limit = 15 }: Props) {
 
   if (!visible.length) {
     return (
-      <p className="text-sm text-slate-500 py-4 text-center">
+      <p className="text-sm text-slate-400 py-4 text-center">
         No recent activity — activity will appear here as your groups get going.
       </p>
     )
@@ -82,16 +82,16 @@ export function ActivityFeed({ limit = 15 }: Props) {
         return (
           <div
             key={`${event.eventType}-${event.occurredAt}-${i}`}
-            className="flex items-start gap-3 py-3 border-b border-slate-800 last:border-0"
+            className="flex items-start gap-3 py-3 border-b border-gray-200 last:border-0"
           >
             <div className={`p-1.5 rounded-full shrink-0 mt-0.5 ${config.iconClass}`}>
               <Icon size={13} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm text-slate-200">{config.label(event)}</p>
-              <p className="text-xs text-slate-500 mt-0.5">{event.groupName}</p>
+              <p className="text-sm text-slate-800">{config.label(event)}</p>
+              <p className="text-xs text-slate-400 mt-0.5">{event.groupName}</p>
             </div>
-            <span className="text-xs text-slate-500 shrink-0 mt-0.5">
+            <span className="text-xs text-slate-400 shrink-0 mt-0.5">
               {timeAgo(event.occurredAt)}
             </span>
           </div>

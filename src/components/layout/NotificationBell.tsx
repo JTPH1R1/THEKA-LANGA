@@ -7,10 +7,10 @@ import { formatDateTime } from '@/lib/formatters'
 import type { AppNotification } from '@/types/domain.types'
 
 const PRIORITY_COLORS: Record<string, string> = {
-  urgent: 'text-rose-400',
-  high:   'text-amber-400',
-  normal: 'text-slate-300',
-  low:    'text-slate-400',
+  urgent: 'text-rose-600',
+  high:   'text-amber-600',
+  normal: 'text-slate-700',
+  low:    'text-slate-500',
 }
 
 export function NotificationBell() {
@@ -43,7 +43,7 @@ export function NotificationBell() {
       <Button
         variant="ghost"
         size="sm"
-        className="relative text-slate-400 hover:text-slate-200 p-2"
+        className="relative text-slate-500 hover:text-slate-700 p-2"
         aria-label="Notifications"
         onClick={() => setOpen((v) => !v)}
       >
@@ -56,25 +56,25 @@ export function NotificationBell() {
       </Button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-1 w-80 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
-            <span className="text-sm font-semibold text-slate-100">
+        <div className="absolute right-0 top-full mt-1 w-80 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+            <span className="text-sm font-semibold text-slate-900">
               Notifications
               {unreadCount > 0 && (
-                <span className="ml-2 text-xs font-normal text-teal-400">{unreadCount} new</span>
+                <span className="ml-2 text-xs font-normal text-teal-600">{unreadCount} new</span>
               )}
             </span>
             <div className="flex items-center gap-3">
               {unreadCount > 0 && (
                 <button
                   onClick={() => markAll()}
-                  className="flex items-center gap-1 text-xs text-teal-400 hover:text-teal-300"
+                  className="flex items-center gap-1 text-xs text-teal-600 hover:text-teal-700"
                 >
                   <CheckCheck size={12} />
                   Mark all read
                 </button>
               )}
-              <button onClick={() => setOpen(false)} className="text-slate-500 hover:text-slate-300">
+              <button onClick={() => setOpen(false)} className="text-slate-400 hover:text-slate-600">
                 <X size={14} />
               </button>
             </div>
@@ -82,7 +82,7 @@ export function NotificationBell() {
 
           <div className="max-h-96 overflow-y-auto">
             {notifications.length === 0 && (
-              <div className="px-4 py-8 text-center text-slate-500 text-sm">
+              <div className="px-4 py-8 text-center text-slate-400 text-sm">
                 No notifications
               </div>
             )}
@@ -91,18 +91,18 @@ export function NotificationBell() {
                 key={n.id}
                 onClick={() => handleItemClick(n)}
                 className={[
-                  'w-full text-left px-4 py-3 border-b border-slate-800/60 hover:bg-slate-800/40 transition-colors',
-                  !n.read ? 'bg-slate-800/20' : '',
+                  'w-full text-left px-4 py-3 border-b border-gray-100 hover:bg-gray-50 transition-colors',
+                  !n.read ? 'bg-teal-50/60' : '',
                 ].join(' ')}
               >
                 <div className="flex items-start gap-2.5">
-                  <span className={['mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0', !n.read ? 'bg-teal-400' : 'bg-transparent'].join(' ')} />
+                  <span className={['mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0', !n.read ? 'bg-teal-500' : 'bg-transparent'].join(' ')} />
                   <div className="min-w-0 flex-1">
-                    <p className={`text-xs font-medium leading-snug ${PRIORITY_COLORS[n.priority] ?? 'text-slate-300'}`}>
+                    <p className={`text-xs font-medium leading-snug ${PRIORITY_COLORS[n.priority] ?? 'text-slate-700'}`}>
                       {n.title}
                     </p>
-                    <p className="text-xs text-slate-400 mt-0.5 line-clamp-2 leading-snug">{n.body}</p>
-                    <p className="text-[10px] text-slate-600 mt-1">{formatDateTime(n.createdAt)}</p>
+                    <p className="text-xs text-slate-500 mt-0.5 line-clamp-2 leading-snug">{n.body}</p>
+                    <p className="text-[10px] text-slate-400 mt-1">{formatDateTime(n.createdAt)}</p>
                   </div>
                 </div>
               </button>

@@ -63,14 +63,14 @@ export function LoginPage() {
   return (
     <AuthLayout title="Sign in" description="Welcome back to Theka Langa">
       {/* Mode toggle */}
-      <div className="flex rounded-lg bg-slate-800 p-1 mb-6">
+      <div className="flex rounded-lg bg-gray-100 p-1 mb-6">
         <button
           type="button"
           onClick={() => setMode('password')}
           className={`flex-1 py-1.5 text-sm font-medium rounded-md transition-colors ${
             mode === 'password'
               ? 'bg-teal-600 text-white'
-              : 'text-slate-400 hover:text-slate-200'
+              : 'text-slate-400 hover:text-slate-800'
           }`}
         >
           Password
@@ -81,7 +81,7 @@ export function LoginPage() {
           className={`flex-1 py-1.5 text-sm font-medium rounded-md transition-colors ${
             mode === 'magic'
               ? 'bg-teal-600 text-white'
-              : 'text-slate-400 hover:text-slate-200'
+              : 'text-slate-400 hover:text-slate-800'
           }`}
         >
           Magic link
@@ -98,13 +98,13 @@ export function LoginPage() {
           )}
 
           <div className="space-y-1.5">
-            <Label htmlFor="email" className="text-slate-300">Email address</Label>
+            <Label htmlFor="email" className="text-slate-700">Email address</Label>
             <Input
               id="email"
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
               {...passwordForm.register('email')}
             />
             {passwordForm.formState.errors.email && (
@@ -114,10 +114,10 @@ export function LoginPage() {
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password" className="text-slate-300">Password</Label>
+              <Label htmlFor="password" className="text-slate-700">Password</Label>
               <Link
                 to="/auth/reset-password"
-                className="text-xs text-teal-400 hover:text-teal-300 transition-colors"
+                className="text-xs text-teal-600 hover:text-teal-700 transition-colors"
               >
                 Forgot password?
               </Link>
@@ -128,13 +128,13 @@ export function LoginPage() {
                 type={showPassword ? 'text' : 'password'}
                 autoComplete="current-password"
                 placeholder="••••••••"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500 pr-10"
+                className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500 pr-10"
                 {...passwordForm.register('password')}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((s) => !s)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-800"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -160,19 +160,19 @@ export function LoginPage() {
         <>
           {magicSent ? (
             <div className="text-center py-4 space-y-3">
-              <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-teal-900/50 mx-auto">
-                <Mail className="text-teal-400" size={24} />
+              <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-teal-100/50 mx-auto">
+                <Mail className="text-teal-600" size={24} />
               </div>
-              <p className="text-sm text-slate-300 font-medium">Check your email</p>
+              <p className="text-sm text-slate-700 font-medium">Check your email</p>
               <p className="text-xs text-slate-400">
                 We sent a sign-in link to{' '}
-                <span className="text-slate-200">{magicForm.getValues('email')}</span>.
+                <span className="text-slate-800">{magicForm.getValues('email')}</span>.
                 The link expires in 10 minutes.
               </p>
               <button
                 type="button"
                 onClick={() => setMagicSent(false)}
-                className="text-xs text-teal-400 hover:text-teal-300 underline"
+                className="text-xs text-teal-600 hover:text-teal-700 underline"
               >
                 Use a different email
               </button>
@@ -186,13 +186,13 @@ export function LoginPage() {
               )}
 
               <div className="space-y-1.5">
-                <Label htmlFor="magic-email" className="text-slate-300">Email address</Label>
+                <Label htmlFor="magic-email" className="text-slate-700">Email address</Label>
                 <Input
                   id="magic-email"
                   type="email"
                   autoComplete="email"
                   placeholder="you@example.com"
-                  className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+                  className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
                   {...magicForm.register('email')}
                 />
                 {magicForm.formState.errors.email && (
@@ -200,7 +200,7 @@ export function LoginPage() {
                 )}
               </div>
 
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-400">
                 We&apos;ll send a one-click sign-in link. No password needed.
               </p>
 
@@ -216,13 +216,13 @@ export function LoginPage() {
         </>
       )}
 
-      <Separator className="my-6 bg-slate-800" />
+      <Separator className="my-6 bg-gray-100" />
 
       <p className="text-center text-sm text-slate-400">
         Don&apos;t have an account?{' '}
         <Link
           to="/auth/register"
-          className="text-teal-400 hover:text-teal-300 font-medium transition-colors"
+          className="text-teal-600 hover:text-teal-700 font-medium transition-colors"
         >
           Create account
         </Link>

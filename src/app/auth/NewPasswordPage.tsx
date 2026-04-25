@@ -44,10 +44,10 @@ export function NewPasswordPage() {
     return (
       <AuthLayout title="Password updated" description="Your new password is set">
         <div className="text-center space-y-4 py-2">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-teal-900/50 mx-auto">
-            <CheckCircle2 className="text-teal-400" size={28} />
+          <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-teal-100/50 mx-auto">
+            <CheckCircle2 className="text-teal-600" size={28} />
           </div>
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-700">
             Your password has been updated. You can now sign in with your new password.
           </p>
           <Button
@@ -71,20 +71,20 @@ export function NewPasswordPage() {
         )}
 
         <div className="space-y-1.5">
-          <Label htmlFor="password" className="text-slate-300">New password</Label>
+          <Label htmlFor="password" className="text-slate-700">New password</Label>
           <div className="relative">
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
               autoComplete="new-password"
               placeholder="Min. 8 characters"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500 pr-10"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500 pr-10"
               {...form.register('password')}
             />
             <button
               type="button"
               onClick={() => setShowPassword((s) => !s)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-800"
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -99,7 +99,7 @@ export function NewPasswordPage() {
               ].map(({ ok, label }) => (
                 <li
                   key={label}
-                  className={`text-xs flex items-center gap-1.5 ${ok ? 'text-teal-400' : 'text-slate-500'}`}
+                  className={`text-xs flex items-center gap-1.5 ${ok ? 'text-teal-600' : 'text-slate-400'}`}
                 >
                   <span>{ok ? '✓' : '○'}</span>
                   {label}
@@ -113,20 +113,20 @@ export function NewPasswordPage() {
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="confirmPassword" className="text-slate-300">Confirm password</Label>
+          <Label htmlFor="confirmPassword" className="text-slate-700">Confirm password</Label>
           <div className="relative">
             <Input
               id="confirmPassword"
               type={showConfirm ? 'text' : 'password'}
               autoComplete="new-password"
               placeholder="Re-enter your new password"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500 pr-10"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500 pr-10"
               {...form.register('confirmPassword')}
             />
             <button
               type="button"
               onClick={() => setShowConfirm((s) => !s)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-800"
               aria-label={showConfirm ? 'Hide password' : 'Show password'}
             >
               {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}

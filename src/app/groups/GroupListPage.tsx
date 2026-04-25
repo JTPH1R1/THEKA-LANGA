@@ -26,7 +26,7 @@ export function GroupListPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold text-slate-100">Groups</h1>
+          <h1 className="text-xl font-semibold text-slate-900">Groups</h1>
           <p className="text-sm text-slate-400 mt-0.5">Manage your SACCO groups</p>
         </div>
         <Button asChild className="bg-teal-600 hover:bg-teal-500 text-white gap-2">
@@ -37,7 +37,7 @@ export function GroupListPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1 mb-6 w-fit">
+      <div className="flex gap-1 bg-white border border-gray-200 rounded-lg p-1 mb-6 w-fit">
         {(['mine', 'discover'] as const).map((t) => (
           <button
             key={t}
@@ -45,8 +45,8 @@ export function GroupListPage() {
             className={[
               'px-4 py-1.5 rounded-md text-sm font-medium transition-colors',
               tab === t
-                ? 'bg-slate-800 text-slate-100'
-                : 'text-slate-400 hover:text-slate-200',
+                ? 'bg-gray-100 text-slate-900'
+                : 'text-slate-400 hover:text-slate-800',
             ].join(' ')}
           >
             {t === 'mine' ? 'My groups' : 'Discover'}
@@ -63,17 +63,17 @@ export function GroupListPage() {
               placeholder="Search groups…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+              className="pl-9 bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
             />
           </div>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-36 bg-slate-800 border-slate-700 text-slate-100">
+            <SelectTrigger className="w-36 bg-gray-100 border-gray-300 text-slate-900">
               <SelectValue placeholder="All statuses" />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700">
-              <SelectItem value="" className="text-slate-200 focus:bg-teal-900/40">All statuses</SelectItem>
-              <SelectItem value="forming" className="text-slate-200 focus:bg-teal-900/40">Forming</SelectItem>
-              <SelectItem value="active"  className="text-slate-200 focus:bg-teal-900/40">Active</SelectItem>
+            <SelectContent className="bg-gray-100 border-gray-300">
+              <SelectItem value="" className="text-slate-800 focus:bg-teal-50">All statuses</SelectItem>
+              <SelectItem value="forming" className="text-slate-800 focus:bg-teal-50">Forming</SelectItem>
+              <SelectItem value="active"  className="text-slate-800 focus:bg-teal-50">Active</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -85,7 +85,7 @@ export function GroupListPage() {
           {myLoading ? (
             <div className="space-y-3">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-slate-900 border border-slate-800 rounded-xl h-24 animate-pulse" />
+                <div key={i} className="bg-white border border-gray-200 rounded-xl h-24 animate-pulse" />
               ))}
             </div>
           ) : !myGroups?.length ? (
@@ -115,7 +115,7 @@ export function GroupListPage() {
           {pubLoading ? (
             <div className="space-y-3">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-slate-900 border border-slate-800 rounded-xl h-24 animate-pulse" />
+                <div key={i} className="bg-white border border-gray-200 rounded-xl h-24 animate-pulse" />
               ))}
             </div>
           ) : !publicGroups?.length ? (

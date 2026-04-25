@@ -72,9 +72,9 @@ function AddTransactionDialog({ month, open, onOpenChange }: {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-900 border-slate-800 text-slate-100 max-w-md">
+      <DialogContent className="bg-white border-gray-200 text-slate-900 max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-slate-100">Add transaction</DialogTitle>
+          <DialogTitle className="text-slate-900">Add transaction</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -86,7 +86,7 @@ function AddTransactionDialog({ month, open, onOpenChange }: {
                     'py-2 rounded-lg text-xs font-medium capitalize transition-colors',
                     type === t
                       ? t === 'income' ? 'bg-teal-700 text-white' : t === 'expense' ? 'bg-red-800 text-white' : 'bg-blue-800 text-white'
-                      : 'bg-slate-800 text-slate-400 hover:text-slate-200',
+                      : 'bg-gray-100 text-slate-400 hover:text-slate-800',
                   ].join(' ')}>
                   {t}
                 </button>
@@ -95,9 +95,9 @@ function AddTransactionDialog({ month, open, onOpenChange }: {
             <div className="grid grid-cols-2 gap-3">
               <FormField control={form.control} name="category" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Category</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Category</FormLabel>
                   <FormControl>
-                    <select {...field} className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
+                    <select {...field} className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
                       {categories.map((c) => <option key={c} value={c}>{CATEGORY_LABELS[c] ?? c}</option>)}
                     </select>
                   </FormControl>
@@ -105,11 +105,11 @@ function AddTransactionDialog({ month, open, onOpenChange }: {
               )} />
               <FormField control={form.control} name="amount" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Amount (KES)</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Amount (KES)</FormLabel>
                   <FormControl>
                     <Input type="number" step="0.01" min="0" placeholder="0.00"
                       {...field} onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
-                      className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                      className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                   </FormControl>
                   <FormMessage className="text-xs" />
                 </FormItem>
@@ -118,17 +118,17 @@ function AddTransactionDialog({ month, open, onOpenChange }: {
             <div className="grid grid-cols-2 gap-3">
               <FormField control={form.control} name="date" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Date</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Date</FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                    <Input type="date" {...field} className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                   </FormControl>
                 </FormItem>
               )} />
               <FormField control={form.control} name="paymentMethod" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Method</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Method</FormLabel>
                   <FormControl>
-                    <select {...field} value={field.value ?? ''} className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
+                    <select {...field} value={field.value ?? ''} className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
                       <option value="">Any</option>
                       {Object.entries(PAYMENT_METHOD_LABELS).map(([v, l]) => <option key={v} value={v}>{l}</option>)}
                     </select>
@@ -138,9 +138,9 @@ function AddTransactionDialog({ month, open, onOpenChange }: {
             </div>
             <FormField control={form.control} name="description" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Description (optional)</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Description (optional)</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Supermarket run" {...field} className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                  <Input placeholder="e.g. Supermarket run" {...field} className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                 </FormControl>
               </FormItem>
             )} />
@@ -180,12 +180,12 @@ function TransactionsTab() {
       {/* Controls */}
       <div className="flex items-center gap-3 flex-wrap">
         <Input type="month" value={month} onChange={(e) => setMonth(e.target.value)}
-          className="bg-slate-800 border-slate-700 text-slate-100 w-36 focus-visible:ring-teal-500" />
+          className="bg-gray-100 border-gray-300 text-slate-900 w-36 focus-visible:ring-teal-500" />
         <div className="flex gap-1">
           {(['all', 'income', 'expense'] as const).map((f) => (
             <button key={f} onClick={() => setTypeFilter(f)}
               className={['px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors',
-                typeFilter === f ? 'bg-teal-700 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200',
+                typeFilter === f ? 'bg-teal-700 text-white' : 'bg-gray-100 text-slate-400 hover:text-slate-800',
               ].join(' ')}>
               {f}
             </button>
@@ -201,14 +201,14 @@ function TransactionsTab() {
       {txns.length > 0 && (
         <div className="grid grid-cols-3 gap-3">
           {[
-            { label: 'Income',   value: income,   color: 'text-teal-300', icon: TrendingUp },
+            { label: 'Income',   value: income,   color: 'text-teal-700', icon: TrendingUp },
             { label: 'Expenses', value: expenses, color: 'text-red-300',  icon: TrendingDown },
-            { label: 'Net',      value: net,      color: net >= 0 ? 'text-teal-300' : 'text-red-300', icon: Wallet },
+            { label: 'Net',      value: net,      color: net >= 0 ? 'text-teal-700' : 'text-red-300', icon: Wallet },
           ].map(({ label, value, color, icon: Icon }) => (
-            <div key={label} className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <div key={label} className="bg-white border border-gray-200 rounded-xl p-4">
               <div className="flex items-center gap-1.5 mb-1">
                 <Icon size={13} className={color} />
-                <p className="text-xs text-slate-500">{label}</p>
+                <p className="text-xs text-slate-400">{label}</p>
               </div>
               <p className={`text-lg font-bold tabular-nums ${color}`}>{formatCurrency(value, 'KES')}</p>
             </div>
@@ -217,10 +217,10 @@ function TransactionsTab() {
       )}
 
       {/* Transaction list */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
         {isLoading ? (
           <div className="animate-pulse p-4 space-y-2">
-            {[1,2,3].map((i) => <div key={i} className="h-12 bg-slate-800 rounded" />)}
+            {[1,2,3].map((i) => <div key={i} className="h-12 bg-gray-100 rounded" />)}
           </div>
         ) : !txns.length ? (
           <div className="p-4">
@@ -228,20 +228,20 @@ function TransactionsTab() {
           </div>
         ) : (
           txns.map((tx) => (
-            <div key={tx.id} className="flex items-center gap-3 px-4 py-3 border-b border-slate-800 last:border-0 hover:bg-slate-800/30 transition-colors">
+            <div key={tx.id} className="flex items-center gap-3 px-4 py-3 border-b border-gray-200 last:border-0 hover:bg-gray-100/30 transition-colors">
               <div className={`w-2 h-8 rounded-full shrink-0 ${tx.type === 'income' ? 'bg-teal-500' : tx.type === 'expense' ? 'bg-red-500' : 'bg-blue-500'}`} />
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-200 truncate">
+                <p className="text-sm text-slate-800 truncate">
                   {CATEGORY_LABELS[tx.category] ?? tx.category}
                   {tx.description && <span className="text-slate-400"> — {tx.description}</span>}
                 </p>
-                <p className="text-xs text-slate-500">{formatDate(tx.date)}</p>
+                <p className="text-xs text-slate-400">{formatDate(tx.date)}</p>
               </div>
-              <p className={`text-sm font-semibold tabular-nums shrink-0 ${tx.type === 'income' ? 'text-teal-300' : tx.type === 'expense' ? 'text-red-300' : 'text-slate-300'}`}>
+              <p className={`text-sm font-semibold tabular-nums shrink-0 ${tx.type === 'income' ? 'text-teal-700' : tx.type === 'expense' ? 'text-red-300' : 'text-slate-700'}`}>
                 {tx.type === 'income' ? '+' : tx.type === 'expense' ? '−' : ''}{formatCurrency(tx.amount, 'KES')}
               </p>
               <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(tx.id)}
-                className="p-1 text-slate-600 hover:text-red-400 shrink-0">
+                className="p-1 text-slate-400 hover:text-red-400 shrink-0">
                 <Trash2 size={13} />
               </Button>
             </div>
@@ -298,17 +298,17 @@ function BudgetDialog({ month, existing, open, onOpenChange }: {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-900 border-slate-800 text-slate-100 max-w-sm">
+      <DialogContent className="bg-white border-gray-200 text-slate-900 max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-slate-100">{existing ? 'Edit budget' : 'Add budget'}</DialogTitle>
+          <DialogTitle className="text-slate-900">{existing ? 'Edit budget' : 'Add budget'}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField control={form.control} name="category" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Category</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Category</FormLabel>
                 <FormControl>
-                  <select {...field} className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
+                  <select {...field} className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
                     {EXPENSE_CATEGORIES.map((c) => <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>)}
                   </select>
                 </FormControl>
@@ -316,11 +316,11 @@ function BudgetDialog({ month, existing, open, onOpenChange }: {
             )} />
             <FormField control={form.control} name="budgetedAmount" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Monthly budget (KES)</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Monthly budget (KES)</FormLabel>
                 <FormControl>
                   <Input type="number" step="0.01" min="0" placeholder="0.00"
                     {...field} onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
-                    className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                    className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
@@ -363,7 +363,7 @@ function BudgetsTab() {
     <div className="space-y-5">
       <div className="flex items-center gap-3">
         <Input type="month" value={month} onChange={(e) => setMonth(e.target.value)}
-          className="bg-slate-800 border-slate-700 text-slate-100 w-36 focus-visible:ring-teal-500" />
+          className="bg-gray-100 border-gray-300 text-slate-900 w-36 focus-visible:ring-teal-500" />
         <Button size="sm" onClick={() => setShowAdd(true)}
           className="ml-auto bg-teal-600 hover:bg-teal-500 text-white gap-1.5 text-xs">
           <Plus size={13} /> Add category
@@ -373,13 +373,13 @@ function BudgetsTab() {
       {/* Summary bar */}
       {budgets.length > 0 && (
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-            <p className="text-xs text-slate-500 mb-1">Total budgeted</p>
-            <p className="text-xl font-bold text-slate-100 tabular-nums">{formatCurrency(totalBudgeted, 'KES')}</p>
+          <div className="bg-white border border-gray-200 rounded-xl p-4">
+            <p className="text-xs text-slate-400 mb-1">Total budgeted</p>
+            <p className="text-xl font-bold text-slate-900 tabular-nums">{formatCurrency(totalBudgeted, 'KES')}</p>
           </div>
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-            <p className="text-xs text-slate-500 mb-1">Spent so far</p>
-            <p className={`text-xl font-bold tabular-nums ${totalActual > totalBudgeted ? 'text-red-300' : 'text-teal-300'}`}>
+          <div className="bg-white border border-gray-200 rounded-xl p-4">
+            <p className="text-xs text-slate-400 mb-1">Spent so far</p>
+            <p className={`text-xl font-bold tabular-nums ${totalActual > totalBudgeted ? 'text-red-300' : 'text-teal-700'}`}>
               {formatCurrency(totalActual, 'KES')}
             </p>
           </div>
@@ -387,10 +387,10 @@ function BudgetsTab() {
       )}
 
       {/* Budget rows */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
         {isLoading ? (
           <div className="animate-pulse p-4 space-y-2">
-            {[1,2,3].map((i) => <div key={i} className="h-14 bg-slate-800 rounded" />)}
+            {[1,2,3].map((i) => <div key={i} className="h-14 bg-gray-100 rounded" />)}
           </div>
         ) : !budgets.length ? (
           <div className="p-4">
@@ -402,22 +402,22 @@ function BudgetsTab() {
             const pct     = b.budgetedAmount > 0 ? Math.min(100, Math.round((actual / b.budgetedAmount) * 100)) : 0
             const over    = actual > b.budgetedAmount
             return (
-              <div key={b.id} className="px-4 py-3 border-b border-slate-800 last:border-0">
+              <div key={b.id} className="px-4 py-3 border-b border-gray-200 last:border-0">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-sm text-slate-200">{CATEGORY_LABELS[b.category] ?? b.category}</span>
+                  <span className="text-sm text-slate-800">{CATEGORY_LABELS[b.category] ?? b.category}</span>
                   <div className="flex items-center gap-2">
-                    <span className={`text-sm font-semibold tabular-nums ${over ? 'text-red-300' : 'text-slate-300'}`}>
-                      {formatCurrency(actual, 'KES')} <span className="text-slate-500 font-normal">/ {formatCurrency(b.budgetedAmount, 'KES')}</span>
+                    <span className={`text-sm font-semibold tabular-nums ${over ? 'text-red-300' : 'text-slate-700'}`}>
+                      {formatCurrency(actual, 'KES')} <span className="text-slate-400 font-normal">/ {formatCurrency(b.budgetedAmount, 'KES')}</span>
                     </span>
-                    <button onClick={() => setEditTarget(b)} className="text-slate-500 hover:text-slate-300 text-xs">Edit</button>
-                    <button onClick={() => setDeleteTarget(b.id)} className="text-slate-600 hover:text-red-400"><Trash2 size={12} /></button>
+                    <button onClick={() => setEditTarget(b)} className="text-slate-400 hover:text-slate-700 text-xs">Edit</button>
+                    <button onClick={() => setDeleteTarget(b.id)} className="text-slate-400 hover:text-red-400"><Trash2 size={12} /></button>
                   </div>
                 </div>
-                <div className="w-full h-1.5 bg-slate-700 rounded-full">
+                <div className="w-full h-1.5 bg-gray-200 rounded-full">
                   <div className={`h-full rounded-full transition-all ${over ? 'bg-red-500' : pct > 80 ? 'bg-amber-500' : 'bg-teal-500'}`}
                     style={{ width: `${pct}%` }} />
                 </div>
-                <p className="text-xs text-slate-500 mt-1">{pct}% used · {formatCurrency(Math.max(0, b.budgetedAmount - actual), 'KES')} remaining</p>
+                <p className="text-xs text-slate-400 mt-1">{pct}% used · {formatCurrency(Math.max(0, b.budgetedAmount - actual), 'KES')} remaining</p>
               </div>
             )
           })
@@ -481,17 +481,17 @@ function ShoppingItemsPanel({ list }: { list: ShoppingList }) {
         {[...unchecked, ...checked].map((item: ShoppingItem) => (
           <div key={item.id} className={['flex items-center gap-2.5 py-1.5', item.isChecked ? 'opacity-50' : ''].join(' ')}>
             <button onClick={() => toggleItem.mutate({ id: item.id, checked: !item.isChecked })}
-              className="text-slate-400 hover:text-teal-400 shrink-0 transition-colors">
-              {item.isChecked ? <CheckSquare size={16} className="text-teal-400" /> : <Square size={16} />}
+              className="text-slate-400 hover:text-teal-600 shrink-0 transition-colors">
+              {item.isChecked ? <CheckSquare size={16} className="text-teal-600" /> : <Square size={16} />}
             </button>
-            <span className={['text-sm flex-1', item.isChecked ? 'line-through text-slate-500' : 'text-slate-200'].join(' ')}>
+            <span className={['text-sm flex-1', item.isChecked ? 'line-through text-slate-400' : 'text-slate-800'].join(' ')}>
               {item.name}
               {item.quantity !== 1 && <span className="text-slate-400"> × {item.quantity}{item.unit ? ` ${item.unit}` : ''}</span>}
             </span>
             {item.estimatedPrice != null && (
-              <span className="text-xs text-slate-500 tabular-nums">{formatCurrency(item.estimatedPrice, 'KES')}</span>
+              <span className="text-xs text-slate-400 tabular-nums">{formatCurrency(item.estimatedPrice, 'KES')}</span>
             )}
-            <button onClick={() => deleteItem.mutate(item.id)} className="text-slate-600 hover:text-red-400 shrink-0">
+            <button onClick={() => deleteItem.mutate(item.id)} className="text-slate-400 hover:text-red-400 shrink-0">
               <Trash2 size={12} />
             </button>
           </div>
@@ -506,7 +506,7 @@ function ShoppingItemsPanel({ list }: { list: ShoppingList }) {
               <FormItem className="flex-1">
                 <FormControl>
                   <Input placeholder="Item name" autoFocus {...field}
-                    className="bg-slate-800 border-slate-700 text-slate-100 h-8 text-sm focus-visible:ring-teal-500" />
+                    className="bg-gray-100 border-gray-300 text-slate-900 h-8 text-sm focus-visible:ring-teal-500" />
                 </FormControl>
               </FormItem>
             )} />
@@ -515,13 +515,13 @@ function ShoppingItemsPanel({ list }: { list: ShoppingList }) {
           </form>
         </Form>
       ) : (
-        <button onClick={() => setShowAdd(true)} className="flex items-center gap-1 text-xs text-teal-400 hover:text-teal-300 transition-colors">
+        <button onClick={() => setShowAdd(true)} className="flex items-center gap-1 text-xs text-teal-600 hover:text-teal-700 transition-colors">
           <Plus size={12} /> Add item
         </button>
       )}
 
       {items.length > 0 && (
-        <p className="text-xs text-slate-500">{checked.length}/{items.length} checked</p>
+        <p className="text-xs text-slate-400">{checked.length}/{items.length} checked</p>
       )}
     </div>
   )
@@ -561,7 +561,7 @@ function ShoppingTab() {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-slate-300">Shopping lists</h3>
+        <h3 className="text-sm font-medium text-slate-700">Shopping lists</h3>
         <Button size="sm" onClick={() => setShowCreate(true)} className="bg-teal-600 hover:bg-teal-500 text-white gap-1.5 text-xs">
           <Plus size={13} /> New list
         </Button>
@@ -570,23 +570,23 @@ function ShoppingTab() {
       {/* Create form */}
       {showCreate && (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onCreate)} className="bg-slate-900 border border-teal-800/40 rounded-xl p-4 space-y-3">
+          <form onSubmit={form.handleSubmit(onCreate)} className="bg-white border border-teal-200 rounded-xl p-4 space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <FormField control={form.control} name="name" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">List name</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">List name</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g. Weekly groceries" autoFocus {...field}
-                      className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                      className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                   </FormControl>
                   <FormMessage className="text-xs" />
                 </FormItem>
               )} />
               <FormField control={form.control} name="plannedDate" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Planned date (optional)</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Planned date (optional)</FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                    <Input type="date" {...field} className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                   </FormControl>
                 </FormItem>
               )} />
@@ -604,7 +604,7 @@ function ShoppingTab() {
       {/* Loading */}
       {isLoading ? (
         <div className="space-y-3 animate-pulse">
-          {[1,2].map((i) => <div key={i} className="h-16 bg-slate-900 border border-slate-800 rounded-xl" />)}
+          {[1,2].map((i) => <div key={i} className="h-16 bg-white border border-gray-200 rounded-xl" />)}
         </div>
       ) : !lists.length ? (
         <EmptyState icon={ShoppingCart} title="No shopping lists" description='Create a list to track what to buy and compare estimated vs actual costs.' />
@@ -613,26 +613,26 @@ function ShoppingTab() {
           {active.length > 0 && (
             <div className="space-y-2">
               {active.map((list) => (
-                <div key={list.id} className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+                <div key={list.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden">
                   <div className="flex items-center gap-3 p-4">
                     <button onClick={() => setExpandedList(expandedList === list.id ? null : list.id)}
                       className="flex-1 flex items-center gap-2 text-left">
-                      <span className="text-sm font-medium text-slate-200">{list.name}</span>
-                      {list.plannedDate && <span className="text-xs text-slate-500">{formatDate(list.plannedDate)}</span>}
-                      {expandedList === list.id ? <ChevronUp size={14} className="text-slate-500 ml-auto" /> : <ChevronDown size={14} className="text-slate-500 ml-auto" />}
+                      <span className="text-sm font-medium text-slate-800">{list.name}</span>
+                      {list.plannedDate && <span className="text-xs text-slate-400">{formatDate(list.plannedDate)}</span>}
+                      {expandedList === list.id ? <ChevronUp size={14} className="text-slate-400 ml-auto" /> : <ChevronDown size={14} className="text-slate-400 ml-auto" />}
                     </button>
                     <Button size="sm" variant="ghost" onClick={async () => {
                       try { await completeList.mutateAsync(list.id); toast.success('List completed') }
                       catch (err) { toast.error((err as { message: string }).message) }
-                    }} className="h-7 px-2 text-teal-400 hover:text-teal-300 text-xs shrink-0">
+                    }} className="h-7 px-2 text-teal-600 hover:text-teal-700 text-xs shrink-0">
                       Done
                     </Button>
-                    <button onClick={() => setDeleteTarget(list.id)} className="text-slate-600 hover:text-red-400 shrink-0">
+                    <button onClick={() => setDeleteTarget(list.id)} className="text-slate-400 hover:text-red-400 shrink-0">
                       <Trash2 size={13} />
                     </button>
                   </div>
                   {expandedList === list.id && (
-                    <div className="px-4 pb-4 border-t border-slate-800">
+                    <div className="px-4 pb-4 border-t border-gray-200">
                       <ShoppingItemsPanel list={list} />
                     </div>
                   )}
@@ -643,13 +643,13 @@ function ShoppingTab() {
 
           {complete.length > 0 && (
             <div>
-              <p className="text-xs text-slate-500 mb-2">Completed lists ({complete.length})</p>
+              <p className="text-xs text-slate-400 mb-2">Completed lists ({complete.length})</p>
               <div className="space-y-2">
                 {complete.map((list) => (
-                  <div key={list.id} className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center gap-3 opacity-60">
-                    <span className="text-sm text-slate-300 flex-1 line-through">{list.name}</span>
-                    {list.completedAt && <span className="text-xs text-slate-500">{formatDate(list.completedAt)}</span>}
-                    <button onClick={() => setDeleteTarget(list.id)} className="text-slate-600 hover:text-red-400">
+                  <div key={list.id} className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3 opacity-60">
+                    <span className="text-sm text-slate-700 flex-1 line-through">{list.name}</span>
+                    {list.completedAt && <span className="text-xs text-slate-400">{formatDate(list.completedAt)}</span>}
+                    <button onClick={() => setDeleteTarget(list.id)} className="text-slate-400 hover:text-red-400">
                       <Trash2 size={13} />
                     </button>
                   </div>
@@ -690,12 +690,12 @@ export function PersonalPage() {
   return (
     <div className="p-4 sm:p-6 max-w-3xl mx-auto">
       <div className="mb-6">
-        <h1 className="text-xl font-semibold text-slate-100">Personal Finance</h1>
+        <h1 className="text-xl font-semibold text-slate-900">Personal Finance</h1>
         <p className="text-sm text-slate-400 mt-0.5">Track your income, expenses, budgets, and shopping</p>
       </div>
 
       {/* Tab nav */}
-      <div className="flex gap-1 border-b border-slate-800 mb-6">
+      <div className="flex gap-1 border-b border-gray-200 mb-6">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
@@ -703,8 +703,8 @@ export function PersonalPage() {
             className={[
               'flex items-center gap-1.5 px-3 py-2 text-xs font-medium whitespace-nowrap border-b-2 -mb-px transition-colors',
               tab === id
-                ? 'border-teal-500 text-teal-300'
-                : 'border-transparent text-slate-400 hover:text-slate-200',
+                ? 'border-teal-500 text-teal-700'
+                : 'border-transparent text-slate-400 hover:text-slate-800',
             ].join(' ')}
           >
             <Icon size={13} />

@@ -1,15 +1,15 @@
 import type { LoanStatus } from '@/types/domain.types'
 
 const CONFIG: Record<LoanStatus, { label: string; className: string }> = {
-  applied:      { label: 'Applied',      className: 'bg-slate-800 text-slate-400 border border-slate-700' },
-  under_review: { label: 'Under Review', className: 'bg-blue-900/60 text-blue-300 border border-blue-800' },
-  approved:     { label: 'Approved',     className: 'bg-teal-900/60 text-teal-300 border border-teal-800' },
-  rejected:     { label: 'Rejected',     className: 'bg-red-900/60 text-red-300 border border-red-800' },
-  disbursed:    { label: 'Disbursed',    className: 'bg-indigo-900/60 text-indigo-300 border border-indigo-800' },
-  repaying:     { label: 'Repaying',     className: 'bg-blue-900/60 text-blue-300 border border-blue-800' },
-  completed:    { label: 'Completed',    className: 'bg-teal-900/60 text-teal-300 border border-teal-800' },
-  defaulted:    { label: 'Defaulted',    className: 'bg-red-900/60 text-red-300 border border-red-800' },
-  written_off:  { label: 'Written Off',  className: 'bg-slate-800 text-slate-500 border border-slate-700' },
+  applied:      { label: 'Applied',      className: 'bg-gray-100 text-slate-500 border border-gray-300' },
+  under_review: { label: 'Under Review', className: 'bg-blue-50 text-blue-700 border border-blue-200' },
+  approved:     { label: 'Approved',     className: 'bg-teal-50 text-teal-700 border border-teal-200' },
+  rejected:     { label: 'Rejected',     className: 'bg-red-50 text-red-700 border border-red-200' },
+  disbursed:    { label: 'Disbursed',    className: 'bg-indigo-50 text-indigo-700 border border-indigo-200' },
+  repaying:     { label: 'Repaying',     className: 'bg-blue-50 text-blue-700 border border-blue-200' },
+  completed:    { label: 'Completed',    className: 'bg-teal-50 text-teal-700 border border-teal-200' },
+  defaulted:    { label: 'Defaulted',    className: 'bg-red-50 text-red-700 border border-red-200' },
+  written_off:  { label: 'Written Off',  className: 'bg-gray-100 text-slate-500 border border-gray-300' },
 }
 
 interface Props { status: LoanStatus }

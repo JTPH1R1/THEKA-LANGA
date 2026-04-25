@@ -46,25 +46,25 @@ function RejectDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-900 border-slate-800 text-slate-100 max-w-sm">
+      <DialogContent className="bg-white border-gray-200 text-slate-900 max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-slate-100">Reject loan application?</DialogTitle>
+          <DialogTitle className="text-slate-900">Reject loan application?</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField control={form.control} name="reason" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Reason (required — shown to applicant)</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Reason (required — shown to applicant)</FormLabel>
                 <FormControl>
                   <Input placeholder="e.g. Insufficient contribution history" {...field}
-                    className="bg-slate-800 border-slate-700 text-slate-100" />
+                    className="bg-gray-100 border-gray-300 text-slate-900" />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
             )} />
             <DialogFooter className="gap-2">
               <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}
-                className="text-slate-400 hover:text-slate-200">Cancel</Button>
+                className="text-slate-400 hover:text-slate-800">Cancel</Button>
               <Button type="submit" disabled={reject.isPending}
                 className="bg-red-700 hover:bg-red-600 text-white">
                 {reject.isPending ? 'Please wait…' : 'Reject'}
@@ -110,12 +110,12 @@ function RepaymentDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-900 border-slate-800 text-slate-100 max-w-md">
+      <DialogContent className="bg-white border-gray-200 text-slate-900 max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-slate-100">Record Repayment</DialogTitle>
+          <DialogTitle className="text-slate-900">Record Repayment</DialogTitle>
         </DialogHeader>
 
-        <div className="flex gap-4 text-xs text-slate-400 bg-slate-800/60 rounded-lg px-3 py-2 mb-2">
+        <div className="flex gap-4 text-xs text-slate-400 bg-gray-100 rounded-lg px-3 py-2 mb-2">
           <span>Outstanding: <span className="text-red-300 font-medium">{formatCurrency(loan.outstanding, 'KES')}</span></span>
           <span>Total: {formatCurrency(loan.totalRepayable, 'KES')}</span>
           <span>Repaid: {formatCurrency(loan.amountRepaid, 'KES')}</span>
@@ -126,7 +126,7 @@ function RepaymentDialog({
             {repayments.slice(0, 5).map((r) => (
               <div key={r.id} className="flex justify-between text-xs text-slate-400">
                 <span>{formatDate(r.paidAt)} — {r.paymentRef}</span>
-                <span className="text-teal-300">{formatCurrency(r.amountPaid, 'KES')}</span>
+                <span className="text-teal-700">{formatCurrency(r.amountPaid, 'KES')}</span>
               </div>
             ))}
           </div>
@@ -137,21 +137,21 @@ function RepaymentDialog({
             <div className="grid grid-cols-2 gap-3">
               <FormField control={form.control} name="amountPaid" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Amount (KES)</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Amount (KES)</FormLabel>
                   <FormControl>
                     <Input type="number" step="0.01" min="0" placeholder="0.00"
                       {...field} onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
-                      className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                      className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                   </FormControl>
                   <FormMessage className="text-xs" />
                 </FormItem>
               )} />
               <FormField control={form.control} name="paymentChannel" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Channel</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Channel</FormLabel>
                   <FormControl>
                     <select {...field}
-                      className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
+                      className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500">
                       {Object.entries(PAYMENT_CHANNEL_LABELS).map(([v, l]) => (
                         <option key={v} value={v}>{l}</option>
                       ))}
@@ -162,10 +162,10 @@ function RepaymentDialog({
             </div>
             <FormField control={form.control} name="paymentRef" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Payment reference</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Payment reference</FormLabel>
                 <FormControl>
                   <Input placeholder="M-Pesa ref, bank ref…" {...field}
-                    className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500" />
+                    className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500" />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
@@ -176,7 +176,7 @@ function RepaymentDialog({
                 {recordRepayment.isPending ? 'Recording…' : 'Record Repayment'}
               </Button>
               <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}
-                className="text-slate-400 hover:text-slate-200">Cancel</Button>
+                className="text-slate-400 hover:text-slate-800">Cancel</Button>
             </div>
           </form>
         </Form>
@@ -220,30 +220,30 @@ export function LoanCard({ loan, groupId, currency, myMembership, currentUserId 
     : 0
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
       {/* Header row */}
       <button
         onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center gap-3 p-4 text-left hover:bg-slate-800/40 transition-colors"
+        className="w-full flex items-center gap-3 p-4 text-left hover:bg-gray-50 transition-colors"
       >
         <Avatar className="h-8 w-8 shrink-0">
-          <AvatarFallback className="bg-slate-700 text-slate-300 text-xs">{initials}</AvatarFallback>
+          <AvatarFallback className="bg-gray-200 text-slate-700 text-xs">{initials}</AvatarFallback>
         </Avatar>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-medium text-slate-200">{borrowerName}</span>
-            {isBorrower && <span className="text-xs text-slate-500">(you)</span>}
+            <span className="text-sm font-medium text-slate-800">{borrowerName}</span>
+            {isBorrower && <span className="text-xs text-slate-400">(you)</span>}
             <LoanStatusBadge status={loan.status} />
           </div>
-          <div className="flex gap-3 text-xs text-slate-500 mt-0.5">
+          <div className="flex gap-3 text-xs text-slate-400 mt-0.5">
             <span>{formatCurrency(loan.principal, currency)} principal</span>
             {loan.dueDate && <span>due {formatDate(loan.dueDate)}</span>}
           </div>
         </div>
         {['disbursed','repaying'].includes(loan.status) && (
           <div className="text-right shrink-0 mr-2">
-            <p className="text-xs text-slate-500">{repaidPct}% repaid</p>
-            <div className="w-20 h-1.5 bg-slate-700 rounded-full mt-1">
+            <p className="text-xs text-slate-400">{repaidPct}% repaid</p>
+            <div className="w-20 h-1.5 bg-gray-200 rounded-full mt-1">
               <div
                 className="h-full bg-teal-500 rounded-full transition-all"
                 style={{ width: `${repaidPct}%` }}
@@ -251,12 +251,12 @@ export function LoanCard({ loan, groupId, currency, myMembership, currentUserId 
             </div>
           </div>
         )}
-        <ChevronDown size={16} className={`text-slate-500 transition-transform shrink-0 ${expanded ? 'rotate-180' : ''}`} />
+        <ChevronDown size={16} className={`text-slate-400 transition-transform shrink-0 ${expanded ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Expanded detail */}
       {expanded && (
-        <div className="px-4 pb-4 border-t border-slate-800 space-y-4">
+        <div className="px-4 pb-4 border-t border-gray-200 space-y-4">
           {/* Financials grid */}
           <div className="grid grid-cols-3 gap-3 pt-3">
             {[
@@ -267,9 +267,9 @@ export function LoanCard({ loan, groupId, currency, myMembership, currentUserId 
               { label: 'Repaid',       value: formatCurrency(loan.amountRepaid,   currency) },
               { label: 'Outstanding',  value: formatCurrency(loan.outstanding,    currency) },
             ].map(({ label, value }) => (
-              <div key={label} className="bg-slate-800/60 rounded-lg p-2.5">
-                <p className="text-xs text-slate-500">{label}</p>
-                <p className="text-sm font-semibold text-slate-200 tabular-nums">{value}</p>
+              <div key={label} className="bg-gray-100 rounded-lg p-2.5">
+                <p className="text-xs text-slate-400">{label}</p>
+                <p className="text-sm font-semibold text-slate-800 tabular-nums">{value}</p>
               </div>
             ))}
           </div>
@@ -277,20 +277,20 @@ export function LoanCard({ loan, groupId, currency, myMembership, currentUserId 
           {/* Guarantors */}
           {guarantors.length > 0 && (
             <div>
-              <p className="text-xs text-slate-500 mb-2">Guarantors</p>
+              <p className="text-xs text-slate-400 mb-2">Guarantors</p>
               <div className="flex flex-wrap gap-2">
                 {guarantors.map((g) => {
                   const gName = g.profile?.preferredName ?? g.profile?.fullLegalName ?? 'Unknown'
                   return (
                     <div key={g.id} className="flex items-center gap-1.5 text-xs">
                       <span className={
-                        g.status === 'accepted' ? 'text-teal-400' :
-                        g.status === 'declined' ? 'text-red-400' : 'text-amber-400'
+                        g.status === 'accepted' ? 'text-teal-600' :
+                        g.status === 'declined' ? 'text-red-400' : 'text-amber-600'
                       }>
                         {g.status === 'accepted' ? <CheckCircle2 size={12} className="inline" /> :
                          g.status === 'declined' ? <XCircle size={12} className="inline" /> : '●'}
                       </span>
-                      <span className="text-slate-300">{gName}</span>
+                      <span className="text-slate-700">{gName}</span>
                     </div>
                   )
                 })}

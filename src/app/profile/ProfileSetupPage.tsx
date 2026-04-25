@@ -87,18 +87,18 @@ export function ProfileSetupPage() {
                   ? 'bg-teal-600 text-white'
                   : i === step
                   ? 'bg-teal-600 text-white ring-2 ring-teal-400 ring-offset-1 ring-offset-slate-900'
-                  : 'bg-slate-800 text-slate-500'
+                  : 'bg-gray-100 text-slate-400'
               }`}
             >
               {i < step ? <CheckCircle2 size={14} /> : i + 1}
             </div>
             <span
-              className={`text-xs ${i === step ? 'text-slate-300' : 'text-slate-500'}`}
+              className={`text-xs ${i === step ? 'text-slate-700' : 'text-slate-400'}`}
             >
               {label}
             </span>
             {i < STEPS.length - 1 && (
-              <div className={`h-px w-6 ${i < step ? 'bg-teal-600' : 'bg-slate-700'}`} />
+              <div className={`h-px w-6 ${i < step ? 'bg-teal-600' : 'bg-gray-200'}`} />
             )}
           </div>
         ))}
@@ -115,23 +115,23 @@ export function ProfileSetupPage() {
         {step === 0 && (
           <>
             {fullLegalName && (
-              <div className="bg-slate-800/60 rounded-lg px-4 py-3 text-sm">
+              <div className="bg-gray-100 rounded-lg px-4 py-3 text-sm">
                 <span className="text-slate-400">Legal name: </span>
-                <span className="text-slate-200 font-medium">{fullLegalName}</span>
-                <p className="text-xs text-slate-500 mt-1">
+                <span className="text-slate-800 font-medium">{fullLegalName}</span>
+                <p className="text-xs text-slate-400 mt-1">
                   This is how you appear on official documents. It cannot be changed here.
                 </p>
               </div>
             )}
 
             <div className="space-y-1.5">
-              <Label htmlFor="preferredName" className="text-slate-300">
+              <Label htmlFor="preferredName" className="text-slate-700">
                 Display name
               </Label>
               <Input
                 id="preferredName"
                 placeholder="How you'd like to be called"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+                className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
                 {...form.register('preferredName')}
               />
               {form.formState.errors.preferredName && (
@@ -139,26 +139,26 @@ export function ProfileSetupPage() {
                   {form.formState.errors.preferredName.message}
                 </p>
               )}
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-400">
                 This is shown to other group members instead of your legal name.
               </p>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="phone" className="text-slate-300">
-                Phone number <span className="text-slate-500">(optional)</span>
+              <Label htmlFor="phone" className="text-slate-700">
+                Phone number <span className="text-slate-400">(optional)</span>
               </Label>
               <Input
                 id="phone"
                 type="tel"
                 placeholder="+254712345678"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+                className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
                 {...form.register('phone')}
               />
               {form.formState.errors.phone && (
                 <p className="text-xs text-red-400">{form.formState.errors.phone.message}</p>
               )}
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-400">
                 International format required. Needed for KYC Level 1.
               </p>
             </div>
@@ -177,20 +177,20 @@ export function ProfileSetupPage() {
         {step === 1 && (
           <>
             <div className="space-y-1.5">
-              <Label className="text-slate-300">Timezone</Label>
+              <Label className="text-slate-700">Timezone</Label>
               <Select
                 defaultValue={form.getValues('timezone')}
                 onValueChange={(v) => form.setValue('timezone', v)}
               >
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                   <SelectValue placeholder="Select timezone" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
+                <SelectContent className="bg-gray-100 border-gray-300">
                   {TIMEZONE_OPTIONS.map((tz) => (
                     <SelectItem
                       key={tz.value}
                       value={tz.value}
-                      className="text-slate-200 focus:bg-teal-900/40 focus:text-teal-300"
+                      className="text-slate-800 focus:bg-teal-50 focus:text-teal-700"
                     >
                       {tz.label}
                     </SelectItem>
@@ -203,20 +203,20 @@ export function ProfileSetupPage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-slate-300">Language / locale</Label>
+              <Label className="text-slate-700">Language / locale</Label>
               <Select
                 defaultValue={form.getValues('locale')}
                 onValueChange={(v) => form.setValue('locale', v)}
               >
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                   <SelectValue placeholder="Select locale" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
+                <SelectContent className="bg-gray-100 border-gray-300">
                   {LOCALE_OPTIONS.map((loc) => (
                     <SelectItem
                       key={loc.value}
                       value={loc.value}
-                      className="text-slate-200 focus:bg-teal-900/40 focus:text-teal-300"
+                      className="text-slate-800 focus:bg-teal-50 focus:text-teal-700"
                     >
                       {loc.label}
                     </SelectItem>
@@ -226,7 +226,7 @@ export function ProfileSetupPage() {
               {form.formState.errors.locale && (
                 <p className="text-xs text-red-400">{form.formState.errors.locale.message}</p>
               )}
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-400">
                 Controls how dates, numbers, and currency are displayed.
               </p>
             </div>
@@ -236,7 +236,7 @@ export function ProfileSetupPage() {
                 type="button"
                 variant="outline"
                 onClick={() => setStep(0)}
-                className="flex-1 border-slate-700 text-slate-300 hover:bg-slate-800 gap-2"
+                className="flex-1 border-gray-300 text-slate-700 hover:bg-gray-100 gap-2"
               >
                 <ChevronLeft size={16} /> Back
               </Button>

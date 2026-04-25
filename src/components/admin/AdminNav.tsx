@@ -13,7 +13,7 @@ const LINKS: { to: string; label: string; icon: React.ElementType; end?: boolean
 
 export function AdminNav() {
   return (
-    <div className="border-b border-slate-800 bg-slate-900/50 px-4">
+    <div className="border-b border-gray-200 bg-white/50 px-4">
       <nav className="flex gap-1 overflow-x-auto">
         {LINKS.map(({ to, label, icon: Icon, end }) => (
           <NavLink
@@ -24,8 +24,8 @@ export function AdminNav() {
               cn(
                 'flex items-center gap-1.5 px-3 py-3 text-sm font-medium whitespace-nowrap border-b-2 -mb-px transition-colors',
                 isActive
-                  ? 'border-teal-400 text-teal-300'
-                  : 'border-transparent text-slate-400 hover:text-slate-200',
+                  ? 'border-teal-400 text-teal-700'
+                  : 'border-transparent text-slate-400 hover:text-slate-800',
               )
             }
           >
