@@ -1,4 +1,4 @@
-import { supabase, db } from '@/lib/supabase'
+import { supabase, db, schemaRpc } from '@/lib/supabase'
 import type { Election, ElectionCandidate, ProfileSummary } from '@/types/domain.types'
 
 function mapProfileSummary(row: Record<string, unknown>): ProfileSummary {
@@ -187,16 +187,12 @@ export async function castVote(
 }
 
 export async function openVoting(electionId: string): Promise<void> {
-  const { error } = await supabase.rpc('open_voting' as never, {
-    p_election_id: electionId,
-  } as never)
+  const { error } = await schemaRpc('sacco', 'open_voting', { p_election_id: electionId })
   if (error) throw { message: error.message }
 }
 
 export async function closeElection(electionId: string): Promise<string> {
-  const { data, error } = await supabase.rpc('close_election' as never, {
-    p_election_id: electionId,
-  } as never)
+  const { data, error } = await schemaRpc<string>('sacco', 'close_election', { p_election_id: electionId })
   if (error) throw { message: error.message }
   return data as string
 }

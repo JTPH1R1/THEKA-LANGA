@@ -1,4 +1,4 @@
-import { supabase, db } from '@/lib/supabase'
+import { db, schemaRpc } from '@/lib/supabase'
 import type { Contribution, ContributionStatus, PaymentChannel, ProfileSummary } from '@/types/domain.types'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -105,15 +105,11 @@ export async function generateContributionSchedule(params: {
   cyclePeriod: string
   dueDate: string
 }): Promise<number> {
-  const { data, error } = await supabase.rpc(
-    'generate_contribution_schedule' as never,
-    {
-      p_group_id:     params.groupId,
-      p_cycle_period: params.cyclePeriod,
-      p_due_date:     params.dueDate,
-    } as never,
-    { schema: 'finance' } as never,
-  )
+  const { data, error } = await schemaRpc<number>('finance', 'generate_contribution_schedule', {
+    p_group_id:     params.groupId,
+    p_cycle_period: params.cyclePeriod,
+    p_due_date:     params.dueDate,
+  })
   if (error) throw new Error(error.message)
   return data as number
 }
@@ -126,18 +122,14 @@ export async function recordContributionPayment(params: {
   paymentChannel: string
   notes?:         string
 }): Promise<void> {
-  const { error } = await supabase.rpc(
-    'record_contribution_payment' as never,
-    {
-      p_contribution_id: params.contributionId,
-      p_paid_amount:     params.paidAmount,
-      p_fine_amount:     params.fineAmount,
-      p_payment_ref:     params.paymentRef,
-      p_payment_channel: params.paymentChannel,
-      p_notes:           params.notes ?? null,
-    } as never,
-    { schema: 'finance' } as never,
-  )
+  const { error } = await schemaRpc('finance', 'record_contribution_payment', {
+    p_contribution_id: params.contributionId,
+    p_paid_amount:     params.paidAmount,
+    p_fine_amount:     params.fineAmount,
+    p_payment_ref:     params.paymentRef,
+    p_payment_channel: params.paymentChannel,
+    p_notes:           params.notes ?? null,
+  })
   if (error) throw new Error(error.message)
 }
 
@@ -145,13 +137,9 @@ export async function waiveContribution(params: {
   contributionId: string
   reason: string
 }): Promise<void> {
-  const { error } = await supabase.rpc(
-    'waive_contribution' as never,
-    {
-      p_contribution_id: params.contributionId,
-      p_reason:          params.reason,
-    } as never,
-    { schema: 'finance' } as never,
-  )
+  const { error } = await schemaRpc('finance', 'waive_contribution', {
+    p_contribution_id: params.contributionId,
+    p_reason:          params.reason,
+  })
   if (error) throw new Error(error.message)
 }

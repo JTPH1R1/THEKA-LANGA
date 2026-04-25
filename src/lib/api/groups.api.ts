@@ -1,4 +1,4 @@
-import { supabase, db } from '@/lib/supabase'
+import { db, schemaRpc } from '@/lib/supabase'
 import type { Group, GroupRules, GroupWithMeta } from '@/types/domain.types'
 import type { GroupInfoValues } from '@/lib/validators/group.schema'
 import type { FullRulesValues } from '@/lib/validators/group-rules.schema'
@@ -140,8 +140,7 @@ export async function createGroup(
 ): Promise<string> {
   const toCents = (v: number) => Math.round(v * 100)
 
-  const { data, error } = await supabase.rpc('create_group' as never, {
-    // Group identity
+  const { data, error } = await schemaRpc<string>('sacco', 'create_group', {
     p_name:        info.name,
     p_slug:        info.slug,
     p_type:        info.type,
@@ -150,21 +149,18 @@ export async function createGroup(
     p_timezone:    info.timezone,
     p_cycle_start: info.cycleStart ?? null,
     p_cycle_end:   info.cycleEnd ?? null,
-    // Contributions
     p_contribution_amount:              toCents(rules.contributionAmount),
     p_contribution_frequency:           rules.contributionFrequency,
     p_contribution_day:                 rules.contributionDay ?? null,
     p_grace_period_days:                rules.gracePeriodDays,
     p_late_fine_flat:                   toCents(rules.lateFineFlat),
     p_late_fine_interest_rate_daily:    rules.lateFineInterestRateDaily,
-    // Membership
     p_initiation_fee:                   toCents(rules.initiationFee),
     p_late_joining_fee:                 toCents(rules.lateJoiningFee),
     p_mid_join_allowed:                 rules.midJoinAllowed,
     p_mid_join_deadline_weeks:          rules.midJoinDeadlineWeeks,
     p_max_members:                      rules.maxMembers ?? null,
     p_min_kyc_level:                    rules.minKycLevel,
-    // Loans
     p_loan_enabled:                     rules.loanEnabled,
     p_max_loan_multiplier:              rules.maxLoanMultiplier,
     p_loan_interest_rate:               rules.loanInterestRate,
@@ -175,13 +171,11 @@ export async function createGroup(
     p_guarantor_required:               rules.guarantorRequired,
     p_guarantors_required_count:        rules.guarantorsRequiredCount,
     p_min_guarantor_credit_score:       rules.minGuarantorCreditScore ?? null,
-    // Defaults
     p_default_threshold_days:           rules.defaultThresholdDays,
     p_default_penalty_rate:             rules.defaultPenaltyRate,
     p_blacklist_recommendation_after:   rules.blacklistRecommendationAfter,
-    // Returns
     p_dividend_distribution:            rules.dividendDistribution,
-  } as never)
+  })
 
   if (error) throw { message: error.message }
   return data as string

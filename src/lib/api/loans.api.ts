@@ -1,4 +1,4 @@
-import { supabase, db } from '@/lib/supabase'
+import { db, schemaRpc } from '@/lib/supabase'
 import type {
   Loan, LoanGuarantor, LoanRepayment, LoanStatus,
   RepaymentPeriod, ProfileSummary,
@@ -197,44 +197,28 @@ export async function applyForLoan(params: {
   guarantorIds: string[]
   notes?: string
 }): Promise<string> {
-  const { data, error } = await supabase.rpc(
-    'apply_for_loan' as never,
-    {
-      p_group_id:      params.groupId,
-      p_principal:     params.principal,
-      p_guarantor_ids: params.guarantorIds,
-      p_notes:         params.notes ?? null,
-    } as never,
-    { schema: 'finance' } as never,
-  )
+  const { data, error } = await schemaRpc<string>('finance', 'apply_for_loan', {
+    p_group_id:      params.groupId,
+    p_principal:     params.principal,
+    p_guarantor_ids: params.guarantorIds,
+    p_notes:         params.notes ?? null,
+  })
   if (error) throw new Error(error.message)
   return data as string
 }
 
 export async function approveLoan(loanId: string): Promise<void> {
-  const { error } = await supabase.rpc(
-    'approve_loan' as never,
-    { p_loan_id: loanId } as never,
-    { schema: 'finance' } as never,
-  )
+  const { error } = await schemaRpc('finance', 'approve_loan', { p_loan_id: loanId })
   if (error) throw new Error(error.message)
 }
 
 export async function rejectLoan(loanId: string, reason: string): Promise<void> {
-  const { error } = await supabase.rpc(
-    'reject_loan' as never,
-    { p_loan_id: loanId, p_reason: reason } as never,
-    { schema: 'finance' } as never,
-  )
+  const { error } = await schemaRpc('finance', 'reject_loan', { p_loan_id: loanId, p_reason: reason })
   if (error) throw new Error(error.message)
 }
 
 export async function disburseLoan(loanId: string): Promise<void> {
-  const { error } = await supabase.rpc(
-    'disburse_loan' as never,
-    { p_loan_id: loanId } as never,
-    { schema: 'finance' } as never,
-  )
+  const { error } = await schemaRpc('finance', 'disburse_loan', { p_loan_id: loanId })
   if (error) throw new Error(error.message)
 }
 
@@ -245,25 +229,17 @@ export async function recordLoanRepayment(params: {
   paymentChannel: string
   notes?: string
 }): Promise<void> {
-  const { error } = await supabase.rpc(
-    'record_loan_repayment' as never,
-    {
-      p_loan_id:         params.loanId,
-      p_amount_paid:     params.amountPaid,
-      p_payment_ref:     params.paymentRef,
-      p_payment_channel: params.paymentChannel,
-      p_notes:           params.notes ?? null,
-    } as never,
-    { schema: 'finance' } as never,
-  )
+  const { error } = await schemaRpc('finance', 'record_loan_repayment', {
+    p_loan_id:         params.loanId,
+    p_amount_paid:     params.amountPaid,
+    p_payment_ref:     params.paymentRef,
+    p_payment_channel: params.paymentChannel,
+    p_notes:           params.notes ?? null,
+  })
   if (error) throw new Error(error.message)
 }
 
 export async function respondToGuarantor(loanId: string, accepted: boolean): Promise<void> {
-  const { error } = await supabase.rpc(
-    'respond_to_guarantor' as never,
-    { p_loan_id: loanId, p_accepted: accepted } as never,
-    { schema: 'finance' } as never,
-  )
+  const { error } = await schemaRpc('finance', 'respond_to_guarantor', { p_loan_id: loanId, p_accepted: accepted })
   if (error) throw new Error(error.message)
 }
