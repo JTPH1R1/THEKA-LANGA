@@ -19,17 +19,18 @@ function rpc<T>(fn: string, params: Record<string, unknown> = {}, schema: DbSche
 export async function getAdminStats(): Promise<AdminStats> {
   const { data, error } = await rpc<Record<string, unknown>>('admin_get_stats')
   if (error) throw new Error(error.message)
+  if (!data) throw new Error('No data returned from admin_get_stats')
   const d = data as Record<string, unknown>
   return {
-    totalUsers:       d.total_users as number,
-    activeUsers:      d.active_users as number,
-    blacklistedUsers: d.blacklisted_users as number,
-    activeGroups:     d.active_groups as number,
-    totalGroups:      d.total_groups as number,
-    loanOutstanding:  d.loan_outstanding as number,
-    totalDefaults:    d.total_defaults as number,
-    kycQueueCount:    d.kyc_queue_count as number,
-    unresolvedErrors: d.unresolved_errors as number,
+    totalUsers:       (d.total_users as number)       ?? 0,
+    activeUsers:      (d.active_users as number)      ?? 0,
+    blacklistedUsers: (d.blacklisted_users as number) ?? 0,
+    activeGroups:     (d.active_groups as number)     ?? 0,
+    totalGroups:      (d.total_groups as number)      ?? 0,
+    loanOutstanding:  (d.loan_outstanding as number)  ?? 0,
+    totalDefaults:    (d.total_defaults as number)    ?? 0,
+    kycQueueCount:    (d.kyc_queue_count as number)   ?? 0,
+    unresolvedErrors: (d.unresolved_errors as number) ?? 0,
   }
 }
 

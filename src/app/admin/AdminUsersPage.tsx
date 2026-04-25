@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, Ban, CheckCircle } from 'lucide-react'
+import { Search, Ban, CheckCircle, RefreshCw } from 'lucide-react'
 import { toast } from 'sonner'
 import { AdminNav } from '@/components/admin/AdminNav'
 import { useAdminUsers, useBlacklistUser, useUnblacklistUser } from '@/hooks/useAdmin'
@@ -72,7 +72,7 @@ export function AdminUsersPage() {
   const [blacklistFilter, setBlacklistFilter] = useState<string>('all')
   const [actionUser, setActionUser] = useState<AdminUser | null>(null)
 
-  const { data: users = [], isLoading } = useAdminUsers({
+  const { data: users = [], isLoading, refetch, isFetching } = useAdminUsers({
     search: search || undefined,
     kycLevel: kycFilter !== 'all' ? Number(kycFilter) : undefined,
     blacklisted: blacklistFilter === 'blacklisted' ? true : blacklistFilter === 'active' ? false : undefined,
@@ -82,9 +82,21 @@ export function AdminUsersPage() {
     <div>
       <AdminNav />
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-6">
-        <div>
-          <h1 className="text-xl font-bold text-slate-100">Users</h1>
-          <p className="text-sm text-slate-400 mt-0.5">{users.length} profiles</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-slate-100">Users</h1>
+            <p className="text-sm text-slate-400 mt-0.5">{users.length} profiles</p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => refetch()}
+            disabled={isFetching}
+            className="border-slate-700 text-slate-300 hover:text-slate-100"
+          >
+            <RefreshCw size={14} className={isFetching ? 'animate-spin' : ''} />
+            <span className="ml-1.5">Refresh</span>
+          </Button>
         </div>
 
         {/* Filters */}
