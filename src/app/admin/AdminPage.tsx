@@ -27,7 +27,7 @@ export function AdminPage() {
 
   const skeleton = <div className="h-7 w-20 bg-slate-700 animate-pulse rounded" />
 
-  if (isError) return (
+  if (!stats && isError) return (
     <div>
       <AdminNav />
       <div className="max-w-5xl mx-auto px-4 py-16 text-center">
