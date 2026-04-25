@@ -5,7 +5,7 @@ import { Topbar } from '@/components/layout/Topbar'
 
 export function AppShell() {
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
+    <div className="flex h-screen bg-white overflow-hidden">
       {/* Desktop sidebar */}
       <Sidebar />
 

@@ -69,8 +69,8 @@ export function LoginPage() {
           onClick={() => setMode('password')}
           className={`flex-1 py-1.5 text-sm font-medium rounded-md transition-colors ${
             mode === 'password'
-              ? 'bg-teal-600 text-white'
-              : 'text-slate-400 hover:text-slate-800'
+              ? 'bg-[#1B2D6A] text-white'
+              : 'text-slate-500 hover:text-slate-800'
           }`}
         >
           Password
@@ -80,8 +80,8 @@ export function LoginPage() {
           onClick={() => setMode('magic')}
           className={`flex-1 py-1.5 text-sm font-medium rounded-md transition-colors ${
             mode === 'magic'
-              ? 'bg-teal-600 text-white'
-              : 'text-slate-400 hover:text-slate-800'
+              ? 'bg-[#1B2D6A] text-white'
+              : 'text-slate-500 hover:text-slate-800'
           }`}
         >
           Magic link
