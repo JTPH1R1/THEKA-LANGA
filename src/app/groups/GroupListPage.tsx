@@ -14,11 +14,11 @@ import {
 export function GroupListPage() {
   const [tab, setTab] = useState<'mine' | 'discover'>('mine')
   const [search, setSearch] = useState('')
-  const [statusFilter, setStatusFilter] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
 
   const { data: myGroups, isLoading: myLoading } = useMyGroups()
   const { data: publicGroups, isLoading: pubLoading } = usePublicGroups(
-    tab === 'discover' ? { search: search || undefined, status: statusFilter || undefined } : undefined
+    tab === 'discover' ? { search: search || undefined, status: statusFilter !== 'all' ? statusFilter || undefined : undefined } : undefined
   )
 
   return (
@@ -71,7 +71,7 @@ export function GroupListPage() {
               <SelectValue placeholder="All statuses" />
             </SelectTrigger>
             <SelectContent className="bg-gray-100 border-gray-300">
-              <SelectItem value="" className="text-slate-800 focus:bg-teal-50">All statuses</SelectItem>
+              <SelectItem value="all" className="text-slate-800 focus:bg-teal-50">All statuses</SelectItem>
               <SelectItem value="forming" className="text-slate-800 focus:bg-teal-50">Forming</SelectItem>
               <SelectItem value="active"  className="text-slate-800 focus:bg-teal-50">Active</SelectItem>
             </SelectContent>
