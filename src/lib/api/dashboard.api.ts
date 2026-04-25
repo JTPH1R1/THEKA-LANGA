@@ -1,4 +1,4 @@
-import { supabase, db } from '@/lib/supabase'
+import { db, schemaRpc } from '@/lib/supabase'
 import type {
   DashboardKpis, GroupSummaryRow, ActivityEvent, NextContributionDue,
 } from '@/types/domain.types'
@@ -88,11 +88,7 @@ export async function getMyGroupSummaries(): Promise<GroupSummaryRow[]> {
 }
 
 export async function getActivityFeed(limit = 20): Promise<ActivityEvent[]> {
-  const { data, error } = await supabase.rpc(
-    'get_activity_feed' as never,
-    { p_limit: limit } as never,
-    { schema: 'sacco' } as never,
-  )
+  const { data, error } = await schemaRpc<Record<string, unknown>[]>('sacco', 'get_activity_feed', { p_limit: limit })
   if (error) throw new Error(error.message)
 
   return ((data ?? []) as Record<string, unknown>[]).map((row) => ({
@@ -107,11 +103,7 @@ export async function getActivityFeed(limit = 20): Promise<ActivityEvent[]> {
 }
 
 export async function getNextContributionsDue(): Promise<NextContributionDue[]> {
-  const { data, error } = await supabase.rpc(
-    'get_next_contribution_due' as never,
-    {} as never,
-    { schema: 'finance' } as never,
-  )
+  const { data, error } = await schemaRpc<Record<string, unknown>[]>('finance', 'get_next_contribution_due')
   if (error) throw new Error(error.message)
 
   return ((data ?? []) as Record<string, unknown>[]).map((row) => ({

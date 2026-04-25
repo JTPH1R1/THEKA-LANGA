@@ -1,4 +1,4 @@
-import { supabase, db } from '@/lib/supabase'
+import { supabase, db, schemaRpc } from '@/lib/supabase'
 import type { GroupMember, GroupJoinRequest, ProfileSummary } from '@/types/domain.types'
 
 function mapProfileSummary(row: Record<string, unknown>): ProfileSummary {
@@ -169,9 +169,7 @@ export async function withdrawJoinRequest(requestId: string): Promise<void> {
 }
 
 export async function approveJoinRequest(requestId: string): Promise<void> {
-  const { error } = await supabase.rpc('approve_join_request' as never, {
-    p_request_id: requestId,
-  } as never)
+  const { error } = await schemaRpc('sacco', 'approve_join_request', { p_request_id: requestId })
   if (error) throw { message: error.message }
 }
 

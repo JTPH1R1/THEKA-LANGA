@@ -1,4 +1,4 @@
-import { supabase, db } from '@/lib/supabase'
+import { supabase, db, schemaRpc } from '@/lib/supabase'
 
 export interface KycProfileData {
   profileId: string
@@ -91,11 +91,11 @@ export async function completeLevel1(params: {
   gender: string
   nationality: string
 }): Promise<void> {
-  const { error } = await supabase.rpc('complete_level1' as never, {
+  const { error } = await schemaRpc('kyc', 'complete_level1', {
     p_date_of_birth: params.dateOfBirth,
     p_gender: params.gender,
     p_nationality: params.nationality,
-  } as never)
+  })
   if (error) throw { message: error.message }
 }
 
@@ -171,11 +171,10 @@ export async function submitLevel2(params: {
     })
   if (nokError) throw { message: nokError.message }
 
-  // Call RPC to set status to pending_review
-  const { error: rpcError } = await supabase.rpc('submit_level2' as never, {
+  const { error: rpcError } = await schemaRpc('kyc', 'submit_level2', {
     p_doc_id: docId,
     p_selfie_id: selfieId,
-  } as never)
+  })
   if (rpcError) throw { message: rpcError.message }
 }
 
@@ -240,9 +239,9 @@ export async function submitLevel3(params: {
     })
   if (finError) throw { message: finError.message }
 
-  const { error: rpcError } = await supabase.rpc('submit_level3' as never, {
+  const { error: rpcError } = await schemaRpc('kyc', 'submit_level3', {
     p_address_id: addressId,
-  } as never)
+  })
   if (rpcError) throw { message: rpcError.message }
 }
 

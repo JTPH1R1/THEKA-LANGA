@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase'
+import { schemaRpc } from '@/lib/supabase'
 import type {
   AdminStats, AdminUser, AdminGroup, AdminKycEntry,
   AdminAuditEvent, AdminJobEntry, AdminSystemError,
@@ -8,10 +8,10 @@ import type {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-async function rpc<T>(fn: string, params: Record<string, unknown> = {}, schema = 'core'): Promise<{ data: T; error: { message: string } | null }> {
-  const result = await (supabase as unknown as { rpc: (fn: string, params: unknown, opts: unknown) => Promise<{ data: T; error: { message: string } | null }> })
-    .rpc(fn, params, { schema })
-  return result
+type DbSchema = 'core' | 'kyc' | 'sacco' | 'finance' | 'audit' | 'system'
+
+function rpc<T>(fn: string, params: Record<string, unknown> = {}, schema: DbSchema = 'core') {
+  return schemaRpc<T>(schema, fn, params)
 }
 
 // ─── Stats ────────────────────────────────────────────────────────────────────
