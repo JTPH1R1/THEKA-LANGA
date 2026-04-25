@@ -43,18 +43,18 @@ function FieldRow({ label, hint, error, children }: {
 }) {
   return (
     <div className="space-y-1.5">
-      <Label className="text-slate-300">{label}</Label>
+      <Label className="text-slate-700">{label}</Label>
       {children}
-      {hint && !error && <p className="text-xs text-slate-500">{hint}</p>}
+      {hint && !error && <p className="text-xs text-slate-400">{hint}</p>}
       {error && <p className="text-xs text-red-400">{error}</p>}
     </div>
   )
 }
 
-const inputCls = 'bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500'
-const selectCls = 'bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500'
-const selectContentCls = 'bg-slate-800 border-slate-700'
-const selectItemCls = 'text-slate-200 focus:bg-teal-900/40'
+const inputCls = 'bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500'
+const selectCls = 'bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500'
+const selectContentCls = 'bg-gray-100 border-gray-300'
+const selectItemCls = 'text-slate-800 focus:bg-teal-50'
 
 export function RulesForm({ defaultValues, onSubmit, isPending, submitLabel = 'Save rules' }: RulesFormProps) {
   const [step, setStep] = useState(0)
@@ -112,15 +112,15 @@ export function RulesForm({ defaultValues, onSubmit, isPending, submitLabel = 'S
             className={[
               'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors shrink-0',
               i === step
-                ? 'bg-teal-900/40 text-teal-300 border border-teal-800'
+                ? 'bg-teal-50 text-teal-700 border border-teal-200'
                 : i < step
-                  ? 'text-teal-400 hover:bg-slate-800 cursor-pointer'
-                  : 'text-slate-600 cursor-default',
+                  ? 'text-teal-600 hover:bg-gray-100 cursor-pointer'
+                  : 'text-slate-400 cursor-default',
             ].join(' ')}
           >
             <span className={[
               'w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold',
-              i < step ? 'bg-teal-600 text-white' : i === step ? 'bg-teal-900 text-teal-300 border border-teal-700' : 'bg-slate-800 text-slate-600',
+              i < step ? 'bg-teal-600 text-white' : i === step ? 'bg-teal-100 text-teal-700 border border-teal-700' : 'bg-gray-100 text-slate-400',
             ].join(' ')}>{i + 1}</span>
             {label}
           </button>
@@ -206,14 +206,14 @@ export function RulesForm({ defaultValues, onSubmit, isPending, submitLabel = 'S
                 )}
               />
             </FieldRow>
-            <Separator className="bg-slate-800" />
+            <Separator className="bg-gray-100" />
             <Controller
               control={form.control} name="midJoinAllowed"
               render={({ field }) => (
                 <label className="flex items-center gap-3 cursor-pointer">
                   <Checkbox checked={field.value} onCheckedChange={field.onChange}
-                    className="border-slate-600 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600" />
-                  <span className="text-sm text-slate-300">Allow mid-cycle joining</span>
+                    className="border-gray-300 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600" />
+                  <span className="text-sm text-slate-700">Allow mid-cycle joining</span>
                 </label>
               )}
             />
@@ -240,8 +240,8 @@ export function RulesForm({ defaultValues, onSubmit, isPending, submitLabel = 'S
               render={({ field }) => (
                 <label className="flex items-center gap-3 cursor-pointer">
                   <Checkbox checked={field.value} onCheckedChange={field.onChange}
-                    className="border-slate-600 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600" />
-                  <span className="text-sm text-slate-300">Enable loans for this group</span>
+                    className="border-gray-300 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600" />
+                  <span className="text-sm text-slate-700">Enable loans for this group</span>
                 </label>
               )}
             />
@@ -287,14 +287,14 @@ export function RulesForm({ defaultValues, onSubmit, isPending, submitLabel = 'S
                       {...form.register('maxActiveLoansPerMember', { valueAsNumber: true })} />
                   </FieldRow>
                 </div>
-                <Separator className="bg-slate-800" />
+                <Separator className="bg-gray-100" />
                 <Controller
                   control={form.control} name="guarantorRequired"
                   render={({ field }) => (
                     <label className="flex items-center gap-3 cursor-pointer">
                       <Checkbox checked={field.value} onCheckedChange={field.onChange}
-                        className="border-slate-600 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600" />
-                      <span className="text-sm text-slate-300">Require guarantors</span>
+                        className="border-gray-300 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600" />
+                      <span className="text-sm text-slate-700">Require guarantors</span>
                     </label>
                   )}
                 />
@@ -364,7 +364,7 @@ export function RulesForm({ defaultValues, onSubmit, isPending, submitLabel = 'S
             type="button" variant="ghost"
             onClick={() => setStep((s) => s - 1)}
             disabled={step === 0}
-            className="text-slate-400 hover:text-slate-200 gap-1.5"
+            className="text-slate-400 hover:text-slate-800 gap-1.5"
           >
             <ChevronLeft size={15} /> Back
           </Button>

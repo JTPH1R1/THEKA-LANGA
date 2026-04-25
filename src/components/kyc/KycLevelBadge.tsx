@@ -13,16 +13,16 @@ export function KycLevelBadge({ level, status, size = 'md' }: KycLevelBadgeProps
   const isRejected = status === 'rejected' || status === 'requires_resubmission'
 
   const config = isRejected
-    ? { icon: ShieldX, color: 'text-red-400 border-red-800 bg-red-900/20' }
+    ? { icon: ShieldX, color: 'text-red-700 border-red-200 bg-red-50' }
     : isPending
-    ? { icon: ShieldAlert, color: 'text-amber-400 border-amber-800 bg-amber-900/20' }
+    ? { icon: ShieldAlert, color: 'text-amber-700 border-amber-200 bg-amber-50' }
     : level >= 3
-    ? { icon: ShieldCheck, color: 'text-indigo-400 border-indigo-800 bg-indigo-900/20' }
+    ? { icon: ShieldCheck, color: 'text-indigo-700 border-indigo-200 bg-indigo-50' }
     : level >= 2
-    ? { icon: ShieldCheck, color: 'text-teal-400 border-teal-800 bg-teal-900/20' }
+    ? { icon: ShieldCheck, color: 'text-teal-700 border-teal-200 bg-teal-50' }
     : level >= 1
-    ? { icon: Shield, color: 'text-blue-400 border-blue-800 bg-blue-900/20' }
-    : { icon: ShieldAlert, color: 'text-slate-400 border-slate-700 bg-slate-800/50' }
+    ? { icon: Shield, color: 'text-blue-700 border-blue-200 bg-blue-50' }
+    : { icon: ShieldAlert, color: 'text-slate-500 border-gray-200 bg-gray-50' }
 
   const Icon = config.icon
   const label = isRejected

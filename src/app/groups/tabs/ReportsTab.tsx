@@ -50,17 +50,17 @@ function CycleReport({ groupId }: { groupId: string }) {
       <div className="space-y-1.5">
         <label className="text-xs text-slate-400 uppercase tracking-wide">Cycle Period</label>
         {loadingPeriods ? (
-          <div className="h-9 w-48 bg-slate-800 animate-pulse rounded-md" />
+          <div className="h-9 w-48 bg-gray-100 animate-pulse rounded-md" />
         ) : periods.length === 0 ? (
-          <p className="text-sm text-slate-500">No contribution periods found. Generate a schedule first.</p>
+          <p className="text-sm text-slate-400">No contribution periods found. Generate a schedule first.</p>
         ) : (
           <Select value={selectedPeriod} onValueChange={setPeriod}>
-            <SelectTrigger className="w-48 bg-slate-800 border-slate-700 text-slate-100">
+            <SelectTrigger className="w-48 bg-gray-100 border-gray-300 text-slate-900">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700">
+            <SelectContent className="bg-gray-100 border-gray-300">
               {periods.map((p) => (
-                <SelectItem key={p} value={p} className="text-slate-100 focus:bg-slate-700">{formatPeriod(p)}</SelectItem>
+                <SelectItem key={p} value={p} className="text-slate-900 focus:bg-gray-200">{formatPeriod(p)}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -68,7 +68,7 @@ function CycleReport({ groupId }: { groupId: string }) {
       </div>
 
       {isLoading && <p className="text-sm text-slate-400">Loading report data…</p>}
-      {error && <p className="text-sm text-rose-400">Error: {error.message}</p>}
+      {error && <p className="text-sm text-rose-600">Error: {error.message}</p>}
       {data && (
         <div className="space-y-3">
           <div className="grid grid-cols-4 gap-3">
@@ -78,8 +78,8 @@ function CycleReport({ groupId }: { groupId: string }) {
               { label: 'Partial', value: data.totals.membersPartial },
               { label: 'Overdue', value: data.totals.membersOverdue },
             ].map(({ label, value }) => (
-              <div key={label} className="bg-slate-800/50 rounded-lg p-3 text-center">
-                <p className="text-2xl font-bold text-slate-100">{value}</p>
+              <div key={label} className="bg-gray-100/50 rounded-lg p-3 text-center">
+                <p className="text-2xl font-bold text-slate-900">{value}</p>
                 <p className="text-xs text-slate-400 mt-0.5">{label}</p>
               </div>
             ))}
@@ -107,17 +107,17 @@ function MemberReport({ groupId }: { groupId: string }) {
       <div className="space-y-1.5">
         <label className="text-xs text-slate-400 uppercase tracking-wide">Member</label>
         {loadingMembers ? (
-          <div className="h-9 w-64 bg-slate-800 animate-pulse rounded-md" />
+          <div className="h-9 w-64 bg-gray-100 animate-pulse rounded-md" />
         ) : activeMembers.length === 0 ? (
-          <p className="text-sm text-slate-500">No active members found.</p>
+          <p className="text-sm text-slate-400">No active members found.</p>
         ) : (
           <Select value={selectedId} onValueChange={setMemberId}>
-            <SelectTrigger className="w-64 bg-slate-800 border-slate-700 text-slate-100">
+            <SelectTrigger className="w-64 bg-gray-100 border-gray-300 text-slate-900">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700">
+            <SelectContent className="bg-gray-100 border-gray-300">
               {activeMembers.map((m) => (
-                <SelectItem key={m.profileId} value={m.profileId} className="text-slate-100 focus:bg-slate-700">
+                <SelectItem key={m.profileId} value={m.profileId} className="text-slate-900 focus:bg-gray-200">
                   {m.profile?.preferredName ?? m.profile?.fullLegalName ?? m.profileId}
                 </SelectItem>
               ))}
@@ -127,7 +127,7 @@ function MemberReport({ groupId }: { groupId: string }) {
       </div>
 
       {isLoading && <p className="text-sm text-slate-400">Loading member data…</p>}
-      {error && <p className="text-sm text-rose-400">Error: {error.message}</p>}
+      {error && <p className="text-sm text-rose-600">Error: {error.message}</p>}
       {data && (
         <div className="space-y-3">
           <div className="grid grid-cols-3 gap-3">
@@ -136,8 +136,8 @@ function MemberReport({ groupId }: { groupId: string }) {
               { label: 'Active Loans', value: data.totals.activeLoansCount },
               { label: 'Loans Total', value: data.loans.length },
             ].map(({ label, value }) => (
-              <div key={label} className="bg-slate-800/50 rounded-lg p-3 text-center">
-                <p className="text-2xl font-bold text-slate-100">{value}</p>
+              <div key={label} className="bg-gray-100/50 rounded-lg p-3 text-center">
+                <p className="text-2xl font-bold text-slate-900">{value}</p>
                 <p className="text-xs text-slate-400 mt-0.5">{label}</p>
               </div>
             ))}
@@ -158,7 +158,7 @@ function LoanBookReport({ groupId }: { groupId: string }) {
   return (
     <div className="space-y-4">
       {isLoading && <p className="text-sm text-slate-400">Loading loan data…</p>}
-      {error && <p className="text-sm text-rose-400">Error: {error.message}</p>}
+      {error && <p className="text-sm text-rose-600">Error: {error.message}</p>}
       {data && (
         <div className="space-y-3">
           <div className="grid grid-cols-4 gap-3">
@@ -168,8 +168,8 @@ function LoanBookReport({ groupId }: { groupId: string }) {
               { label: 'Completed', value: data.totals.completedCount },
               { label: 'Defaulted', value: data.totals.defaultCount },
             ].map(({ label, value }) => (
-              <div key={label} className="bg-slate-800/50 rounded-lg p-3 text-center">
-                <p className="text-2xl font-bold text-slate-100">{value}</p>
+              <div key={label} className="bg-gray-100/50 rounded-lg p-3 text-center">
+                <p className="text-2xl font-bold text-slate-900">{value}</p>
                 <p className="text-xs text-slate-400 mt-0.5">{label}</p>
               </div>
             ))}
@@ -196,7 +196,7 @@ export function ReportsTab({ groupId }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-slate-100 mb-1">Generate Reports</h2>
+        <h2 className="text-lg font-semibold text-slate-900 mb-1">Generate Reports</h2>
         <p className="text-sm text-slate-400">Download PDF reports for this group.</p>
       </div>
 
@@ -209,18 +209,18 @@ export function ReportsTab({ groupId }: Props) {
             className={`rounded-xl border p-4 text-left transition-colors ${
               activeType === id
                 ? 'border-teal-500 bg-teal-500/10'
-                : 'border-slate-700 bg-slate-800/40 hover:border-slate-600'
+                : 'border-gray-300 bg-gray-50 hover:border-gray-300'
             }`}
           >
-            <Icon className={`size-5 mb-2 ${activeType === id ? 'text-teal-400' : 'text-slate-400'}`} />
-            <p className={`text-sm font-medium ${activeType === id ? 'text-slate-100' : 'text-slate-300'}`}>{label}</p>
-            <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+            <Icon className={`size-5 mb-2 ${activeType === id ? 'text-teal-600' : 'text-slate-400'}`} />
+            <p className={`text-sm font-medium ${activeType === id ? 'text-slate-900' : 'text-slate-700'}`}>{label}</p>
+            <p className="text-xs text-slate-400 mt-0.5">{description}</p>
           </button>
         ))}
       </div>
 
       {/* Report parameters + preview */}
-      <div className="rounded-xl border border-slate-700 bg-slate-800/30 p-5">
+      <div className="rounded-xl border border-gray-300 bg-gray-100/30 p-5">
         {activeType === 'cycle'  && <CycleReport  groupId={groupId} />}
         {activeType === 'member' && <MemberReport groupId={groupId} />}
         {activeType === 'loans'  && <LoanBookReport groupId={groupId} />}

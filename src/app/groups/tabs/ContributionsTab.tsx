@@ -66,18 +66,18 @@ function GenerateSchedulePanel({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-slate-900 border border-teal-800/40 rounded-xl p-5 space-y-4"
+        className="bg-white border border-teal-200 rounded-xl p-5 space-y-4"
       >
-        <h3 className="text-sm font-medium text-teal-300">Generate contribution schedule</h3>
+        <h3 className="text-sm font-medium text-teal-700">Generate contribution schedule</h3>
         <div className="grid grid-cols-2 gap-3">
           <FormField control={form.control} name="cyclePeriod" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-300 text-xs">Period (YYYY-MM)</FormLabel>
+              <FormLabel className="text-slate-700 text-xs">Period (YYYY-MM)</FormLabel>
               <FormControl>
                 <Input
                   placeholder="2026-04"
                   {...field}
-                  className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                  className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                 />
               </FormControl>
               <FormMessage className="text-xs" />
@@ -85,12 +85,12 @@ function GenerateSchedulePanel({
           )} />
           <FormField control={form.control} name="dueDate" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-300 text-xs">Due date</FormLabel>
+              <FormLabel className="text-slate-700 text-xs">Due date</FormLabel>
               <FormControl>
                 <Input
                   type="date"
                   {...field}
-                  className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                  className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                 />
               </FormControl>
               <FormMessage className="text-xs" />
@@ -109,7 +109,7 @@ function GenerateSchedulePanel({
             type="button"
             variant="ghost"
             onClick={() => onDone('')}
-            className="text-slate-400 hover:text-slate-200 text-sm"
+            className="text-slate-400 hover:text-slate-800 text-sm"
           >
             Cancel
           </Button>
@@ -152,20 +152,20 @@ function WaiveDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-900 border-slate-800 text-slate-100 max-w-sm">
+      <DialogContent className="bg-white border-gray-200 text-slate-900 max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-slate-100">Waive contribution?</DialogTitle>
+          <DialogTitle className="text-slate-900">Waive contribution?</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField control={form.control} name="reason" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Reason (required)</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Reason (required)</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. Hardship exemption approved by chair"
                     {...field}
-                    className="bg-slate-800 border-slate-700 text-slate-100"
+                    className="bg-gray-100 border-gray-300 text-slate-900"
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
@@ -176,7 +176,7 @@ function WaiveDialog({
                 type="button"
                 variant="ghost"
                 onClick={() => onOpenChange(false)}
-                className="text-slate-400 hover:text-slate-200"
+                className="text-slate-400 hover:text-slate-800"
               >
                 Cancel
               </Button>
@@ -212,15 +212,15 @@ function SummaryCards({
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
       {[
-        { label: 'Paid',          value: paid.length,       sub: `of ${contributions.length} members`, color: 'text-teal-300' },
-        { label: 'Pending',       value: pending.length,    sub: 'awaiting payment',                   color: 'text-slate-300' },
-        { label: 'Overdue',       value: overdue.length,    sub: 'late or defaulted',                  color: overdue.length > 0 ? 'text-amber-300' : 'text-slate-300' },
-        { label: 'Total collected', value: formatCurrency(collected, currency), sub: 'this period', color: 'text-slate-100', raw: true },
+        { label: 'Paid',          value: paid.length,       sub: `of ${contributions.length} members`, color: 'text-teal-700' },
+        { label: 'Pending',       value: pending.length,    sub: 'awaiting payment',                   color: 'text-slate-700' },
+        { label: 'Overdue',       value: overdue.length,    sub: 'late or defaulted',                  color: overdue.length > 0 ? 'text-amber-600' : 'text-slate-700' },
+        { label: 'Total collected', value: formatCurrency(collected, currency), sub: 'this period', color: 'text-slate-900', raw: true },
       ].map(({ label, value, sub, color, raw }) => (
-        <div key={label} className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-          <p className="text-xs text-slate-500 mb-1">{label}</p>
+        <div key={label} className="bg-white border border-gray-200 rounded-xl p-4">
+          <p className="text-xs text-slate-400 mb-1">{label}</p>
           <p className={`text-xl font-bold ${color}`}>{raw ? value : value}</p>
-          <p className="text-xs text-slate-500">{sub}</p>
+          <p className="text-xs text-slate-400">{sub}</p>
         </div>
       ))}
     </div>
@@ -267,7 +267,7 @@ export function ContributionsTab({ groupId, currency, myMembership }: Contributi
         <select
           value={selectedPeriod}
           onChange={(e) => setSelectedPeriod(e.target.value)}
-          className="rounded-md bg-slate-800 border border-slate-700 text-slate-100 px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
+          className="rounded-md bg-gray-100 border border-gray-300 text-slate-900 px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
         >
           {allPeriods.map((p) => (
             <option key={p} value={p}>{p}</option>
@@ -296,10 +296,10 @@ export function ContributionsTab({ groupId, currency, myMembership }: Contributi
       )}
 
       {/* Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
         {isLoading ? (
           <div className="space-y-px p-4 animate-pulse">
-            {[1,2,3].map((i) => <div key={i} className="h-14 bg-slate-800 rounded mb-2" />)}
+            {[1,2,3].map((i) => <div key={i} className="h-14 bg-gray-100 rounded mb-2" />)}
           </div>
         ) : !contributions.length ? (
           <div className="p-4">
@@ -312,13 +312,13 @@ export function ContributionsTab({ groupId, currency, myMembership }: Contributi
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-800">
-                <th className="text-left text-xs text-slate-500 font-medium px-4 py-3">Member</th>
-                <th className="text-right text-xs text-slate-500 font-medium px-4 py-3">Expected</th>
-                <th className="text-right text-xs text-slate-500 font-medium px-4 py-3">Paid</th>
-                <th className="text-right text-xs text-slate-500 font-medium px-4 py-3 hidden sm:table-cell">Fine</th>
-                <th className="text-center text-xs text-slate-500 font-medium px-4 py-3">Status</th>
-                <th className="text-right text-xs text-slate-500 font-medium px-4 py-3 hidden md:table-cell">Due</th>
+              <tr className="border-b border-gray-200">
+                <th className="text-left text-xs text-slate-400 font-medium px-4 py-3">Member</th>
+                <th className="text-right text-xs text-slate-400 font-medium px-4 py-3">Expected</th>
+                <th className="text-right text-xs text-slate-400 font-medium px-4 py-3">Paid</th>
+                <th className="text-right text-xs text-slate-400 font-medium px-4 py-3 hidden sm:table-cell">Fine</th>
+                <th className="text-center text-xs text-slate-400 font-medium px-4 py-3">Status</th>
+                <th className="text-right text-xs text-slate-400 font-medium px-4 py-3 hidden md:table-cell">Due</th>
                 {(isOfficer || isMember) && (
                   <th className="px-4 py-3" />
                 )}
@@ -333,38 +333,38 @@ export function ContributionsTab({ groupId, currency, myMembership }: Contributi
                 const isDue     = new Date(c.dueDate) < new Date() && c.status === 'pending'
 
                 return (
-                  <tr key={c.id} className="border-b border-slate-800 last:border-0 hover:bg-slate-800/30 transition-colors">
+                  <tr key={c.id} className="border-b border-gray-200 last:border-0 hover:bg-gray-100/30 transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <Avatar className="h-7 w-7 shrink-0">
-                          <AvatarFallback className="bg-slate-700 text-slate-300 text-xs">{initials}</AvatarFallback>
+                          <AvatarFallback className="bg-gray-200 text-slate-700 text-xs">{initials}</AvatarFallback>
                         </Avatar>
                         <div className="min-w-0">
-                          <span className="text-slate-200 truncate block">{name}</span>
+                          <span className="text-slate-800 truncate block">{name}</span>
                           {c.paymentRef && (
-                            <span className="text-xs text-slate-500">{c.paymentRef}</span>
+                            <span className="text-xs text-slate-400">{c.paymentRef}</span>
                           )}
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-right text-slate-300 tabular-nums">
+                    <td className="px-4 py-3 text-right text-slate-700 tabular-nums">
                       {formatCurrency(c.expectedAmount, currency)}
                     </td>
                     <td className="px-4 py-3 text-right tabular-nums">
-                      <span className={c.paidAmount > 0 ? 'text-teal-300' : 'text-slate-500'}>
+                      <span className={c.paidAmount > 0 ? 'text-teal-700' : 'text-slate-400'}>
                         {formatCurrency(c.paidAmount, currency)}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-right tabular-nums text-amber-400 hidden sm:table-cell">
+                    <td className="px-4 py-3 text-right tabular-nums text-amber-600 hidden sm:table-cell">
                       {c.fineAmount > 0 ? formatCurrency(c.fineAmount, currency) : '—'}
                     </td>
                     <td className="px-4 py-3 text-center">
                       <div className="flex items-center justify-center gap-1">
                         <ContributionStatusBadge status={c.status} />
-                        {isDue && <AlertCircle size={12} className="text-amber-400" />}
+                        {isDue && <AlertCircle size={12} className="text-amber-600" />}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-right text-slate-500 text-xs hidden md:table-cell">
+                    <td className="px-4 py-3 text-right text-slate-400 text-xs hidden md:table-cell">
                       {formatDate(c.dueDate)}
                     </td>
                     {(isOfficer || isMember) && (
@@ -384,7 +384,7 @@ export function ContributionsTab({ groupId, currency, myMembership }: Contributi
                               size="sm"
                               variant="ghost"
                               onClick={() => setWaiveTarget(c)}
-                              className="h-7 px-2 text-slate-400 hover:text-slate-200 text-xs"
+                              className="h-7 px-2 text-slate-400 hover:text-slate-800 text-xs"
                             >
                               Waive
                             </Button>

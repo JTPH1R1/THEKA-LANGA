@@ -56,34 +56,34 @@ export function Level1Step({ email, phone }: Level1StepProps) {
       {/* Read-only checks */}
       <div className="space-y-2">
         <div className="flex items-center gap-2 text-sm">
-          <CheckCircle2 size={16} className="text-teal-400" />
-          <span className="text-slate-300">Email verified:</span>
-          <span className="text-slate-200 font-medium">{email}</span>
+          <CheckCircle2 size={16} className="text-teal-600" />
+          <span className="text-slate-700">Email verified:</span>
+          <span className="text-slate-800 font-medium">{email}</span>
         </div>
         <div className={`flex items-center gap-2 text-sm ${phone ? '' : 'opacity-60'}`}>
           {phone
-            ? <CheckCircle2 size={16} className="text-teal-400" />
-            : <div className="h-4 w-4 rounded-full border-2 border-slate-600" />
+            ? <CheckCircle2 size={16} className="text-teal-600" />
+            : <div className="h-4 w-4 rounded-full border-2 border-gray-300" />
           }
-          <span className="text-slate-300">Phone number:</span>
+          <span className="text-slate-700">Phone number:</span>
           {phone
-            ? <span className="text-slate-200 font-medium">{phone}</span>
-            : <span className="text-amber-400 text-xs">Not set — add in profile settings</span>
+            ? <span className="text-slate-800 font-medium">{phone}</span>
+            : <span className="text-amber-600 text-xs">Not set — add in profile settings</span>
           }
         </div>
       </div>
 
-      <div className="border-t border-slate-800 pt-4 space-y-4">
-        <p className="text-xs text-slate-500">
+      <div className="border-t border-gray-200 pt-4 space-y-4">
+        <p className="text-xs text-slate-400">
           Complete the fields below to verify your identity.
         </p>
 
         <div className="space-y-1.5">
-          <Label htmlFor="dob" className="text-slate-300">Date of birth</Label>
+          <Label htmlFor="dob" className="text-slate-700">Date of birth</Label>
           <Input
             id="dob"
             type="date"
-            className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+            className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
             {...form.register('dateOfBirth')}
           />
           {form.formState.errors.dateOfBirth && (
@@ -92,12 +92,12 @@ export function Level1Step({ email, phone }: Level1StepProps) {
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-slate-300">Gender</Label>
+          <Label className="text-slate-700">Gender</Label>
           <Select onValueChange={(v) => form.setValue('gender', v as Level1FormValues['gender'])}>
-            <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+            <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
               <SelectValue placeholder="Select gender" />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700">
+            <SelectContent className="bg-gray-100 border-gray-300">
               {[
                 { value: 'male',              label: 'Male' },
                 { value: 'female',            label: 'Female' },
@@ -107,7 +107,7 @@ export function Level1Step({ email, phone }: Level1StepProps) {
                 <SelectItem
                   key={o.value}
                   value={o.value}
-                  className="text-slate-200 focus:bg-teal-900/40"
+                  className="text-slate-800 focus:bg-teal-50"
                 >
                   {o.label}
                 </SelectItem>
@@ -120,17 +120,17 @@ export function Level1Step({ email, phone }: Level1StepProps) {
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-slate-300">Nationality</Label>
+          <Label className="text-slate-700">Nationality</Label>
           <Select onValueChange={(v) => form.setValue('nationality', v)}>
-            <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+            <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
               <SelectValue placeholder="Select nationality" />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700 max-h-60">
+            <SelectContent className="bg-gray-100 border-gray-300 max-h-60">
               {AFRICAN_COUNTRIES.map((c) => (
                 <SelectItem
                   key={c.value}
                   value={c.value}
-                  className="text-slate-200 focus:bg-teal-900/40"
+                  className="text-slate-800 focus:bg-teal-50"
                 >
                   {c.label}
                 </SelectItem>

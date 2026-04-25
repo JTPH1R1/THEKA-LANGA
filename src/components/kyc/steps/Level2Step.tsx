@@ -69,23 +69,23 @@ export function Level2Step() {
 
       {/* ID Document */}
       <div className="space-y-4">
-        <h3 className="text-sm font-medium text-slate-300 border-b border-slate-800 pb-2">
+        <h3 className="text-sm font-medium text-slate-700 border-b border-gray-200 pb-2">
           Government ID
         </h3>
 
         <div className="space-y-1.5">
-          <Label className="text-slate-300">Document type</Label>
+          <Label className="text-slate-700">Document type</Label>
           <Controller
             control={form.control}
             name="docType"
             render={({ field }) => (
               <Select onValueChange={field.onChange}>
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                   <SelectValue placeholder="Select document type" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
+                <SelectContent className="bg-gray-100 border-gray-300">
                   {Object.entries(DOC_TYPE_LABELS).map(([v, l]) => (
-                    <SelectItem key={v} value={v} className="text-slate-200 focus:bg-teal-900/40">
+                    <SelectItem key={v} value={v} className="text-slate-800 focus:bg-teal-50">
                       {l}
                     </SelectItem>
                   ))}
@@ -98,11 +98,11 @@ export function Level2Step() {
 
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <Label htmlFor="docNumber" className="text-slate-300">Document number</Label>
+            <Label htmlFor="docNumber" className="text-slate-700">Document number</Label>
             <Input
               id="docNumber"
               placeholder="e.g. 12345678"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
               {...form.register('docNumber')}
             />
             {errors.docNumber && (
@@ -110,18 +110,18 @@ export function Level2Step() {
             )}
           </div>
           <div className="space-y-1.5">
-            <Label className="text-slate-300">Issuing country</Label>
+            <Label className="text-slate-700">Issuing country</Label>
             <Controller
               control={form.control}
               name="issuingCountry"
               render={({ field }) => (
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                  <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                     <SelectValue placeholder="Country" />
                   </SelectTrigger>
-                  <SelectContent className="bg-slate-800 border-slate-700 max-h-60">
+                  <SelectContent className="bg-gray-100 border-gray-300 max-h-60">
                     {AFRICAN_COUNTRIES.map((c) => (
-                      <SelectItem key={c.value} value={c.value} className="text-slate-200 focus:bg-teal-900/40">
+                      <SelectItem key={c.value} value={c.value} className="text-slate-800 focus:bg-teal-50">
                         {c.label}
                       </SelectItem>
                     ))}
@@ -137,11 +137,11 @@ export function Level2Step() {
 
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <Label htmlFor="docFullName" className="text-slate-300">Name on document</Label>
+            <Label htmlFor="docFullName" className="text-slate-700">Name on document</Label>
             <Input
               id="docFullName"
               placeholder="Exactly as printed"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
               {...form.register('docFullName')}
             />
             {errors.docFullName && (
@@ -149,13 +149,13 @@ export function Level2Step() {
             )}
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="expiryDate" className="text-slate-300">
-              Expiry date <span className="text-slate-500">(if applicable)</span>
+            <Label htmlFor="expiryDate" className="text-slate-700">
+              Expiry date <span className="text-slate-400">(if applicable)</span>
             </Label>
             <Input
               id="expiryDate"
               type="date"
-              className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+              className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
               {...form.register('expiryDate')}
             />
           </div>
@@ -191,7 +191,7 @@ export function Level2Step() {
 
       {/* Selfie */}
       <div className="space-y-4">
-        <h3 className="text-sm font-medium text-slate-300 border-b border-slate-800 pb-2">
+        <h3 className="text-sm font-medium text-slate-700 border-b border-gray-200 pb-2">
           Selfie / Liveness photo
         </h3>
         <Controller
@@ -212,16 +212,16 @@ export function Level2Step() {
 
       {/* Next of Kin */}
       <div className="space-y-4">
-        <h3 className="text-sm font-medium text-slate-300 border-b border-slate-800 pb-2">
+        <h3 className="text-sm font-medium text-slate-700 border-b border-gray-200 pb-2">
           Next of kin / emergency contact
         </h3>
 
         <div className="space-y-1.5">
-          <Label htmlFor="nokFullName" className="text-slate-300">Full name</Label>
+          <Label htmlFor="nokFullName" className="text-slate-700">Full name</Label>
           <Input
             id="nokFullName"
             placeholder="Next of kin full name"
-            className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+            className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
             {...form.register('nokFullName')}
           />
           {errors.nokFullName && (
@@ -231,23 +231,23 @@ export function Level2Step() {
 
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <Label className="text-slate-300">Relationship</Label>
+            <Label className="text-slate-700">Relationship</Label>
             <Controller
               control={form.control}
               name="nokRelationship"
               render={({ field }) => (
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                  <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                     <SelectValue placeholder="Relationship" />
                   </SelectTrigger>
-                  <SelectContent className="bg-slate-800 border-slate-700">
+                  <SelectContent className="bg-gray-100 border-gray-300">
                     {[
                       'spouse','parent','sibling','child','friend','colleague','guardian','other',
                     ].map((r) => (
                       <SelectItem
                         key={r}
                         value={r}
-                        className="text-slate-200 focus:bg-teal-900/40 capitalize"
+                        className="text-slate-800 focus:bg-teal-50 capitalize"
                       >
                         {r.charAt(0).toUpperCase() + r.slice(1)}
                       </SelectItem>
@@ -261,12 +261,12 @@ export function Level2Step() {
             )}
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="nokPhone" className="text-slate-300">Phone number</Label>
+            <Label htmlFor="nokPhone" className="text-slate-700">Phone number</Label>
             <Input
               id="nokPhone"
               type="tel"
               placeholder="+254712345678"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
               {...form.register('nokPhone')}
             />
             {errors.nokPhone && (
@@ -284,7 +284,7 @@ export function Level2Step() {
         {submit.isPending ? 'Uploading documents…' : 'Submit for review'}
       </Button>
 
-      <p className="text-xs text-slate-500 text-center">
+      <p className="text-xs text-slate-400 text-center">
         Documents are reviewed within 1–2 business days. You will be notified when approved.
       </p>
     </form>

@@ -33,11 +33,11 @@ export function Topbar() {
   }
 
   return (
-    <header className="h-14 bg-slate-900 border-b border-slate-800 flex items-center px-4 gap-3 shrink-0">
+    <header className="h-14 bg-white border-b border-gray-200 flex items-center px-4 gap-3 shrink-0 shadow-sm">
       {/* Mobile menu toggle */}
       <button
         onClick={toggleSidebar}
-        className="lg:hidden text-slate-400 hover:text-slate-200 p-1"
+        className="lg:hidden text-slate-500 hover:text-slate-700 p-1"
         aria-label="Open menu"
       >
         <Menu size={20} />
@@ -46,7 +46,7 @@ export function Topbar() {
       {/* Mobile brand (desktop shows in sidebar) */}
       <Link
         to="/dashboard"
-        className="lg:hidden text-sm font-bold text-teal-400 tracking-wide"
+        className="lg:hidden text-sm font-bold text-teal-600 tracking-wide"
       >
         THEKA LANGA
       </Link>
@@ -60,12 +60,12 @@ export function Topbar() {
       {/* Avatar → profile edit */}
       <button
         onClick={() => navigate('/profile/edit')}
-        className="flex items-center gap-2 text-sm text-slate-300 hover:text-slate-100 transition-colors"
+        className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 transition-colors"
         aria-label="Edit profile"
       >
-        <Avatar className="h-7 w-7 ring-1 ring-slate-700">
+        <Avatar className="h-7 w-7 ring-1 ring-gray-200">
           <AvatarImage src={profile?.avatarUrl ?? undefined} alt={displayName} />
-          <AvatarFallback className="bg-teal-900 text-teal-300 text-xs font-semibold">
+          <AvatarFallback className="bg-teal-100 text-teal-700 text-xs font-semibold">
             {getInitials(displayName) || <User size={12} />}
           </AvatarFallback>
         </Avatar>
@@ -77,7 +77,7 @@ export function Topbar() {
         size="sm"
         onClick={handleSignOut}
         disabled={signOut.isPending}
-        className="text-slate-500 hover:text-slate-200 p-2"
+        className="text-slate-400 hover:text-slate-700 p-2"
         aria-label="Sign out"
       >
         <LogOut size={16} />

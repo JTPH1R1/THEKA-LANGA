@@ -4,7 +4,7 @@ import { useSession } from '@/hooks/useSession'
 
 function Spinner() {
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="h-8 w-8 rounded-full border-2 border-teal-400 border-t-transparent animate-spin" />
     </div>
   )

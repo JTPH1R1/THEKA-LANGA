@@ -75,13 +75,13 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-900 border-slate-800 text-slate-100 max-w-md">
+      <DialogContent className="bg-white border-gray-200 text-slate-900 max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-slate-100">Record Payment — {memberName}</DialogTitle>
+          <DialogTitle className="text-slate-900">Record Payment — {memberName}</DialogTitle>
         </DialogHeader>
 
-        <div className="flex items-center justify-between text-xs text-slate-400 bg-slate-800/60 rounded-lg px-3 py-2 mb-2">
-          <span>Expected: <span className="text-slate-200 font-medium">{formatCurrency(contribution.expectedAmount, currency)}</span></span>
+        <div className="flex items-center justify-between text-xs text-slate-400 bg-gray-100 rounded-lg px-3 py-2 mb-2">
+          <span>Expected: <span className="text-slate-800 font-medium">{formatCurrency(contribution.expectedAmount, currency)}</span></span>
           <span>Due: {formatDate(contribution.dueDate)}</span>
         </div>
 
@@ -90,7 +90,7 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
             <div className="grid grid-cols-2 gap-3">
               <FormField control={form.control} name="paidAmount" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Amount paid ({currency})</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Amount paid ({currency})</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -99,7 +99,7 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
                       placeholder="0.00"
                       {...field}
                       onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
-                      className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                      className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                     />
                   </FormControl>
                   <FormMessage className="text-xs" />
@@ -108,7 +108,7 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
 
               <FormField control={form.control} name="fineAmount" render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-300 text-xs">Fine / penalty ({currency})</FormLabel>
+                  <FormLabel className="text-slate-700 text-xs">Fine / penalty ({currency})</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -117,7 +117,7 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
                       placeholder="0.00"
                       {...field}
                       onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
-                      className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                      className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                     />
                   </FormControl>
                   <FormMessage className="text-xs" />
@@ -127,12 +127,12 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
 
             <FormField control={form.control} name="paymentRef" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Payment reference</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Payment reference</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="M-Pesa ref, bank ref, etc."
                     {...field}
-                    className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                    className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
@@ -141,11 +141,11 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
 
             <FormField control={form.control} name="paymentChannel" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Payment channel</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Payment channel</FormLabel>
                 <FormControl>
                   <select
                     {...field}
-                    className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
                   >
                     {Object.entries(PAYMENT_CHANNEL_LABELS).map(([val, label]) => (
                       <option key={val} value={val}>{label}</option>
@@ -158,12 +158,12 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
 
             <FormField control={form.control} name="notes" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-300 text-xs">Notes (optional)</FormLabel>
+                <FormLabel className="text-slate-700 text-xs">Notes (optional)</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Any additional notes…"
                     {...field}
-                    className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                    className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
@@ -182,7 +182,7 @@ export function RecordPaymentDialog({ contribution, groupId, currency, open, onO
                 type="button"
                 variant="ghost"
                 onClick={() => onOpenChange(false)}
-                className="text-slate-400 hover:text-slate-200"
+                className="text-slate-400 hover:text-slate-800"
               >
                 Cancel
               </Button>

@@ -10,10 +10,10 @@ import { useSuspendMember, useReinstateMember } from '@/hooks/useGroupMembers'
 import type { GroupMember } from '@/types/domain.types'
 
 const ROLE_COLORS: Record<string, string> = {
-  chair:     'border-amber-700 text-amber-400',
-  treasurer: 'border-teal-700 text-teal-400',
-  secretary: 'border-blue-700 text-blue-400',
-  member:    'border-slate-700 text-slate-400',
+  chair:     'border-amber-700 text-amber-600',
+  treasurer: 'border-teal-700 text-teal-600',
+  secretary: 'border-blue-700 text-blue-600',
+  member:    'border-gray-300 text-slate-400',
 }
 
 interface MemberRowProps {
@@ -57,23 +57,23 @@ export function MemberRow({ member, groupId, isOfficer, currentUserId }: MemberR
 
   return (
     <div className={[
-      'flex items-center gap-3 py-3 border-b border-slate-800 last:border-0',
+      'flex items-center gap-3 py-3 border-b border-gray-200 last:border-0',
       isSuspended ? 'opacity-50' : '',
     ].join(' ')}>
       <Avatar className="h-8 w-8 shrink-0">
-        <AvatarFallback className="bg-teal-900 text-teal-300 text-xs font-semibold">
+        <AvatarFallback className="bg-teal-100 text-teal-700 text-xs font-semibold">
           {initials}
         </AvatarFallback>
       </Avatar>
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-slate-200 truncate">{displayName}</span>
-          {isCurrentUser && <span className="text-xs text-slate-500">(you)</span>}
+          <span className="text-sm font-medium text-slate-800 truncate">{displayName}</span>
+          {isCurrentUser && <span className="text-xs text-slate-400">(you)</span>}
           {isSuspended && <span className="text-xs text-amber-500">suspended</span>}
         </div>
         {member.profile && (
-          <p className="text-xs text-slate-500">Score {member.profile.creditScore}</p>
+          <p className="text-xs text-slate-400">Score {member.profile.creditScore}</p>
         )}
       </div>
 
@@ -89,7 +89,7 @@ export function MemberRow({ member, groupId, isOfficer, currentUserId }: MemberR
           <Button
             variant="ghost"
             size="sm"
-            className="p-1 text-slate-500 hover:text-slate-200 shrink-0"
+            className="p-1 text-slate-400 hover:text-slate-800 shrink-0"
             onClick={() => isSuspended ? setReinstateOpen(true) : setSuspendOpen(true)}
             title={isSuspended ? 'Reinstate' : 'Suspend'}
           >

@@ -49,8 +49,8 @@ export function MembersTab({ groupId, myMembership, currentUserId }: MembersTabP
     <div className="space-y-6">
       {/* Join request queue — officers only */}
       {isOfficer && requests.length > 0 && (
-        <div className="bg-slate-900 border border-amber-800/40 rounded-xl p-5">
-          <h3 className="text-sm font-medium text-amber-400 mb-4">
+        <div className="bg-white border border-amber-200 rounded-xl p-5">
+          <h3 className="text-sm font-medium text-amber-600 mb-4">
             Join requests ({requests.length})
           </h3>
           <div className="space-y-3">
@@ -58,14 +58,14 @@ export function MembersTab({ groupId, myMembership, currentUserId }: MembersTabP
               const name = req.requesterProfile?.preferredName ?? req.requesterProfile?.fullLegalName ?? 'Unknown'
               const initials = name.split(' ').filter(Boolean).slice(0, 2).map((n) => n[0].toUpperCase()).join('')
               return (
-                <div key={req.id} className="flex items-center gap-3 py-2 border-b border-slate-800 last:border-0">
+                <div key={req.id} className="flex items-center gap-3 py-2 border-b border-gray-200 last:border-0">
                   <Avatar className="h-8 w-8 shrink-0">
-                    <AvatarFallback className="bg-slate-700 text-slate-300 text-xs">{initials}</AvatarFallback>
+                    <AvatarFallback className="bg-gray-200 text-slate-700 text-xs">{initials}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-slate-200 truncate">{name}</p>
+                    <p className="text-sm font-medium text-slate-800 truncate">{name}</p>
                     {req.message && <p className="text-xs text-slate-400 truncate">{req.message}</p>}
-                    <p className="text-xs text-slate-500">{formatDate(req.createdAt)}</p>
+                    <p className="text-xs text-slate-400">{formatDate(req.createdAt)}</p>
                   </div>
                   <div className="flex gap-2 shrink-0">
                     <Button
@@ -94,13 +94,13 @@ export function MembersTab({ groupId, myMembership, currentUserId }: MembersTabP
       )}
 
       {/* Member list */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
-        <h3 className="text-sm font-medium text-slate-300 mb-4">
+      <div className="bg-white border border-gray-200 rounded-xl p-5">
+        <h3 className="text-sm font-medium text-slate-700 mb-4">
           Members ({members.length})
         </h3>
         {isLoading ? (
           <div className="space-y-3 animate-pulse">
-            {[1, 2, 3].map((i) => <div key={i} className="h-12 bg-slate-800 rounded" />)}
+            {[1, 2, 3].map((i) => <div key={i} className="h-12 bg-gray-100 rounded" />)}
           </div>
         ) : !members.length ? (
           <EmptyState icon={Users} title="No members yet" />

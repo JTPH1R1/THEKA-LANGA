@@ -37,18 +37,18 @@ export function ResetPasswordPage() {
     return (
       <AuthLayout title="Check your email" description="Password reset instructions sent">
         <div className="text-center space-y-4 py-2">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-teal-900/50 mx-auto">
-            <Mail className="text-teal-400" size={28} />
+          <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-teal-100/50 mx-auto">
+            <Mail className="text-teal-600" size={28} />
           </div>
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-700">
             If{' '}
-            <span className="text-slate-100 font-medium">{form.getValues('email')}</span>{' '}
+            <span className="text-slate-900 font-medium">{form.getValues('email')}</span>{' '}
             is registered, you&apos;ll receive a reset link within a few minutes.
           </p>
-          <p className="text-xs text-slate-500">Check your spam folder if you don&apos;t see it.</p>
+          <p className="text-xs text-slate-400">Check your spam folder if you don&apos;t see it.</p>
           <Link
             to="/auth/login"
-            className="block text-sm text-teal-400 hover:text-teal-300 font-medium transition-colors mt-4"
+            className="block text-sm text-teal-600 hover:text-teal-700 font-medium transition-colors mt-4"
           >
             Back to sign in
           </Link>
@@ -70,13 +70,13 @@ export function ResetPasswordPage() {
         )}
 
         <div className="space-y-1.5">
-          <Label htmlFor="email" className="text-slate-300">Email address</Label>
+          <Label htmlFor="email" className="text-slate-700">Email address</Label>
           <Input
             id="email"
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
-            className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+            className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
             {...form.register('email')}
           />
           {form.formState.errors.email && (
@@ -95,7 +95,7 @@ export function ResetPasswordPage() {
         <p className="text-center text-sm text-slate-400 pt-2">
           <Link
             to="/auth/login"
-            className="text-teal-400 hover:text-teal-300 transition-colors"
+            className="text-teal-600 hover:text-teal-700 transition-colors"
           >
             Back to sign in
           </Link>

@@ -60,15 +60,15 @@ export function RegisterPage() {
     return (
       <AuthLayout title="Verify your email" description="One more step to get started">
         <div className="text-center space-y-4 py-2">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-teal-900/50 mx-auto">
-            <CheckCircle2 className="text-teal-400" size={28} />
+          <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-teal-100/50 mx-auto">
+            <CheckCircle2 className="text-teal-600" size={28} />
           </div>
           <div>
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-slate-700">
               We sent a verification email to{' '}
-              <span className="text-slate-100 font-medium">{registeredEmail}</span>.
+              <span className="text-slate-900 font-medium">{registeredEmail}</span>.
             </p>
-            <p className="text-xs text-slate-500 mt-2">
+            <p className="text-xs text-slate-400 mt-2">
               Click the link in the email to activate your account, then sign in.
             </p>
           </div>
@@ -96,7 +96,7 @@ export function RegisterPage() {
         )}
 
         <div className="space-y-1.5">
-          <Label htmlFor="fullLegalName" className="text-slate-300">
+          <Label htmlFor="fullLegalName" className="text-slate-700">
             Full legal name
           </Label>
           <Input
@@ -104,7 +104,7 @@ export function RegisterPage() {
             type="text"
             autoComplete="name"
             placeholder="As it appears on your government ID"
-            className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+            className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
             {...form.register('fullLegalName')}
           />
           {form.formState.errors.fullLegalName && (
@@ -113,13 +113,13 @@ export function RegisterPage() {
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="email" className="text-slate-300">Email address</Label>
+          <Label htmlFor="email" className="text-slate-700">Email address</Label>
           <Input
             id="email"
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
-            className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+            className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
             {...form.register('email')}
           />
           {form.formState.errors.email && (
@@ -128,20 +128,20 @@ export function RegisterPage() {
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="password" className="text-slate-300">Password</Label>
+          <Label htmlFor="password" className="text-slate-700">Password</Label>
           <div className="relative">
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
               autoComplete="new-password"
               placeholder="Min. 8 characters"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500 pr-10"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500 pr-10"
               {...form.register('password')}
             />
             <button
               type="button"
               onClick={() => setShowPassword((s) => !s)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-800"
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -156,7 +156,7 @@ export function RegisterPage() {
               ].map(({ ok, label }) => (
                 <li
                   key={label}
-                  className={`text-xs flex items-center gap-1.5 ${ok ? 'text-teal-400' : 'text-slate-500'}`}
+                  className={`text-xs flex items-center gap-1.5 ${ok ? 'text-teal-600' : 'text-slate-400'}`}
                 >
                   <span>{ok ? '✓' : '○'}</span>
                   {label}
@@ -170,20 +170,20 @@ export function RegisterPage() {
         </div>
 
         <div className="space-y-1.5">
-          <Label htmlFor="confirmPassword" className="text-slate-300">Confirm password</Label>
+          <Label htmlFor="confirmPassword" className="text-slate-700">Confirm password</Label>
           <div className="relative">
             <Input
               id="confirmPassword"
               type={showConfirm ? 'text' : 'password'}
               autoComplete="new-password"
               placeholder="Re-enter your password"
-              className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500 pr-10"
+              className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500 pr-10"
               {...form.register('confirmPassword')}
             />
             <button
               type="button"
               onClick={() => setShowConfirm((s) => !s)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-800"
               aria-label={showConfirm ? 'Hide confirm password' : 'Show confirm password'}
             >
               {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -198,7 +198,7 @@ export function RegisterPage() {
           <input
             id="acceptTerms"
             type="checkbox"
-            className="mt-0.5 h-4 w-4 rounded border-slate-600 bg-slate-800 accent-teal-500 cursor-pointer"
+            className="mt-0.5 h-4 w-4 rounded border-gray-300 bg-gray-100 accent-teal-500 cursor-pointer"
             {...form.register('acceptTerms')}
           />
           <label
@@ -206,9 +206,9 @@ export function RegisterPage() {
             className="text-xs text-slate-400 leading-relaxed cursor-pointer"
           >
             I agree to the{' '}
-            <span className="text-teal-400 hover:text-teal-300 cursor-pointer">Terms of Service</span>
+            <span className="text-teal-600 hover:text-teal-700 cursor-pointer">Terms of Service</span>
             {' '}and{' '}
-            <span className="text-teal-400 hover:text-teal-300 cursor-pointer">Privacy Policy</span>.
+            <span className="text-teal-600 hover:text-teal-700 cursor-pointer">Privacy Policy</span>.
             My data will be used to manage my cooperative membership.
           </label>
         </div>
@@ -225,13 +225,13 @@ export function RegisterPage() {
         </Button>
       </form>
 
-      <Separator className="my-6 bg-slate-800" />
+      <Separator className="my-6 bg-gray-100" />
 
       <p className="text-center text-sm text-slate-400">
         Already have an account?{' '}
         <Link
           to="/auth/login"
-          className="text-teal-400 hover:text-teal-300 font-medium transition-colors"
+          className="text-teal-600 hover:text-teal-700 font-medium transition-colors"
         >
           Sign in
         </Link>

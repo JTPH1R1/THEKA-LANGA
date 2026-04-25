@@ -33,9 +33,9 @@ export function ConfirmDialog({
 }: ConfirmDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-900 border-slate-800 text-slate-100 max-w-sm">
+      <DialogContent className="bg-white border-gray-200 text-slate-900 max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-slate-100">{title}</DialogTitle>
+          <DialogTitle className="text-slate-900">{title}</DialogTitle>
           <DialogDescription className="text-slate-400">{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter className="gap-2">
@@ -43,7 +43,7 @@ export function ConfirmDialog({
             variant="ghost"
             onClick={() => onOpenChange(false)}
             disabled={isPending}
-            className="text-slate-400 hover:text-slate-200"
+            className="text-slate-400 hover:text-slate-800"
           >
             {cancelLabel}
           </Button>

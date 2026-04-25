@@ -1,13 +1,13 @@
 import type { ContributionStatus } from '@/types/domain.types'
 
 const CONFIG: Record<ContributionStatus, { label: string; className: string }> = {
-  pending:   { label: 'Pending',   className: 'bg-slate-800 text-slate-400 border border-slate-700' },
-  paid:      { label: 'Paid',      className: 'bg-teal-900/60 text-teal-300 border border-teal-800' },
-  partial:   { label: 'Partial',   className: 'bg-blue-900/60 text-blue-300 border border-blue-800' },
-  late:      { label: 'Late',      className: 'bg-amber-900/60 text-amber-300 border border-amber-800' },
-  waived:    { label: 'Waived',    className: 'bg-purple-900/60 text-purple-300 border border-purple-800' },
-  defaulted: { label: 'Defaulted', className: 'bg-red-900/60 text-red-300 border border-red-800' },
-  reversed:  { label: 'Reversed',  className: 'bg-slate-800 text-slate-500 border border-slate-700 line-through' },
+  pending:   { label: 'Pending',   className: 'bg-gray-100 text-slate-500 border border-gray-300' },
+  paid:      { label: 'Paid',      className: 'bg-teal-50 text-teal-700 border border-teal-200' },
+  partial:   { label: 'Partial',   className: 'bg-blue-50 text-blue-700 border border-blue-200' },
+  late:      { label: 'Late',      className: 'bg-amber-50 text-amber-700 border border-amber-200' },
+  waived:    { label: 'Waived',    className: 'bg-purple-50 text-purple-700 border border-purple-200' },
+  defaulted: { label: 'Defaulted', className: 'bg-red-50 text-red-700 border border-red-200' },
+  reversed:  { label: 'Reversed',  className: 'bg-gray-100 text-slate-500 border border-gray-300 line-through' },
 }
 
 interface Props {

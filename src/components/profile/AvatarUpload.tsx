@@ -52,9 +52,9 @@ export function AvatarUpload({ currentUrl, displayName }: AvatarUploadProps) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="relative group cursor-pointer" onClick={() => inputRef.current?.click()}>
-        <Avatar className="h-20 w-20 ring-2 ring-slate-700 ring-offset-2 ring-offset-slate-900">
+        <Avatar className="h-20 w-20 ring-2 ring-gray-200 ring-offset-2 ring-offset-slate-900">
           <AvatarImage src={displayUrl ?? undefined} alt={displayName} />
-          <AvatarFallback className="bg-teal-900 text-teal-300 text-xl font-semibold">
+          <AvatarFallback className="bg-teal-100 text-teal-700 text-xl font-semibold">
             {getInitials(displayName || 'U')}
           </AvatarFallback>
         </Avatar>
@@ -66,7 +66,7 @@ export function AvatarUpload({ currentUrl, displayName }: AvatarUploadProps) {
           )}
         </div>
       </div>
-      <p className="text-xs text-slate-500">Click to upload · JPG, PNG, WebP · max 2 MB</p>
+      <p className="text-xs text-slate-400">Click to upload · JPG, PNG, WebP · max 2 MB</p>
       <input
         ref={inputRef}
         type="file"

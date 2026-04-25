@@ -37,8 +37,8 @@ function NavItem({ to, label, icon: Icon, onClick }: NavItemProps) {
         cn(
           'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
           isActive
-            ? 'bg-teal-900/40 text-teal-300 border border-teal-800/60'
-            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800',
+            ? 'bg-teal-500/20 text-teal-300 border border-teal-500/30'
+            : 'text-blue-100/70 hover:text-white hover:bg-white/10',
         )
       }
     >
@@ -66,7 +66,7 @@ export function Sidebar({ mobile = false }: SidebarProps) {
       {/* Mobile overlay */}
       {mobile && sidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-slate-950/80 lg:hidden"
+          className="fixed inset-0 z-30 bg-slate-900/60 lg:hidden"
           onClick={close}
           aria-hidden
         />
@@ -74,7 +74,8 @@ export function Sidebar({ mobile = false }: SidebarProps) {
 
       <aside
         className={cn(
-          'flex flex-col bg-slate-900 border-r border-slate-800 h-full',
+          'flex flex-col h-full',
+          'bg-[#1B2D6A] border-r border-[#243580]',
           mobile
             ? cn(
                 'fixed inset-y-0 left-0 z-40 w-64 transition-transform duration-200 lg:hidden',
@@ -84,15 +85,15 @@ export function Sidebar({ mobile = false }: SidebarProps) {
         )}
       >
         {/* Brand */}
-        <div className="flex items-center justify-between px-4 h-14 border-b border-slate-800 shrink-0">
+        <div className="flex items-center justify-between px-4 h-14 border-b border-[#243580] shrink-0">
           <Link to="/dashboard" className="flex flex-col leading-tight" onClick={mobile ? close : undefined}>
-            <span className="text-base font-bold text-teal-400 tracking-wide">THEKA LANGA</span>
-            <span className="text-[10px] text-slate-500 -mt-0.5">My Portion</span>
+            <span className="text-base font-bold text-teal-300 tracking-wide">THEKA LANGA</span>
+            <span className="text-[10px] text-blue-200/50 -mt-0.5 tracking-widest uppercase">My Portion</span>
           </Link>
           {mobile && (
             <button
               onClick={close}
-              className="text-slate-500 hover:text-slate-300 p-1"
+              className="text-blue-200/60 hover:text-white p-1"
               aria-label="Close menu"
             >
               <X size={18} />
@@ -120,7 +121,7 @@ export function Sidebar({ mobile = false }: SidebarProps) {
           {isAdmin && (
             <>
               <div className="pt-4 pb-1 px-1">
-                <p className="text-[10px] font-semibold text-slate-600 uppercase tracking-wider">
+                <p className="text-[10px] font-semibold text-blue-200/40 uppercase tracking-wider">
                   Administration
                 </p>
               </div>
@@ -133,9 +134,9 @@ export function Sidebar({ mobile = false }: SidebarProps) {
 
         {/* Profile summary at bottom */}
         {profile && (
-          <div className="px-3 py-3 border-t border-slate-800 shrink-0">
+          <div className="px-3 py-3 border-t border-[#243580] shrink-0">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-teal-900 flex items-center justify-center shrink-0">
+              <div className="w-7 h-7 rounded-full bg-teal-500/20 border border-teal-400/30 flex items-center justify-center shrink-0">
                 <span className="text-xs font-semibold text-teal-300">
                   {(profile.preferredName ?? profile.fullLegalName ?? '?')
                     .split(' ')
@@ -146,7 +147,7 @@ export function Sidebar({ mobile = false }: SidebarProps) {
                 </span>
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium text-slate-200 truncate">
+                <p className="text-xs font-medium text-white/90 truncate">
                   {profile.preferredName ?? profile.fullLegalName}
                 </p>
                 <KycLevelBadge level={profile.kycLevel} size="sm" />

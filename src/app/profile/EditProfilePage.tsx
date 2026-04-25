@@ -71,7 +71,7 @@ export function EditProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="h-8 w-8 rounded-full border-2 border-teal-400 border-t-transparent animate-spin" />
       </div>
     )
@@ -80,14 +80,14 @@ export function EditProfilePage() {
   if (!profile) return null
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
+    <div className="min-h-screen bg-gray-50 text-slate-900 p-4 sm:p-8">
       <div className="max-w-lg mx-auto">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="text-slate-400 hover:text-slate-200 transition-colors"
+            className="text-slate-400 hover:text-slate-800 transition-colors"
             aria-label="Go back"
           >
             <ArrowLeft size={20} />
@@ -96,7 +96,7 @@ export function EditProfilePage() {
         </div>
 
         {/* Avatar */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-4">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-4">
           <AvatarUpload
             currentUrl={profile.avatarUrl}
             displayName={profile.preferredName ?? profile.fullLegalName}
@@ -104,43 +104,43 @@ export function EditProfilePage() {
         </div>
 
         {/* Read-only info */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-4 space-y-3">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-4 space-y-3">
           <div>
-            <p className="text-xs text-slate-500 mb-1">Legal name</p>
-            <p className="text-sm text-slate-200">{profile.fullLegalName}</p>
+            <p className="text-xs text-slate-400 mb-1">Legal name</p>
+            <p className="text-sm text-slate-800">{profile.fullLegalName}</p>
           </div>
           <div>
-            <p className="text-xs text-slate-500 mb-1">Email</p>
-            <p className="text-sm text-slate-200">{profile.email}</p>
+            <p className="text-xs text-slate-400 mb-1">Email</p>
+            <p className="text-sm text-slate-800">{profile.email}</p>
           </div>
           <div className="flex items-center gap-3">
             <div>
-              <p className="text-xs text-slate-500 mb-1">KYC level</p>
+              <p className="text-xs text-slate-400 mb-1">KYC level</p>
               <Badge
                 variant="outline"
-                className="border-teal-700 text-teal-400 text-xs"
+                className="border-teal-300 text-teal-600 text-xs"
               >
                 {KYC_LEVEL_LABELS[profile.kycLevel]}
               </Badge>
             </div>
             <div>
-              <p className="text-xs text-slate-500 mb-1">Credit score</p>
+              <p className="text-xs text-slate-400 mb-1">Credit score</p>
               <Badge
                 variant="outline"
-                className="border-slate-600 text-slate-300 text-xs"
+                className="border-gray-300 text-slate-700 text-xs"
               >
                 {profile.creditScore} · {profile.creditScoreBand}
               </Badge>
             </div>
           </div>
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-400">
             Legal name, email, KYC level, and credit score cannot be changed here.
           </p>
         </div>
 
         {/* Editable form */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-          <h2 className="text-sm font-medium text-slate-300 mb-4">Personal details</h2>
+        <div className="bg-white border border-gray-200 rounded-xl p-6">
+          <h2 className="text-sm font-medium text-slate-700 mb-4">Personal details</h2>
 
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
             {form.formState.errors.root && (
@@ -150,11 +150,11 @@ export function EditProfilePage() {
             )}
 
             <div className="space-y-1.5">
-              <Label htmlFor="preferredName" className="text-slate-300">Display name</Label>
+              <Label htmlFor="preferredName" className="text-slate-700">Display name</Label>
               <Input
                 id="preferredName"
                 placeholder="How you'd like to be called"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+                className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
                 {...form.register('preferredName')}
               />
               {form.formState.errors.preferredName && (
@@ -165,17 +165,17 @@ export function EditProfilePage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="phone" className="text-slate-300">
+              <Label htmlFor="phone" className="text-slate-700">
                 Phone number{' '}
                 {profile.phoneVerified && (
-                  <span className="text-teal-400 text-xs">✓ verified</span>
+                  <span className="text-teal-600 text-xs">✓ verified</span>
                 )}
               </Label>
               <Input
                 id="phone"
                 type="tel"
                 placeholder="+254712345678"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+                className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
                 {...form.register('phone')}
               />
               {form.formState.errors.phone && (
@@ -184,20 +184,20 @@ export function EditProfilePage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-slate-300">Timezone</Label>
+              <Label className="text-slate-700">Timezone</Label>
               <Select
                 value={form.watch('timezone')}
                 onValueChange={(v) => form.setValue('timezone', v, { shouldDirty: true })}
               >
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
+                <SelectContent className="bg-gray-100 border-gray-300">
                   {TIMEZONE_OPTIONS.map((tz) => (
                     <SelectItem
                       key={tz.value}
                       value={tz.value}
-                      className="text-slate-200 focus:bg-teal-900/40 focus:text-teal-300"
+                      className="text-slate-800 focus:bg-teal-50 focus:text-teal-700"
                     >
                       {tz.label}
                     </SelectItem>
@@ -207,20 +207,20 @@ export function EditProfilePage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-slate-300">Language / locale</Label>
+              <Label className="text-slate-700">Language / locale</Label>
               <Select
                 value={form.watch('locale')}
                 onValueChange={(v) => form.setValue('locale', v, { shouldDirty: true })}
               >
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
+                <SelectContent className="bg-gray-100 border-gray-300">
                   {LOCALE_OPTIONS.map((loc) => (
                     <SelectItem
                       key={loc.value}
                       value={loc.value}
-                      className="text-slate-200 focus:bg-teal-900/40 focus:text-teal-300"
+                      className="text-slate-800 focus:bg-teal-50 focus:text-teal-700"
                     >
                       {loc.label}
                     </SelectItem>

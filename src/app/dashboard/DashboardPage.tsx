@@ -23,18 +23,18 @@ function KpiCard({
   loading?: boolean
 }) {
   const content = (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex items-start justify-between hover:border-slate-700 transition-colors">
+    <div className="bg-white border border-gray-200 rounded-xl p-5 flex items-start justify-between hover:border-gray-300 transition-colors">
       <div>
-        <p className="text-xs text-slate-500 mb-1">{label}</p>
+        <p className="text-xs text-slate-400 mb-1">{label}</p>
         {loading ? (
-          <div className="h-7 w-20 bg-slate-800 rounded animate-pulse mt-1" />
+          <div className="h-7 w-20 bg-gray-100 rounded animate-pulse mt-1" />
         ) : (
-          <p className="text-2xl font-bold text-slate-100 tabular-nums">{value}</p>
+          <p className="text-2xl font-bold text-slate-900 tabular-nums">{value}</p>
         )}
-        {sub && !loading && <p className="text-xs text-slate-500 mt-1">{sub}</p>}
+        {sub && !loading && <p className="text-xs text-slate-400 mt-1">{sub}</p>}
       </div>
-      <div className="p-2 rounded-lg bg-slate-800">
-        <Icon size={18} className="text-teal-400" />
+      <div className="p-2 rounded-lg bg-gray-100">
+        <Icon size={18} className="text-teal-600" />
       </div>
     </div>
   )
@@ -49,10 +49,10 @@ function NextContributionsDue() {
   if (isLoading || !due.length) return null
 
   return (
-    <div className="bg-amber-950/30 border border-amber-800/40 rounded-xl p-4">
+    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-3">
-        <Calendar size={14} className="text-amber-400" />
-        <h3 className="text-xs font-medium text-amber-300">Upcoming contributions</h3>
+        <Calendar size={14} className="text-amber-600" />
+        <h3 className="text-xs font-medium text-amber-600">Upcoming contributions</h3>
       </div>
       <div className="space-y-2">
         {due.map((item) => (
@@ -62,10 +62,10 @@ function NextContributionsDue() {
             className="flex items-center justify-between hover:opacity-80 transition-opacity"
           >
             <div>
-              <p className="text-sm text-slate-200">{item.groupName}</p>
-              <p className="text-xs text-slate-500">Due {formatDate(item.dueDate)}</p>
+              <p className="text-sm text-slate-800">{item.groupName}</p>
+              <p className="text-xs text-slate-400">Due {formatDate(item.dueDate)}</p>
             </div>
-            <p className="text-sm font-semibold text-amber-300 tabular-nums">
+            <p className="text-sm font-semibold text-amber-600 tabular-nums">
               {formatCurrency(item.expectedAmount, item.currency)}
             </p>
           </Link>
@@ -89,7 +89,7 @@ export function DashboardPage() {
     <div className="p-4 sm:p-6 max-w-5xl mx-auto">
       {/* Greeting */}
       <div className="mb-6">
-        <h1 className="text-xl font-semibold text-slate-100">
+        <h1 className="text-xl font-semibold text-slate-900">
           Welcome back{displayName ? `, ${displayName.split(' ')[0]}` : ''}
         </h1>
         <p className="text-sm text-slate-400 mt-0.5">Here's your financial snapshot</p>
@@ -99,18 +99,18 @@ export function DashboardPage() {
       {profile && profile.kycLevel < 2 && (
         <Link
           to="/kyc"
-          className="flex items-center gap-3 bg-teal-950/40 border border-teal-800/50 rounded-xl p-4 mb-6 hover:bg-teal-950/60 transition-colors"
+          className="flex items-center gap-3 bg-teal-50 border border-teal-200 rounded-xl p-4 mb-6 hover:bg-teal-100 transition-colors"
         >
-          <ShieldCheck size={20} className="text-teal-400 shrink-0" />
+          <ShieldCheck size={20} className="text-teal-600 shrink-0" />
           <div>
-            <p className="text-sm font-medium text-teal-300">Complete identity verification</p>
-            <p className="text-xs text-teal-500 mt-0.5">
+            <p className="text-sm font-medium text-teal-700">Complete identity verification</p>
+            <p className="text-xs text-teal-600 mt-0.5">
               {profile.kycLevel === 0
                 ? 'Verify your phone and personal details to join groups'
                 : 'Submit your ID documents to apply for loans'}
             </p>
           </div>
-          <span className="ml-auto text-teal-400 text-xs">→</span>
+          <span className="ml-auto text-teal-600 text-xs">→</span>
         </Link>
       )}
 
@@ -159,10 +159,10 @@ export function DashboardPage() {
         {/* My groups */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-semibold text-slate-300">My groups</h2>
+            <h2 className="text-sm font-semibold text-slate-700">My groups</h2>
             <Link
               to="/groups/new"
-              className="flex items-center gap-1 text-xs text-teal-400 hover:text-teal-300 transition-colors"
+              className="flex items-center gap-1 text-xs text-teal-600 hover:text-teal-700 transition-colors"
             >
               <Plus size={12} /> New group
             </Link>
@@ -170,13 +170,13 @@ export function DashboardPage() {
 
           {groupsLoading ? (
             <div className="space-y-3 animate-pulse">
-              {[1, 2].map((i) => <div key={i} className="h-32 bg-slate-900 border border-slate-800 rounded-xl" />)}
+              {[1, 2].map((i) => <div key={i} className="h-32 bg-white border border-gray-200 rounded-xl" />)}
             </div>
           ) : !groupSummaries.length ? (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 text-center">
-              <Users size={24} className="text-slate-600 mx-auto mb-2" />
+            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center">
+              <Users size={24} className="text-slate-400 mx-auto mb-2" />
               <p className="text-sm text-slate-400">You haven't joined any groups yet.</p>
-              <Link to="/groups" className="text-xs text-teal-400 hover:underline mt-1 block">
+              <Link to="/groups" className="text-xs text-teal-600 hover:underline mt-1 block">
                 Discover groups →
               </Link>
             </div>
@@ -187,7 +187,7 @@ export function DashboardPage() {
               ))}
               <Link
                 to="/groups"
-                className="block text-center text-xs text-slate-400 hover:text-teal-400 transition-colors py-2"
+                className="block text-center text-xs text-slate-400 hover:text-teal-600 transition-colors py-2"
               >
                 View all groups →
               </Link>
@@ -198,12 +198,12 @@ export function DashboardPage() {
         {/* Activity feed */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-semibold text-slate-300">Recent activity</h2>
+            <h2 className="text-sm font-semibold text-slate-700">Recent activity</h2>
             {feed.length > 0 && (
-              <span className="text-xs text-slate-500">{feed.length} events</span>
+              <span className="text-xs text-slate-400">{feed.length} events</span>
             )}
           </div>
-          <div className="bg-slate-900 border border-slate-800 rounded-xl px-4 py-1">
+          <div className="bg-white border border-gray-200 rounded-xl px-4 py-1">
             <ActivityFeed limit={12} />
           </div>
         </div>
@@ -211,23 +211,23 @@ export function DashboardPage() {
 
       {/* Profile strip */}
       {profile && (
-        <div className="mt-6 bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="mt-6 bg-white border border-gray-200 rounded-xl p-5">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs text-slate-500 mb-1">Your account</p>
-              <p className="text-base font-semibold text-slate-100">{displayName}</p>
+              <p className="text-xs text-slate-400 mb-1">Your account</p>
+              <p className="text-base font-semibold text-slate-900">{displayName}</p>
               <p className="text-sm text-slate-400">{profile.email}</p>
               <div className="flex flex-wrap items-center gap-2 mt-3">
                 <KycLevelBadge level={profile.kycLevel} size="sm" />
-                <Badge variant="outline" className="border-slate-600 text-slate-300 text-xs">
+                <Badge variant="outline" className="border-gray-300 text-slate-700 text-xs">
                   Score {profile.creditScore}
                 </Badge>
-                <Badge variant="outline" className="border-slate-600 text-slate-400 text-xs capitalize">
+                <Badge variant="outline" className="border-gray-300 text-slate-400 text-xs capitalize">
                   {profile.systemRole}
                 </Badge>
               </div>
             </div>
-            <Link to="/profile/edit" className="text-xs text-slate-400 hover:text-teal-400 transition-colors">
+            <Link to="/profile/edit" className="text-xs text-slate-400 hover:text-teal-600 transition-colors">
               Edit profile →
             </Link>
           </div>

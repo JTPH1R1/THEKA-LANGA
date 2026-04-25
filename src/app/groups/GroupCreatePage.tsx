@@ -73,11 +73,11 @@ export function GroupCreatePage() {
       <div className="mb-6">
         <Link
           to="/groups"
-          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-teal-400 transition-colors mb-3"
+          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-teal-600 transition-colors mb-3"
         >
           <ArrowLeft size={13} /> Back to groups
         </Link>
-        <h1 className="text-xl font-semibold text-slate-100">Create a group</h1>
+        <h1 className="text-xl font-semibold text-slate-900">Create a group</h1>
         <p className="text-sm text-slate-400 mt-0.5">
           {step === 'info' ? 'Step 1 of 2 — Group details' : 'Step 2 of 2 — Configure rules'}
         </p>
@@ -85,39 +85,39 @@ export function GroupCreatePage() {
 
       {/* Step 1 — Group info */}
       {step === 'info' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-white border border-gray-200 rounded-xl p-6">
           <form onSubmit={form.handleSubmit(handleInfoSubmit)} className="space-y-5">
             <div className="space-y-1.5">
-              <Label htmlFor="name" className="text-slate-300">Group name <span className="text-red-400">*</span></Label>
+              <Label htmlFor="name" className="text-slate-700">Group name <span className="text-red-400">*</span></Label>
               <Input
                 id="name"
                 placeholder="e.g. Nairobi Savings Circle"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 focus-visible:ring-teal-500"
+                className="bg-gray-100 border-gray-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-teal-500"
                 {...form.register('name')}
               />
               {errors.name && <p className="text-xs text-red-400">{errors.name.message}</p>}
               {watchedName && (
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-400">
                   URL slug: <span className="text-slate-400">/groups/{slug}</span>
                 </p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-slate-300">Group type <span className="text-red-400">*</span></Label>
+              <Label className="text-slate-700">Group type <span className="text-red-400">*</span></Label>
               <Controller
                 control={form.control}
                 name="type"
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                    <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="bg-slate-800 border-slate-700">
-                      <SelectItem value="public"  className="text-slate-200 focus:bg-teal-900/40">
+                    <SelectContent className="bg-gray-100 border-gray-300">
+                      <SelectItem value="public"  className="text-slate-800 focus:bg-teal-50">
                         Public — visible in discovery
                       </SelectItem>
-                      <SelectItem value="private" className="text-slate-200 focus:bg-teal-900/40">
+                      <SelectItem value="private" className="text-slate-800 focus:bg-teal-50">
                         Private — invite only
                       </SelectItem>
                     </SelectContent>
@@ -128,14 +128,14 @@ export function GroupCreatePage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="description" className="text-slate-300">
-                Description <span className="text-slate-500">(optional)</span>
+              <Label htmlFor="description" className="text-slate-700">
+                Description <span className="text-slate-400">(optional)</span>
               </Label>
               <textarea
                 id="description"
                 rows={3}
                 placeholder="What is this group about? Who can join?"
-                className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-teal-500 px-3 py-2 text-sm resize-none"
+                className="w-full rounded-md bg-gray-100 border border-gray-300 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-teal-500 px-3 py-2 text-sm resize-none"
                 {...form.register('description')}
               />
               {errors.description && <p className="text-xs text-red-400">{errors.description.message}</p>}
@@ -143,18 +143,18 @@ export function GroupCreatePage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label className="text-slate-300">Currency</Label>
+                <Label className="text-slate-700">Currency</Label>
                 <Controller
                   control={form.control}
                   name="currency"
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                      <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-slate-800 border-slate-700">
+                      <SelectContent className="bg-gray-100 border-gray-300">
                         {CURRENCY_OPTIONS.map((c) => (
-                          <SelectItem key={c.value} value={c.value} className="text-slate-200 focus:bg-teal-900/40">
+                          <SelectItem key={c.value} value={c.value} className="text-slate-800 focus:bg-teal-50">
                             {c.label}
                           </SelectItem>
                         ))}
@@ -164,18 +164,18 @@ export function GroupCreatePage() {
                 />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-slate-300">Timezone</Label>
+                <Label className="text-slate-700">Timezone</Label>
                 <Controller
                   control={form.control}
                   name="timezone"
                   render={({ field }) => (
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 focus:ring-teal-500">
+                      <SelectTrigger className="bg-gray-100 border-gray-300 text-slate-900 focus:ring-teal-500">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-slate-800 border-slate-700">
+                      <SelectContent className="bg-gray-100 border-gray-300">
                         {TIMEZONE_OPTIONS.map((tz) => (
-                          <SelectItem key={tz.value} value={tz.value} className="text-slate-200 focus:bg-teal-900/40">
+                          <SelectItem key={tz.value} value={tz.value} className="text-slate-800 focus:bg-teal-50">
                             {tz.label}
                           </SelectItem>
                         ))}
@@ -188,24 +188,24 @@ export function GroupCreatePage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="cycleStart" className="text-slate-300">
-                  Cycle start <span className="text-slate-500">(optional)</span>
+                <Label htmlFor="cycleStart" className="text-slate-700">
+                  Cycle start <span className="text-slate-400">(optional)</span>
                 </Label>
                 <Input
                   id="cycleStart"
                   type="date"
-                  className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                  className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                   {...form.register('cycleStart')}
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="cycleEnd" className="text-slate-300">
-                  Cycle end <span className="text-slate-500">(optional)</span>
+                <Label htmlFor="cycleEnd" className="text-slate-700">
+                  Cycle end <span className="text-slate-400">(optional)</span>
                 </Label>
                 <Input
                   id="cycleEnd"
                   type="date"
-                  className="bg-slate-800 border-slate-700 text-slate-100 focus-visible:ring-teal-500"
+                  className="bg-gray-100 border-gray-300 text-slate-900 focus-visible:ring-teal-500"
                   {...form.register('cycleEnd')}
                 />
                 {errors.cycleEnd && <p className="text-xs text-red-400">{errors.cycleEnd.message}</p>}
@@ -221,7 +221,7 @@ export function GroupCreatePage() {
 
       {/* Step 2 — Rules */}
       {step === 'rules' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <div className="bg-white border border-gray-200 rounded-xl p-6">
           {rootError && (
             <Alert variant="destructive" className="mb-5">
               <AlertDescription>{rootError}</AlertDescription>
@@ -230,15 +230,15 @@ export function GroupCreatePage() {
 
           <div className="flex items-center justify-between mb-5">
             <div>
-              <p className="text-sm font-medium text-slate-200">{groupInfo?.name}</p>
-              <p className="text-xs text-slate-500 capitalize">
+              <p className="text-sm font-medium text-slate-800">{groupInfo?.name}</p>
+              <p className="text-xs text-slate-400 capitalize">
                 {groupInfo?.type} · {groupInfo?.currency}
               </p>
             </div>
             <button
               type="button"
               onClick={() => setStep('info')}
-              className="text-xs text-slate-400 hover:text-teal-400 transition-colors"
+              className="text-xs text-slate-400 hover:text-teal-600 transition-colors"
             >
               ← Edit details
             </button>
